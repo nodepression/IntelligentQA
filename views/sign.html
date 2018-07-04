@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../statics/css/lib/mdui.min.css">
+    <link rel="stylesheet" href="../statics/css/sign.css">
+    <title>登陆注册</title>
+</head>
+
+<body class="mdui-theme-primary-indigo mdui-theme-accent-blue">
+
+    <div class="mdui-container">
+
+        <button class="mdui-btn mdui-color-theme-accent mdui-ripple" id="open">open</button>
+
+        <div class="mdui-dialog" id="dialog">
+            <div class="mdui-dialog-title">
+                <div class="mdui-row switch">
+                    <div class="mdui-col-xs-3 mdui-col-offset-xs-9 mdui-typo-subheading">切换到教师登陆</div>
+                </div>
+                <div class="mdui-row">
+                    <div class="mdui-col-xs-4">学生登陆</div>
+                </div>
+                <div class="mdui-row switch" style="display: none">
+                    <div class="mdui-col-xs-3 mdui-typo-subheading">切换到教师登陆</div>
+                </div>
+
+            </div>
+            <div class="mdui-dialog-content mdui-typo">
+                <div class="mdui-textfield">
+                    <i class="mdui-icon material-icons">&#xe853;</i>
+                    <input class="mdui-textfield-input" type="text" placeholder="username" />
+                </div>
+                <div class="mdui-textfield">
+                    <i class="mdui-icon material-icons">&#xe899;</i>
+                    <input class="mdui-textfield-input" type="password" placeholder="password" />
+                </div>
+            </div>
+            <div class="mdui-dialog-actions mdui-dialog-actions-stacked">
+                <button class="mdui-btn mdui-ripple">turn on speed boost</button>
+                <button class="mdui-btn mdui-ripple">no thanks</button>
+            </div>
+        </div>
+
+    </div>
+    <script src="../statics/js/lib/jquery.js"></script>
+    <script src="../statics/js/lib/mdui.min.js"></script>
+    <script>
+        var inst = new mdui.Dialog('#dialog', { 'overlay': true, 'destroyOnClosed': true });
+        document.getElementById('open').addEventListener('click', function () {
+            inst.open();
+        });
+    </script>
+</body>
+
+</html>
