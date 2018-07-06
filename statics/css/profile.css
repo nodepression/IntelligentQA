@@ -1,0 +1,106 @@
+a:hover
+{
+background-color:rgb(224, 221, 221)
+}
+.logo {
+  background-color: rgb(1, 102, 144);
+  position: absolute;
+  left: 220px;
+  top: 0px;
+  width: 200px;
+  height: 49px;
+  z-index: 68;
+}
+navigationbg{
+  background-color: rgb(252, 252, 252);
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 1449px;
+  height: 69px;
+  z-index: 23;
+}
+.logo1{
+  font-size: 29.33px;
+  font-family: "Microsoft YaHei";
+  color: rgb(247, 253, 253);
+  line-height: 1.2;
+  position: absolute;
+  left: 72px;
+  top: 8.422px;
+  width: 65px;
+  height: 33px;
+  z-index: 69;
+}
+.font {
+  font-size: 20px;
+  font-family: "Microsoft YaHei";
+  color: rgb(36, 41, 44);
+}
+.font1 {
+  font-size: 17px;
+  font-family: "Microsoft YaHei";
+  color: rgb(36, 41, 44);
+}
+.leftbar {
+  background-color: rgb(252, 252, 252);
+  position: absolute;
+  left: 220px;
+  top: 50px;
+  width: 229px;
+  height: 1389px;
+  z-index: 45;
+}
+.infochange{
+  background-color: rgb(252, 252, 252);
+  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.3);
+  position: absolute;
+  left: 440px;
+  top: 70px;
+  width: 720px;
+  height: 280px;
+  z-index: 6;
+}
+.old： {
+  font-size: 20px;
+  font-family: "Microsoft YaHei";
+  color: rgb(4, 4, 4);
+  line-height: 1.2;
+  position: absolute;
+  left: 513.844px;
+  top: 121.897px;
+  width: 65px;
+  height: 18px;
+  z-index: 16;
+}
+.text{
+  background-color: rgb(218, 218, 218);
+  width: 200px;
+  height: 30px;
+}
+.confirm {
+  background-color: rgb(241, 241, 241);
+  position: absolute;
+  left: 142px;
+  top: 222px;
+  width: 100px;
+  height: 40px;
+  z-index: 113;
+}
+
+#dialog>.mdui-dialog-title{
+  background-color: #02648d;
+}
+#dialog .z_input{
+  height: 100%;
+  display: block;
+}
+
+#dialog .z_icon{
+  margin-top: 16px;
+  height: 50px;
+  display: block;
+}
+
+
+
