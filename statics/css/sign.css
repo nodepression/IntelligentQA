@@ -1,14 +1,21 @@
-#dialog>.mdui-dialog-title{
+.mdui-dialog{
+    width: 30%;
+}
+.mdui-dialog>.mdui-dialog-title{
     background-color: #02648d;
+    color: aliceblue;   
 }
 #dialog .z_input{
-    /* margin-top: 16px; */
     height: 100%;
     display: block;
 }
 
-#dialog .z_icon{
+.mdui-dialog .z_icon{
     margin-top: 16px;
     height: 50px;
     display: block;
 }
+.mdui-dialog-actions{
+    color: aliceblue
+}
+

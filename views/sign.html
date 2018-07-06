@@ -14,46 +14,83 @@
 
     <div class="mdui-container">
 
-        <button class="mdui-btn mdui-color-theme-accent mdui-ripple" id="open">open</button>
+        <button class="mdui-btn mdui-color-theme-accent mdui-ripple" id="open">登陆/注册</button>
 
-        <div class="mdui-dialog" id="dialog">
+        <!-- 登陆 -->
+        <div class="mdui-dialog" id="signin_dialog">
             <div class="mdui-dialog-title">
                 <div class="mdui-row switch">
-                    <div class="mdui-col-xs-3 mdui-col-offset-xs-9 mdui-typo-subheading">切换到教师登陆</div>
+                    <button class="mdui-col-xs-4 mdui-col-offset-xs-8 mdui-typo-subheading mdui-btn" id="switchID">切换到教师</button>
                 </div>
                 <div class="mdui-row">
-                    <div class="mdui-col-xs-4">学生登陆</div>
+                    <div class="mdui-col-xs-3" id="identity">学生</div>
                 </div>
-                <div class="mdui-row switch" style="display: none">
-                    <div class="mdui-col-xs-3 mdui-typo-subheading">切换到教师登陆</div>
-                </div>
-
             </div>
             <div class="mdui-dialog-content mdui-typo">
                 <div class="mdui-textfield">
                     <i class="mdui-icon material-icons">&#xe853;</i>
-                    <input class="mdui-textfield-input" type="text" placeholder="username" />
+                    <input class="mdui-textfield-input username" maxlength="10" onkeyup="this.value=this.value.replace(/\s+/g,'')" id="in_username" type="text" placeholder="用户名"/>
                 </div>
                 <div class="mdui-textfield">
-                    <i class="mdui-icon material-icons">&#xe899;</i>
-                    <input class="mdui-textfield-input" type="password" placeholder="password" />
+                    <i class="mdui-icon material-icons" >&#xe899;</i>
+                    <input class="mdui-textfield-input password"  maxlength="20" onkeyup="this.value=this.value.replace(/\s+/g,'')" id="in_password" type="password" placeholder="密码" />
                 </div>
             </div>
-            <div class="mdui-dialog-actions mdui-dialog-actions-stacked">
-                <button class="mdui-btn mdui-ripple">turn on speed boost</button>
-                <button class="mdui-btn mdui-ripple">no thanks</button>
+            <div class="mdui-dialog-actions">
+                <span class="mdui-text-color-black-secondary" style="float: left;margin-left: 6%;margin-top: 20px;">
+                    还没有账号，点我
+                    <u>
+                        <span style="cursor: pointer;" class="mdui-text-color-black-secondary in_up"> 注册</span>
+                    </u>
+                </span>
+                <button class="mdui-btn submit" style="background-color:#02658e;color: aliceblue;margin-right: 3%;">登陆</button>
             </div>
         </div>
+
+        <!-- 注册 -->
+        <div class="mdui-dialog" id="signup_dialog">
+                <div class="mdui-dialog-title">
+                    <div class="mdui-row">
+                        <div class="mdui-col-xs-3">用户注册</div>
+                    </div>
+                </div>
+                <div class="mdui-dialog-content mdui-typo">
+                    <div class="mdui-textfield">
+                        <i class="mdui-icon material-icons">&#xe853;</i>
+                        <input class="mdui-textfield-input username" maxlength="10" onkeyup="this.value=this.value.replace(/\s+/g,'')" id="up_username" type="text"      placeholder="用户名"/>
+                    </div>
+                    <div class="mdui-textfield">
+                        <i class="mdui-icon material-icons" >&#xe899;</i>
+                        <input class="mdui-textfield-input password" maxlength="20" onkeyup="this.value=this.value.replace(/\s+/g,'')" id="up_password" type="password" placeholder="密码" />
+                    </div>
+                    <div class="mdui-textfield">
+                        <i class="mdui-icon material-icons">&#xe899;</i>
+                        <input class="mdui-textfield-input" maxlength="20" onkeyup="this.value=this.value.replace(/\s+/g,'')" id="repassword"   type="password" placeholder="再次输入密码" />
+                    </div>
+                    <div class="mdui-textfield" style="margin-left: 2%;">
+                        <select class="mdui-select" id="status">
+                            <option value="0" selected>学生</option>
+                            <option value="1">教师</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mdui-dialog-actions">
+                    <span class="mdui-text-color-black-secondary" style="float: left;margin-left: 6%;margin-top: 20px;">
+                        已经有账号，点我
+                        <u>
+                            <span style="cursor: pointer;" class="mdui-text-color-black-secondary in_up"> 登陆</span>
+                        </u>
+                    </span>
+                    <button class="mdui-btn submit" style="background-color:#02658e;color: aliceblue;margin-right: 3%;">注册</button>
+                </div>
+            </div>
+    
 
     </div>
     <script src="../statics/js/lib/jquery.js"></script>
     <script src="../statics/js/lib/mdui.min.js"></script>
-    <script>
-        var inst = new mdui.Dialog('#dialog', { 'overlay': true, 'destroyOnClosed': true });
-        document.getElementById('open').addEventListener('click', function () {
-            inst.open();
-        });
-    </script>
+    <script src="../statics/js/sign.js"></script>
+
 </body>
 
 </html>
