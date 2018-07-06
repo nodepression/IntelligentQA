@@ -4,7 +4,7 @@
     var username = undefined;
     var password = undefined;
     var repassword = undefined;
-    var status = undefined;
+    var type = undefined;
     // 程序用到的辅助数据
     var flag = 0;//登陆者的身份 0-学生  1-教师
     var signin = true;//默认为登陆
@@ -54,7 +54,7 @@
         }
     }
 
-
+    //登陆
     function sign_in() {
         if (!user) {
             alert("帐户名格式不正确");
@@ -63,20 +63,21 @@
                 alert("密码格式不正确");
             }
             else {
-                status = flag;
-                alert(username + " " + password + " " + status);
+                type = flag;
+                alert(username + " " + password + " " + type);
                 $.post("/sign/in",
-                        {
-                            username: username,
-                            password: password,
-                        },
-                        function (data, status) {
-                            alert("数据：" + data + "\n状态：" + status);
-                        });
+                    {
+                        username: username,
+                        password: password,
+                    },
+                    function (data, status) {
+                        alert("数据: " + data + "\n状态: " + status);
+                    });
             }
         }
 
     }
+    //注册
     function sign_up() {
         if (!user) {
             alert("帐户名格式不正确");
@@ -89,16 +90,16 @@
                     alert("两次密码不相等");
                 }
                 else {
-                    status = $('#status').val();
-                    alert(username + " " + password + " " + repassword + " " + status);
+                    type = $('#status').val();
+                    alert(username + " " + password + " " + repassword + " " + type);
                     $.post("/sign/up",
                         {
                             username: username,
                             password: password,
-                            status: status
+                            type: type
                         },
                         function (data, status) {
-                            alert("数据：" + data + "\n状态：" + status);
+                            alert("数据: " + data + "\n状态: " + status);
                         });
                 }
 
