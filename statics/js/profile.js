@@ -24,7 +24,7 @@
             else {
                 password = $("#password").val();   //原密码
                 alert( password + " " + newpassword + " " + repassword);
-                $.post("/profile/center",
+                $.post("/profile/modifyPass",
                     {
                         password: password,
                         newpassword: newpassword,
