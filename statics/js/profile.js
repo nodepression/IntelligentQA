@@ -9,10 +9,13 @@
   var passEqual = false; //两次密码是否相等
   //dom obj
   var submit = $('#submit');     //提交按钮,点击发送请求。
+  var pre = $('#pre');  // 上翻页
   submit.click(function () {
     changepassword();
   })
-
+  pre.click(function (){
+      count--;
+  })
   function changepassword() {
         if (!pass || !repass) {
             alert("密码格式不正确(最少8位)");
@@ -79,7 +82,3 @@ function showc(){
   $("#tab2").hide();
   $("#tab3").show();//显示tab3
   }
-
-
-
-

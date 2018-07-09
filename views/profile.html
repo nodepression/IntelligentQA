@@ -16,7 +16,7 @@
         <div class="mdui-tab mdui-tab-centered" style="background-color: rgb(252, 252, 252)" mdui-tab>
           <a href="javascript:void(0)" onclick="showa()" class="mdui-ripple mdui-ripple-white"><span class="font" >个人信息修改</span></a>
           <a href="javascript:void(0)" onclick="showb()" class="mdui-ripple mdui-ripple-white" id="tabb"><span class="font">我的资源</span></a>
-          <a href="javascript:void(0)" onclick="showc()" class="mdui-ripple mdui-ripple-white"><span class="font" id="tabc">我的提问</span></a>
+          <a href="javascript:void(0)" onclick="showc()" class="mdui-ripple mdui-ripple-white" id="tabc"><span class="font">我的提问</span></a>
         </div></div>
    <ul class="mdui-list leftbar" style="max-width: 200px;color: rgb(252, 252, 252);">
     <li class="mdui-list-item" style="margin-top: 30px">
@@ -43,10 +43,33 @@
    <tr><td style="height: 70px"><input type="submit" id="submit" value="确认" class="confirm font1"/> </td></tr>
   </table> 
 </div>
-<div id="tab2">
-  
+<div id="tab2" style="display: none;">
+  <table class=" alltop "cellspacing="25">
+    <td style="font-size: 25px;font-family: Microsoft YaHei">我上传的资源：</td></table>
+  <table class=" myresourse mdui-table-hoverable" cellspacing="30">
+    <tr><td style="border:1px solid rgb(182, 172, 172)">First</td></tr>   
+    <tr><td style="border:1px solid rgb(182, 172, 172)">Second</td></tr>
+    <tr><td style="border:1px solid rgb(182, 172, 172)">First</td></tr>   
+    <tr><td style="border:1px solid rgb(182, 172, 172)">Second</td></tr>
+  </table>
+  <table class=" allbottom " style="background-color: rgb(252, 252, 252)" >
+    <tr><td class="mdui-icon material-icons" id="pre">keyboard_arrow_left</td>
+    <td class="mdui-text-center" style="font-size: 20px;font-family: Microsoft YaHei;vertical-align: top;">111</td>
+    <td class="mdui-icon material-icons" id="next">keyboard_arrow_right</td></tr></table>
 </div>
-<div id="tab3">
+<div id="tab3" style="display: none;">
+  <table class=" alltop "cellspacing="25">
+    <td style="font-size: 25px;font-family: Microsoft YaHei">我的提问：</td></table>
+  <table class=" myresourse mdui-table-hoverable" cellspacing="30">
+    <tr><td style="border:1px solid rgb(182, 172, 172)">First</td></tr>   
+    <tr><td style="border:1px solid rgb(182, 172, 172)">Second</td></tr>
+    <tr><td style="border:1px solid rgb(182, 172, 172)">First</td></tr>   
+    <tr><td style="border:1px solid rgb(182, 172, 172)">Second</td></tr>
+  </table>
+  <table class=" allbottom " style="background-color: rgb(252, 252, 252)" >
+    <tr><td class="mdui-icon material-icons" id="pre">keyboard_arrow_left</td>
+    <td class="mdui-text-center" style="font-size: 20px;font-family: Microsoft YaHei;vertical-align: top;">111</td>
+    <td class="mdui-icon material-icons" id="next">keyboard_arrow_right</td></tr></table>
 </div>
 <script src="../statics/js/lib/jquery.js"></script>
 <script src="../statics/js/lib/mdui.min.js"></script>
