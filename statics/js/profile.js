@@ -8,6 +8,7 @@
   var repass = true //再次输入密码的格式
   var passEqual = false; //两次密码是否相等
   //dom obj
+  var open = $('#open');
   var submit = $('#submit');     //提交按钮,点击发送请求。
   var pre = $('#pre');  // 上翻页
   submit.click(function () {
@@ -82,3 +83,9 @@ function showc(){
   $("#tab2").hide();
   $("#tab3").show();//显示tab3
   }
+  var open = $('#open');
+//点击进入登陆/注册框界面
+var inst = new mdui.Dialog('#tag_dialog', { 'overlay': true, 'destroyOnClosed': true });
+    open.click(function () {
+             inst.open();
+      })
