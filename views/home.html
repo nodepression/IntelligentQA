@@ -9,32 +9,47 @@
     <link rel="stylesheet" href="../statics/css/home.css">
     <title>主页</title>
 </head>
-<body background="../pics/bg.png">
-    <div class="mdui-container">
-    <div class="mdui-appbar">
-        <div id="logo" class="logo"> 
-          <b class="logo1">猿助</b></div>
-          <div class="mdui-tab mdui-tab-centered" style="background-color: rgb(252, 252, 252)" mdui-tab>
-              <a class="mdui-ripple mdui-ripple-white"><span class="font">1</span></a>
-              <a class="mdui-ripple mdui-ripple-white"><span class="font">2</span></a>
-              <a class="mdui-ripple mdui-ripple-white"><span class="font">3</span></a>
+
+<body>
+    <div class="mdui-container-fluid" style="height:1500px;">
+        <div style="position: fixed;background-color: white;height: 50px;width: 100%;"></div>
+        <div class="mdui-row">
+            <div class="mdui-col-xs-3 mdui-col-offset-xs-1 left">
+                <ul class="mdui-list leftBar">
+                    <li class="logo">
+                        <div class="mdui-list-item-content" id="logo">猿助</div>
+                    </li>
+                    <li class="mdui-list-item mdui-ripple ">
+                        <i class="mdui-list-item-icon mdui-icon material-icons">search</i>
+                        <div class="mdui-list-item-content">资源平台</div>
+                    </li>
+                    <li class="mdui-list-item mdui-ripple">
+                        <i class="mdui-list-item-icon mdui-icon material-icons">question_answer</i>
+                        <div class="mdui-list-item-content">提问交流</div>
+                    </li>
+                    <li class="mdui-list-item mdui-ripple">
+                        <i class="mdui-list-item-icon mdui-icon material-icons">person</i>
+                        <div class="mdui-list-item-content">个人中心</div>
+                    </li>
+                </ul>
             </div>
-      </div>
-   <ul class="mdui-list leftbar" style="max-width: 200px;">
-    <li class="mdui-list-item" style="margin-top: 30px">
-     <i class="mdui-list-item-icon mdui-icon material-icons">search</i><td></td>
-     <div class="mdui-list-item-content"><span class="font"><a href="#search">资源检索</a></span></div>
-    </li>
-    <li class="mdui-list-item">
-      <i class="mdui-list-item-icon mdui-icon material-icons">question_answer</i>
-    <div class="mdui-list-item-content"><span class="font"><a href="ask.html">提问交流</a></span></div>
-  </li>
-  <li class="mdui-list-item">
-    <i class="mdui-list-item-icon mdui-icon material-icons">person</i>
-    <div class="mdui-list-item-content"><span class="font"><a href="profile.html">个人中心</a></span></div>
-  </li>
-</ul>
-</div>
-<script src="//mdui-aliyun.cdn.w3cbus.com/source/dist/js/mdui.min.js"></script>
+            <div class="mdui-col-xs-8 mdui-col-offset-xs-4 right">
+                <div class="mdui-row" style="position: fixed;">
+                    <div class="mdui-appbar topBar">
+                        <div class="mdui-tab mdui-color-theme" mdui-tab >
+                            <a href="#" class="mdui-ripple mdui-ripple-white">资源大厅</a>
+                            <a href="#" class="mdui-ripple mdui-ripple-white">资源搜索</a>
+                            <a style="position: fixed;right: 0px;">zq</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="mdui-row con">
+                        your code
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../statics/js/lib/mdui.min.js"></script>
 </body>
+
 </html>

@@ -71,10 +71,17 @@
                         password: password,
                     },
                     function (data, status) {
-                        alert("数据: " + data + "\n状态: " + status);
+                        if (data.status != 200) {
+                            alert(data.msg);
+                        } else {
+                            open.html(username);
+                            open.attr("disabled", "disabled");
+                            open.unbind();
+                        }
                     });
             }
         }
+        inst.close();
 
     }
     //注册
@@ -99,12 +106,20 @@
                             type: type
                         },
                         function (data, status) {
-                            alert("数据: " + data + "\n状态: " + status);
+                            if (data.status != 200) {
+                                alert(data.msg);
+                            } else {
+                                open.html(username);
+                                open.attr("disabled", "disabled");
+                                open.unbind();
+                            }
                         });
                 }
 
             }
         }
+
+        inst.close();
 
     }
 
@@ -177,6 +192,6 @@
             }
         }
     })
-    
+
 
 }.call(this));
