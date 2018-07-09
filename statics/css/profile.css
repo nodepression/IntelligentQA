@@ -87,7 +87,32 @@ navigationbg{
   height: 40px;
   z-index: 113;
 }
-
-
+.alltop{
+    background-color: rgb(252, 252, 252);
+    position: absolute;
+    left: 468px;
+    top: 78px;
+    width: 729px;
+    height: 62px;
+    z-index: 75;  
+}
+.myresourse{
+  background-color: rgb(252, 252, 252);
+  position: absolute;
+  left: 468px;
+  top: 140px;
+  width: 729px;
+  height: 485px;
+  z-index: 75;  
+}
+.allbottom{
+  background-color: rgb(252, 252, 252);
+  position: absolute;
+  left: 468px;
+  top: 625px;
+  width: 729px;
+  height: 62px;
+  z-index: 75;  
+}
 
 
