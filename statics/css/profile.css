@@ -123,7 +123,7 @@ navigationbg{
 }
 .alltop{
     background-color: rgb(252, 252, 252);
-    position: absolute;
+    position: relative;
     left: 468px;
     top: 78px;
     width: 729px;
@@ -132,7 +132,7 @@ navigationbg{
 }
 .myresourse{
   background-color: rgb(252, 252, 252);
-  position: absolute;
+  position: relative;
   left: 468px;
   top: 140px;
   width: 729px;
@@ -141,9 +141,9 @@ navigationbg{
 }
 .allbottom{
   background-color: rgb(252, 252, 252);
-  position: absolute;
+  position: relative;
   left: 468px;
-  top: 625px;
+  top: 135px;
   width: 729px;
   height: 62px;
   z-index: 75;  
