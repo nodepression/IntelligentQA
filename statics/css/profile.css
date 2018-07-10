@@ -1,93 +1,19 @@
-a:hover
-{
-background-color:rgb(224, 221, 221)
-}
-.logo {
-  background-color: rgb(1, 102, 144);
-  position: absolute;
-  left: 220px;
-  top: 0px;
-  width: 200px;
-  height: 49px;
-  z-index: 68;
-}
-navigationbg{
-  background-color: rgb(252, 252, 252);
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  width: 1449px;
-  height: 69px;
-  z-index: 23;
-}
-.logo1{
-  font-size: 29.33px;
-  font-family: "Microsoft YaHei";
-  color: rgb(247, 253, 253);
-  line-height: 1.2;
-  position: absolute;
-  left: 72px;
-  top: 8.422px;
-  width: 65px;
-  height: 33px;
-  z-index: 69;
-}
-.font {
-  font-size: 20px;
-  font-family: "Microsoft YaHei";
-  color: rgb(36, 41, 44);
-}
 .font2 {
-  font-size: 23.331px;
+  font-size:18px;
   font-family: "Microsoft YaHei";
   color: rgb(247, 253, 253);
+}
+.font1 {
+  font-size:18px;
+  font-family: "Microsoft YaHei";
+  color: rgb(77, 148, 177)
 }
 
-.font1 {
-  font-size: 17px;
-  font-family: "Microsoft YaHei";
-  color: rgb(36, 41, 44);
-}
-.leftbar {
-  background-color: rgb(252, 252, 252);
-  position: absolute;
-  left: 220px;
-  top: 50px;
-  width: 229px;
-  height: 1389px;
-  z-index: 45;
-}
 .infochange{
-  background-color: rgb(252, 252, 252);
-  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.3);
-  position: absolute;
   left: 440px;
-  top: 70px;
+  top: 170px;
   width: 720px;
   height: 280px;
-  z-index: 6;
-}
-.question {
-  background-color: rgb(252,252,252);
-  position: absolute;
-  left: 469px;
-  top: 74px;
-  width: 729px;
-  height: 409px;
-  z-index: 7;
-}
-
-.old： {
-  font-size: 20px;
-  font-family: "Microsoft YaHei";
-  color: rgb(4, 4, 4);
-  line-height: 1.2;
-  position: absolute;
-  left: 513.844px;
-  top: 121.897px;
-  width: 65px;
-  height: 18px;
-  z-index: 16;
 }
 .text{
   background-color: rgb(218, 218, 218);
@@ -104,56 +30,30 @@ navigationbg{
   width: 495px;
   height: 105px;
 }
-
 .confirm {
   background-color: rgb(241, 241, 241);
-  position: absolute;
   left: 142px;
-  top: 222px;
-  width: 100px;
-  height: 40px;
-}
-.confirm1 {
-  background-color: rgb(1,102, 144);
-  position: absolute;
-  left: 142px;
-  top: 342px;
   width: 100px;
   height: 40px;
 }
 .alltop{
-    background-color: rgb(252, 252, 252);
     position: relative;
-    left: 468px;
-    top: 78px;
     width: 729px;
-    height: 62px;
-    z-index: 75;  
+    height: 40px;
 }
 .myresourse{
-  background-color: rgb(252, 252, 252);
   position: relative;
-  left: 468px;
-  top: 140px;
-  width: 729px;
+  width: 865px;
   height: 485px;
-  z-index: 75;  
 }
 .allbottom{
-  background-color: rgb(252, 252, 252);
   position: relative;
-  left: 468px;
-  top: 135px;
   width: 729px;
   height: 62px;
-  z-index: 75;  
 }
-.tagdialog {
-  /* background-color: rgb(241, 241, 241); */
+/* .tagdialog {
   position:relative;
-  left: 120px;
+  top:-500px;
   width: 480px;
   height: 320px;
-}
-
-
+} */

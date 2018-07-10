@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../../statics/css/lib/mdui.min.css">
+    <link rel="stylesheet" href="../../statics/css/profile.css">
+    <link rel="stylesheet" href="../../statics/css/home.css">
+    <title>个人中心</title>
+</head>
+<body>
+  <div class="mdui-container-fluid" style="height:1500px;">
+      <div style="position: fixed;background-color: white;height: 50px;width: 100%;"></div>
+      <div class="mdui-row">
+          <div class="mdui-col-xs-3 mdui-col-offset-xs-1 left">
+              <ul class="mdui-list leftBar">
+                  <li class="logo">
+                      <div class="mdui-list-item-content" id="logo">猿助</div>
+                  </li>
+                  <li class="mdui-list-item mdui-ripple ">
+                      <i class="mdui-list-item-icon mdui-icon material-icons">search</i>
+                      <div class="mdui-list-item-content">资源平台</div>
+                  </li>
+                  <li class="mdui-list-item mdui-ripple">
+                      <i class="mdui-list-item-icon mdui-icon material-icons">question_answer</i>
+                      <div class="mdui-list-item-content"><a href="ask.html">提问交流</a></div>
+                  </li>
+                  <li class="mdui-list-item mdui-ripple">
+                      <i class="mdui-list-item-icon mdui-icon material-icons">person</i>
+                      <div class="mdui-list-item-content"><a href="#">个人中心</a></div>
+                  </li>
+              </ul>
+          </div>
+          <div class="mdui-col-xs-8 mdui-col-offset-xs-4 right">
+              <div class="mdui-row" style="position: fixed;">
+                  <div class="mdui-appbar topBar">
+                      <div class="mdui-tab mdui-color-theme" mdui-tab >
+                          <a href="#" onclick="showa()" class="mdui-ripple mdui-ripple-white" id="taba">个人信息修改</a>
+                          <a href="#" onclick="showb()" class="mdui-ripple mdui-ripple-white" id="tabb">我的资源</a>
+                          <a href="#" onclick="showc()" class="mdui-ripple mdui-ripple-white" id="tabc">我的提问</a>
+                          <a style="position: fixed;right: 0px;">zq</a>
+                      </div>
+                  </div>
+              </div>
+              <div class="mdui-row con">                
+                <div id="tab1">
+                  <table class="infochange">
+                    <tr><td width="130px" ><span style="margin-left: 20px">旧密码：</span></td>
+                    <td><input type="text" id="password" class="text"></td></tr>
+                    <tr><td><span style="margin-left: 20px">新密码：</span></td>
+                    <td><input type="password" id="newpassword" class="text"></td></tr>
+                    <tr><td><span style="margin-left: 20px">确认新密码：</span></td>
+                    <td><input type="password" id="repassword" class="text"></td></tr>
+                    <tr><td style="height: 70px"><input type="submit" id="submit" value="确认" class="confirm mdui-ripple"/> </td></tr>
+                  </table> 
+                </div>
+                <div id="tab2" style="display: none;">
+                  <table class=" alltop "cellspacing="15">
+                        <td style="font-size: 18px;font-family: Microsoft YaHei">我上传的资源：</td>
+                  </table>
+                  <table class=" myresourse mdui-table-hoverable" cellspacing="30">
+                         <tr><td style="border:1px solid rgb(182, 172, 172)">First</td></tr>   
+                         <tr><td style="border:1px solid rgb(182, 172, 172)">Second</td></tr>
+                         <tr><td style="border:1px solid rgb(182, 172, 172)">First</td></tr>   
+                         <tr><td style="border:1px solid rgb(182, 172, 172)">Second</td></tr>
+                  </table>
+                  <table class=" allbottom " >
+                         <tr><td class="mdui-icon material-icons" id="pre">keyboard_arrow_left</td>
+                         <td class="mdui-text-center" style="font-size: 20px;font-family: Microsoft YaHei;vertical-align: top;">111</td>
+                         <td class="mdui-icon material-icons" id="next">keyboard_arrow_right</td></tr>
+                  </table>
+                </div>
+                <div id="tab3" style="display: none;">
+                  <table class=" alltop "cellspacing="15" >
+                        <td style="font-size: 18px;font-family: Microsoft YaHei">我的提问：</td>
+                  </table>
+                  <table class=" myresourse mdui-table-hoverable" cellspacing="30">
+                        <tr><td style="border:1px solid rgb(182, 172, 172)">
+                            <div class="mdui-container-fluid" style="height: 50px;">
+                               <div class="mdui-row">
+                                    <div class="mdui-col-xs-9 font1">title</div>
+                                    <div class="mdui-col-xs-3">回答数目：</div>
+                                </div>
+                                <div class="mdui-row">
+                                        <div class="mdui-col-xs-9 font1">发布时间：</div>
+                                        <div class="mdui-col-xs-3">status</div>
+                                </div>
+                              </div></td></tr>   
+                        <tr><td style="border:1px solid rgb(182, 172, 172)">
+                            <div class="mdui-container-fluid" style="height: 50px;">
+                                <div class="mdui-row">
+                                    <div class="mdui-col-xs-9 font1">title</div>
+                                    <div class="mdui-col-xs-3">回答数目：</div>
+                                </div>
+                                <div class="mdui-row">
+                                        <div class="mdui-col-xs-9 font1">发布时间：</div>
+                                        <div class="mdui-col-xs-3">status</div>
+                                </div>
+                            </div></td></tr>
+                        <tr><td style="border:1px solid rgb(182, 172, 172)">
+                            <div class="mdui-container-fluid" style="height: 50px;">
+                             <div class="mdui-row">
+                                    <div class="mdui-col-xs-9 font1">title</div>
+                                    <div class="mdui-col-xs-3">回答数目：</div>
+                                </div>
+                                <div class="mdui-row">
+                                        <div class="mdui-col-xs-9 font1">发布时间：</div>
+                                        <div class="mdui-col-xs-3">status</div>
+                                </div>
+                              </div></td></tr>   
+                        <tr><td style="border:1px solid rgb(182, 172, 172)">
+                            <div class="mdui-container-fluid" style="height: 50px;">
+                               <div class="mdui-row">
+                                    <div class="mdui-col-xs-9 font1">title</div>
+                                    <div class="mdui-col-xs-3">回答数目：</div>
+                                </div>
+                                <div class="mdui-row">
+                                        <div class="mdui-col-xs-9 font1">发布时间：</div>
+                                        <div class="mdui-col-xs-3">status</div>
+                                </div>
+                              </div></td></tr>
+                  </table>
+                  <table class=" allbottom ">
+                        <tr><td class="mdui-icon material-icons" id="pre">keyboard_arrow_left</td>
+                        <td class="mdui-text-center" style="font-size: 20px;font-family: Microsoft YaHei;vertical-align: top;">111</td>
+                        <td class="mdui-icon material-icons" id="next">keyboard_arrow_right</td></tr>
+                  </table>
+                </div>
+              </div>
+          </div>
+      </div>
+  </div>
+<script src="../../statics/js/lib/jquery.js"></script>
+<script src="../../statics/js/lib/mdui.min.js"></script>
+<script src="../../statics/js/profile.js"></script>
+</body>
+</html>
