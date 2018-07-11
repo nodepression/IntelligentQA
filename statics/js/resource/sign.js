@@ -65,12 +65,13 @@
             else {
                 type = flag;
                 alert(username + " " + password + " " + type);
-                $.post("http://localhost:8080/sign/in",
-                    {
-                        "username": username,
-                        "password": password
-                    },
-                    function (data, status) {
+                $.ajax({
+                    type: 'post',
+                    url: "http://localhost:8080/sign/in",
+                    data: JSON.stringify({ "username": username, "password": password }),
+                    contentType: "application/json;charset=UTF-8",
+                    dataType: "json", //预期服务器返回类
+                    success: function (data) {
                         if (data.status != 200) {
                             alert(data.msg);
                         } else {
@@ -78,11 +79,11 @@
                             open.attr("disabled", "disabled");
                             open.unbind();
                         }
-                    });
+                    }
+                });
             }
         }
         inst.close();
-
     }
     //注册
     function sign_up() {
@@ -99,13 +100,14 @@
                 else {
                     type = $('#status').val();
                     alert(username + " " + password + " " + repassword + " " + type);
-                    $.post("http://localhost:8080/sign/up",
-                        {
-                            "username": username,
-                            "password": password,
-                            "type": type
-                        },
-                        function (data, status) {
+
+                    $.ajax({
+                        type: 'post',
+                        url: "http://localhost:8080/sign/up",
+                        data: JSON.stringify({ "username": username, "password": password,"type": type}),
+                        contentType: "application/json;charset=UTF-8",
+                        dataType: "json", //预期服务器返回类
+                        success: function (data) {
                             if (data.status != 200) {
                                 alert(data.msg);
                             } else {
@@ -113,7 +115,8 @@
                                 open.attr("disabled", "disabled");
                                 open.unbind();
                             }
-                        });
+                        }
+                    });
                 }
 
             }
