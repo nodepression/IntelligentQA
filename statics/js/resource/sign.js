@@ -65,10 +65,10 @@
             else {
                 type = flag;
                 alert(username + " " + password + " " + type);
-                $.post("/sign/in",
+                $.post("http://localhost:8080/sign/in",
                     {
-                        username: username,
-                        password: password,
+                        "username": username,
+                        "password": password
                     },
                     function (data, status) {
                         if (data.status != 200) {
@@ -99,11 +99,11 @@
                 else {
                     type = $('#status').val();
                     alert(username + " " + password + " " + repassword + " " + type);
-                    $.post("/sign/up",
+                    $.post("http://localhost:8080/sign/up",
                         {
-                            username: username,
-                            password: password,
-                            type: type
+                            "username": username,
+                            "password": password,
+                            "type": type
                         },
                         function (data, status) {
                             if (data.status != 200) {
