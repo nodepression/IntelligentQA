@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../../statics/css/lib/mdui.min.css">
     <link rel="stylesheet" href="../../statics/css/profile.css">
     <link rel="stylesheet" href="../../statics/css/home.css">
+    <link rel="stylesheet" href="../../statics/css/ask.css">
     <title>提问交流</title>
 </head>
 <body>
@@ -29,7 +30,7 @@
                     </li>
                     <li class="mdui-list-item mdui-ripple">
                         <i class="mdui-list-item-icon mdui-icon material-icons">person</i>
-                        <div class="mdui-list-item-content"><a href="profile.html">个人中心</a></div>
+                        <div class="mdui-list-item-content"><a href="../profile/profile.html">个人中心</a></div>
                     </li>
                 </ul>
             </div>
@@ -47,32 +48,40 @@
         <div class="mdui-row con"> 
         <div id="tab1">
                 <div class="mdui-textfield">
-                    <table>
-                       <tr><img class="mdui-img-fluid" src ="../../pics/monkey.png"> 
-                        <label class="mdui-textfield-label">您好，请问有什么疑问？</label>
-                        <textarea style="width: 190px" class="mdui-textfield-textarea" placeholder="请输入问题"/></textarea></tr>
-                    </table>
+                    <table class="table1">
+                       <tr><td><img class="mdui-img-fluid" src ="../../pics/monkey.png"></td>
+                        <td><label class="mdui-textfield-label">您好，请问有什么疑问？</label></td></tr>
+                       <tr><td></td><td><input class="inputlabel1" placeholder="请输入问题"/></input></td>
+                       <td><button class="mdui-btn" style="background-color: black;color: white;border-radius: 5px">提问</button></td></tr>
+                    </table>    
                       </div>
 
         </div>
         <div id="tab2" style="display: none;">
                 <table class=" alltop "cellspacing="15">
-                      <td style="font-size: 18px;font-family: Microsoft YaHei">为您推荐的问题：</td>
+                      <td style="font-size: 16px;font-family: Microsoft YaHei">问题列表：</td>
+                      <td style="text-align: right"><input class="inputlabel" placeholder="输入标签" id="ftag"/></input>
+                        <button class="btn" style="color: rgb(1, 102, 144)" id="filter">筛选</button></td>
                 </table>
-                <ul class="mdui-list" style="max-width: 360px;">
+                <ul class="mdui-list" style="max-width: 900px;">
                         <li class="mdui-list-item">
                           <div class="mdui-list-item-content">
-                            <div class="mdui-list-item-title font1" >11111111?</div>
-                            <div class="mdui-list-item-text mdui-list-item-one-line"></div>
+                            <div class="mdui-list-item-title font1" >为什么说PHP是最好的语言？<span style="color: gray;left: 10px"><i class="mdui-icon material-icons">local_offer</i>tags</span>
+                                <span style="margin-left:330px">count</span>
+                                <span style="margin-left:30px">time</span>
+                            </div>
                           </div>
                         </li>
                         <li class="mdui-divider-inset mdui-m-y-0"></li>
                         <li class="mdui-list-item">
-                          <div class="mdui-list-item-content">
-                            <div class="mdui-list-item-title font1">2222?</div>
-                            <div class="mdui-list-item-text mdui-list-item-one-line"></div>
-                          </div>
-                        </li>
+                            <div class="mdui-list-item-content">
+                              <div class="mdui-list-item-title font1" >为什么说PHP是最好的语言？<span style="color: gray;left: 10px"><i class="mdui-icon material-icons">local_offer</i>tags</span>
+                                  <span style="margin-left:330px">count</span>
+                                  <span style="margin-left:30px">time</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li class="mdui-divider-inset mdui-m-y-0"></li>
                       </ul>
                 <table class=" allbottom " >
                        <tr><td class="mdui-icon material-icons" id="pre">keyboard_arrow_left</td>
@@ -83,29 +92,30 @@
         <div id="tab3" style="display: none">
                 <table style=" position: relative;top: 10px">
                  <tr><td  width="130px" ><span style="margin-left: 20px">标题：</span></td>
-                 <td><input type="text" id="password" class="text1"></td></tr>
+                 <td><input type="text" id="title" class="text1"></td></tr>
                  <tr><td style="vertical-align: top"><span style="margin-left: 20px">说明：</span></td>
-                 <td style="vertical-align: top"><textarea id="newpassword" class="text2"></textarea></td></tr>
+                 <td style="vertical-align: top"><textarea id="description" class="text2"></textarea></td></tr>
                  <tr><td style="vertical-align:sub"><span style="margin-left: 20px">标签：</span></td>
                  <td class="mdui-btn mdui-ripple" id="open" style="color: rgb(77, 148, 177)">点击选择</td></tr>
-                 <tr><td style="height: 70px;position: relative;left: 150px"><input type="submit" id="submit" value="求猿!" class="font2" style="background-color: rgb(1,102,144)"/></td></tr>
+                 <tr><td style="height: 70px;position: relative;left: 150px"><input type="submit" id="ask" value="求猿!" class="font2 mdui-btn" style="background-color: rgb(1,102,144)"/></td></tr>
                  </table>
         </div>
 </div>
 <!-- 标签 -->
-<div class="mdui-dialog" id="tag_dialog">
+<div class="mdui-dialog" id="tag_dialog" style=" width: 480px;height: 320px;left: 150px">
       <div class="mdui-row"><p class="mdui-text-center" id="edit">编辑标签</p></div>
       <div class="mdui-dialog-content mdui-typo">
-          <div class="mdui-textfield">标签：<input class="text"></div>
+          <div class="mdui-textfield" id="tags">标签：<input class="text"></div>
           <div class="mdui-textfield">选择列表：</div>
           <div class="mdui-dialog-actions">
-              <button class="mdui-btn mdui-ripple" mdui-dialog-close>保存</button>
-              <button class="mdui-btn mdui-ripple" mdui-dialog-confirm>取消</button>
+              <button class="save  mdui-ripple" mdui-dialog-close style="color: white">保存</button>
+              <button class="cancel mdui-ripple" mdui-dialog-confirm style="color:black">取消</button>
             </div>
       </div>
 </div>
 <script src="../../statics/js/lib/jquery.js"></script>
 <script src="../../statics/js/lib/mdui.min.js"></script>
 <script src="../../statics/js/profile.js"></script>
+<script src="../../statics/js/ask.js"></script>
 </body>
 </html>
