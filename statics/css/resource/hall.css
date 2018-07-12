@@ -13,10 +13,24 @@
     justify-content: space-between;
 }
 .firstType .card{
+    position: relative;
     color: white;
     width: 40%;
     height: 50px;
     margin-top: 24px;
     text-align: center;
     line-height: 50px;
+}
+.firstType .card span{
+    margin-left: 8px;
+    cursor: pointer;
+}
+
+.second{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #f1f1f1;
+    color: black;
+    z-index: -1;
 }

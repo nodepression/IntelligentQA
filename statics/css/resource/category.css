@@ -1,0 +1,62 @@
+.con
+{
+    width: 80%;
+    padding: 2%;
+}
+.title{
+    height: 60px;
+    line-height: 60px;
+}
+.type{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+}
+.type span{
+    width: 18%;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    margin-left: 2%;
+    cursor: pointer;
+}
+.type span:hover{
+    background-color: #6db7d5;
+}
+
+.list>.choose{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+.list>.choose>div{
+    cursor: pointer;
+}
+
+.result{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    /* height: 416px; */
+    /* background-color: black; */
+}
+.result>.item{
+    width: 18%;
+    margin-left: 2%;
+    margin-top: 24px;
+    height: 80px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.page{
+    width: 100px;
+    height: 30px;
+    margin: auto;
+    text-align: center;
+    margin-top: 32px;
+}
+.page i{
+    cursor: pointer;
+}
