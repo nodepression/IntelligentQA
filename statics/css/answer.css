@@ -1,0 +1,20 @@
+.mdui-rowa {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+.mdui-rowb {
+  padding-top: 30px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+.mdui-rowc {
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+.button{
+  border-style:solid;
+  border-width:1px;
+  border-color: #016690;
+  background-color: white;
+  }

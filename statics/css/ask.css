@@ -1,0 +1,47 @@
+.table1{
+    position: relative;
+    left: 50px;
+}
+.save{
+    background-color: #016690;
+    left: -250px;
+    border-radius: 5px
+}
+.cancel{
+    left: -250px;
+    border-radius: 5px
+}
+.btn {
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(1, 102, 144);
+    border-radius: 2px;
+    background-color: rgb(124, 200, 232);
+    width: 53px;
+    height: 30px;
+  }
+  .inputlabel {
+    color: rgb(43, 51, 59);
+    border-radius:5px;
+    width: 176px;
+    height: 25px;
+    background-color: rgb(220,225,227);
+    font-family: Microsoft YaHei;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(43,51,59);
+  }
+  .inputlabel1 {
+    color: rgb(43, 51, 59);
+    border-radius:3px;
+    width: 480px;
+    height: 30px;
+    background-color: rgb(220,225,227);
+    font-family: Microsoft YaHei;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(43,51,59);
+  }
+  
+  
+  
