@@ -1,0 +1,22 @@
+.con
+{
+    width: 80%;
+    padding: 5%;
+}
+.con>.title
+{
+    font-family: sans-serif;
+}
+.firstType{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+.firstType .card{
+    color: white;
+    width: 40%;
+    height: 50px;
+    margin-top: 24px;
+    text-align: center;
+    line-height: 50px;
+}
