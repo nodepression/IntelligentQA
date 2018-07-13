@@ -59,14 +59,14 @@
     //登陆
     function sign_in() {
         if (!user) {
-            alert("帐户名格式不正确");
+            alert("帐户名只能为数字或者字母,且最小3位");
         } else {
             if (!pass) {
-                alert("密码格式不正确");
+                alert("密码最少8位");
             }
             else {
                 type = flag;
-                alert(username + " " + password + " " + type);
+                // alert(username + " " + password + " " + type);
                 $.ajax({
                     type: 'post',
                     url: "http://localhost:8080/sign/in",
@@ -77,7 +77,8 @@
                         if (data.status != 200) {
                             alert(data.msg);
                         } else {
-                            open.html(username);
+                            console.log(username);
+                            open.text(username);
                             open.attr("disabled", "disabled");
                             open.unbind();
                         }
@@ -90,18 +91,18 @@
     //注册
     function sign_up() {
         if (!user) {
-            alert("帐户名格式不正确");
+            alert("帐户名只能为数字或者字母,且最小3位");
         } else {
             if (!pass || !repass) {
-                alert("密码格式不正确");
+                alert("密码最少8位");
             }
             else {
                 if (!passEqual) {
-                    alert("两次密码不相等");
+                    alert("两次密码不一致");
                 }
                 else {
                     type = $('#status').val();
-                    alert(username + " " + password + " " + repassword + " " + type);
+                    // alert(username + " " + password + " " + repassword + " " + type);
 
                     $.ajax({
                         type: 'post',
@@ -111,9 +112,11 @@
                         dataType: "json", //预期服务器返回类
                         success: function (data) {
                             if (data.status != 200) {
+                                
                                 alert(data.msg);
                             } else {
-                                open.html(username);
+                                console.log(username);
+                                open.text(username);
                                 open.attr("disabled", "disabled");
                                 open.unbind();
                             }
@@ -166,7 +169,7 @@
         var regs = /^\w{3,10}$/;
         if (!regs.test(username)) {
             user = false;
-            alert("帐户名只能为数字或者字符,且最小3位");
+            alert("帐户名只能为数字或者字母,且最小3位");
         } else {
             user = true;
         }
