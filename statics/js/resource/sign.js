@@ -70,14 +70,13 @@
                 $.ajax({
                     type: 'post',
                     url: "http://localhost:8080/sign/in",
-                    data: JSON.stringify({ "username": username, "password": password }),
+                    data: JSON.stringify({ "username": username, "password": password,"type":type}),
                     contentType: "application/json;charset=UTF-8",
                     dataType: "json", //预期服务器返回类
                     success: function (data) {
                         if (data.status != 200) {
                             alert(data.msg);
                         } else {
-                            console.log(username);
                             open.text(username);
                             open.attr("disabled", "disabled");
                             open.unbind();
@@ -112,10 +111,8 @@
                         dataType: "json", //预期服务器返回类
                         success: function (data) {
                             if (data.status != 200) {
-                                
                                 alert(data.msg);
                             } else {
-                                console.log(username);
                                 open.text(username);
                                 open.attr("disabled", "disabled");
                                 open.unbind();
