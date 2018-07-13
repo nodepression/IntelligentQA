@@ -4,6 +4,9 @@ html,body{
   background-image: url("../images/bg.png");
   background-attachment: fixed;
 }
+body::-webkit-scrollbar {
+  display: none;
+}
 .left{
   position: fixed;
   height: 100%;

@@ -19,9 +19,7 @@
     color: aliceblue
 }
 
-body::-webkit-scrollbar {
-    display: none;
-}
+
 .mdui-textfield-focus .mdui-icon{
     color: #02648d!important;
 }

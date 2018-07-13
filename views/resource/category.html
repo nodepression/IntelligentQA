@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="../../statics/css/home.css">
     <link rel="stylesheet" href="../../statics/css/resource/category.css">
+    <link rel="stylesheet" href="../../statics/css/resource/upload.css">
 
     <title>资源分类</title>
 </head>
@@ -72,16 +73,7 @@
                             分类 :
                         </div>
                         <div class="mdui-col-xs-11 type second">
-                            <span class="tag">前端开发</span>
-                            <span class="tag">后端开发</span>
-                            <span class="tag">移动开发</span>
-                            <span class="tag">云计算&大数据</span>
-                            <span class="tag">算法&数学</span>
-                            <span class="tag">测试&运维</span>
-                            <span class="tag">数据库</span>
-                            <span class="tag">UI设计</span>
-                            <span class="tag">前沿技术</span>
-                            <span class="tag">游戏开发</span>
+
                         </div>
                     </div>
                     <div class="mdui-typo">
@@ -109,7 +101,7 @@
                                 <span>时间排序</span>
                                 <span>热门排序</span>
                             </div>
-                            <div style="margin-right: 2%;color: #e8ac41">上传新文件</div>
+                            <div style="margin-right: 2%;color: #e8ac41 " id="upload">上传新文件</div>
                         </div>
 
                         <div class="result">
@@ -126,11 +118,23 @@
             </div>
 
         </div>
+
+        <div class="mdui-dialog" id="upload_dialog">
+            <center>文件上传</center>
+            <div class="mdui-typo">
+                <hr/>
+            </div>
+            <div class="mdui-textfield">
+                <label class="mdui-textfield-label">文件名</label>
+                <input class="mdui-textfield-input" type="text"/>
+              </div>
+        </div>
     </div>
 
-    <script src="../../statics/js/lib/mdui.min.js"></script>
     <script src="../../statics/js/lib/jquery.js"></script>
+    <script src="../../statics/js/lib/mdui.min.js"></script>
     <script src="../../statics/js/resource/category.js"></script>
+    <script src="../../statics/js/resource/upload.js"></script>
 </body>
 
 </html>

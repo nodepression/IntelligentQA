@@ -1,12 +1,16 @@
 (function () {
+    // 资源大厅跳转时传递的参数
+    var index1 = 0,
+        index2 = 1,
+        index3 = 0;
     // 资源对应的标签
-    var one,   //一级
-        two,   //二级
-        three; //三级
+    var tag1 = "前端开发",      //一级
+        tag2 = "React.js",     //二级
+        tag3 = "全部";         //三级
 
     var index = 1; //当前位于第几页
     var num = 10; //一页最多显示多少个
-    var result = new Array(73);
+    var result = new Array(11);
     var len = result.length;
     for (var k = 0; k < len; k++) {
         result[k] = k;
@@ -19,15 +23,33 @@
         "mobile": ["Android", "iOS", "ReactNative", "WEEX"],
         "cloud": ["云计算 ", "大数据", "Hadoop"],
         "algorithm": ["算法与数据结构"],
-        "test": ["运维", "自动化测试", "Linux", "测试", "功能测试", "性能测试", "自动化测试", "接口测试", "安全测试"],
+        "test": ["运维", "自动化测试", "Linux", "测试", "功能测试", "性能测试", "接口测试", "安全测试"],
         "database": ["MySQL", "Redis", "MongoDB", "Oracle", "SQL Server"],
         "uiDesign": ["模型制作", "动效动画", "设计基础", "设计工具", "APPUI设计", "产品交互"],
         "leading": ["区块链", "人工智能", "计算机视觉", "微服务", "以太坊", "机器学习", "深度学习", "数据分析"],
         "game": ["Unity3D", "Cocos2d-x"]
     };
 
+    //提取url参数
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+        if (r != null) return unescape(r[2]); return null; //返回参数值
+    }
+
     //初始化
     function init() {
+        index1 = getUrlParam("index1");
+        index2 = getUrlParam("index2");
+
+        //根据资源大厅以及页面跳转时传来的 index 显示详细分类
+        var first = $(".first").find(".tag").eq(index1);
+        first.css("backgroundColor", "#6db7d5");
+        var aspect = first.attr("class").split(" ")[1]; //获取方向名
+        changeSecond(aspect);
+
+        $(".second").find(".tag").eq(index2).css("backgroundColor", "#6db7d5");
+        $(".third").find(".tag").eq(index3).css("backgroundColor", "#6db7d5");
 
         $('.pre').css("visibility", "hidden");
         if (len <= num) {
@@ -36,6 +58,10 @@
         render();
     }
     init();
+
+
+
+
 
     //渲染后台返回的结果
     function render() {
@@ -70,26 +96,25 @@
     //类型选择
     $('.first').click(function (e) {
         if ($(e.target).hasClass("tag")) {
-            one = $(e.target).text();
+            tag1 = $(e.target).text();
             $(".first>.tag").css("backgroundColor", "white");
             $(e.target).css("backgroundColor", "#6db7d5");
 
             $('.second').empty();
             var aspect = $(e.target).attr("class").split(" ")[1];
-            // console.log(aspect);
             changeSecond(aspect);
         }
     })
     $('.second').click(function (e) {
         if ($(e.target).hasClass("tag")) {
-            two = $(e.target).text();
+            tag2 = $(e.target).text();
             $(".second>.tag").css("backgroundColor", "white");
             $(e.target).css("backgroundColor", "#6db7d5");
         }
     })
     $('.third').click(function (e) {
         if ($(e.target).hasClass("tag")) {
-            three = $(e.target).text();
+            tag3 = $(e.target).text();
             $(".third>.tag").css("backgroundColor", "white");
             $(e.target).css("backgroundColor", "#6db7d5");
         }
@@ -102,7 +127,8 @@
         $('.result').empty()
         if (index == lastIndex) {  //当前是最后一页
             $('.next').css("visibility", "visible");
-        } else if (index == 2) //当前是第二页
+        }
+        if (index == 2) //当前是第二页
         {
             $('.pre').css("visibility", "hidden");
         }

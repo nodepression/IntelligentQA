@@ -21,11 +21,16 @@
     text-align: center;
     line-height: 50px;
 }
-.firstType .card span{
+.firstType .card{
+    cursor: pointer;
+}
+.firstType .card>.second>span{
     margin-left: 8px;
     cursor: pointer;
 }
-
+.firstType .card>.second>span:hover{
+    background-color: #6db7d5;
+}
 .second{
     position: absolute;
     width: 100%;
