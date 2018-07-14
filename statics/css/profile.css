@@ -4,7 +4,7 @@
   color: rgb(247, 253, 253);
 }
 .font1 {
-  font-size:18px;
+  font-size:15px;
   font-family: "Microsoft YaHei";
   color: rgb(77, 148, 177)
 }
@@ -53,7 +53,7 @@
 .myresourse{
   position: relative;
   width: 865px;
-  height: 485px;
+  height: 96px;
 }
 .allbottom{
   position: relative;
@@ -67,5 +67,27 @@
   height: 320px;
 } */
 
+.td{
+  border: 1px;
+  border-style: solid;
+  border-color: rgb(173, 182, 172);
+}
 
+.btn {
+  color:white;
+  background-color:rgb(255,0,0);
+  text-align: center;
+  margin: 4px 2px;
+  border:none;
 
+}
+
+.btn1 {
+  color:white;
+  background-color:rgb(98,255,81);
+  width:10px;
+  text-align: center;
+  margin: 4px 2px;
+  border:none;
+
+}

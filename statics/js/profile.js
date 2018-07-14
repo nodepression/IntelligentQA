@@ -3,6 +3,10 @@
   var password = undefined;
   var newpassword = undefined;
   var repassword = undefined;
+  var title=undefined;
+  var time=undefined;
+  var count=undefined;
+  var status=undefined;
 
   // 程序用到的辅助数据
   var pass = false; //密码格式
@@ -10,13 +14,99 @@
   var passEqual = false; //两次密码是否相等
   //dom obj
   var submit = $('#submit');     //提交按钮,点击发送请求。
-//   var pre = $('#pre');  // 上翻页
+  var qpre = $('#qpre');  // 上翻页
+  var qnext = $('#qnext');//下翻页
+  var qtable = $('#qtable');
+  var rpre = $('#rpre');  // 上翻页
+  var rnext = $('#rnext');//下翻页
+  var rtable = $('#rtable');
+  var index = 1; //当前位于第几页
+  var index1 = 1; //当前位于第几页
+    var num = 4; //一页最多显示多少个
+    var result = new Array(10);
+    var rresult = new Array(7);
+    var len = result.length;
+    var rlen = rresult.length;
+    var lastIndex = Math.floor(len / num) + 1; //最多显示到第几页
+    var rlastIndex = Math.floor(rlen / num) + 1; //最多显示到第几页
+    for (var r = 0; r < rlen; r++) {
+        rresult[r] = r;
+    }
+    for (var k = 0; k < len; k++) {
+        result[k] = k;
+    }
   submit.click(function () {
     changepassword();
   })
-//   pre.click(function (){
-//       count--;
-//   })
+  //上一页
+  qpre.click(function () {
+    quespre();
+  })
+  //下一页
+  qnext.click(function(){
+       quesnext(); 
+  })
+  //上一页
+  rpre.click(function () {
+    respre();
+  })
+  //下一页
+  rnext.click(function(){
+       resnext(); 
+  })
+
+  function quesnext(){
+    qtable.empty()
+    if (index == 1) {  //当前是第一页
+        qpre.css("visibility", "visible");
+    }
+    if (index == (lastIndex - 1)) //当前是倒数第二页
+    {
+        qnext.css("visibility", "hidden");
+    }
+    index++;
+    renderq();
+
+  }
+  function resnext(){
+    rtable.empty()
+    if (index1 == 1) {  //当前是第一页
+        rpre.css("visibility", "visible");
+    }
+    if (index1 == (rlastIndex - 1)) //当前是倒数第二页
+    {
+        rnext.css("visibility", "hidden");
+    }
+    index1++;
+    renderr();
+
+  }
+
+    function quespre(){
+       qtable.empty()
+    if (index == lastIndex) {  //当前是最后一页
+        qnext.css("visibility", "visible");
+    } if (index == 2) //当前是第二页
+    {
+        qpre.css("visibility", "hidden");
+    }
+    index--;
+    renderq();
+
+    }
+
+    function respre(){
+        rtable.empty()
+     if (index1 == rlastIndex) {  //当前是最后一页
+         rnext.css("visibility", "visible");
+     }  if (index1 == 2) //当前是第二页
+     {
+         rpre.css("visibility", "hidden");
+     }
+     index1--;
+     renderr();
+     }
+    
   function changepassword() {
         if (!pass || !repass) {
             alert("密码格式不正确(最少8位)");
@@ -28,14 +118,20 @@
             else {
                 password = $("#password").val();   //原密码
                 alert( password + " " + newpassword + " " + repassword);
-                $.post("/profile/modifyPass",
-                    {
-                        password: password,
-                        newpassword: newpassword,
-                    },
-                    function (data, status) {
-                        alert("数据: " + data + "\n状态: " + status);
-                    });
+                $.ajax({
+                    type: 'post',
+                    url: "http://localhost:8080/profile/modifyPass",
+                    data: JSON.stringify({ "password": password, "newpassword": newpassword}),
+                    contentType: "application/json;charset=UTF-8",
+                    dataType: "json", //预期服务器返回类
+                    success: function (data) {
+                        if (data.status != 200) {
+                            alert(data.msg);
+                        } else {
+                          alert("密码修改成功！");
+                        }
+                    }
+                });
             }
     }
 }
@@ -66,6 +162,180 @@ $('#repassword').change(function (e) {
       }
   }
 })
+
+    
+  
+//初始化
+function initq() {
+    qpre.css("visibility", "hidden");
+    if (len <= num) {
+        qnext.css("visibility", "hidden");
+    }
+    renderq();
+    
+}
+  initq();
+
+  //初始化
+function initr() {
+    rpre.css("visibility", "hidden");
+    if (rlen <= num) {
+        rnext.css("visibility", "hidden");
+    }
+    renderr();
+    
+}
+  initr();
+
+//渲染后台返回的结果
+function renderq() {
+    // $.ajax({
+    //     type: 'post',
+    //     url: "http://localhost:8080/profile/myQuestion",
+    //     data: JSON.stringify({}),
+    //     contentType: "application/json;charset=UTF-8",
+    //     dataType: "json", //预期服务器返回类
+    //     success: function (data) {
+    //         if (data.status != 200) {
+    //             alert(data.msg);
+    //         } else {
+    //             var qresult=data.data;//把json的data取出来
+    //             if(qlen<=4)
+    //     {
+    //         $('.page i').css("display","none");
+    //     }
+    for (var i = (index - 1) * num; i < (index - 1) * num + num; i++) {
+        if (i >= len)
+            break;
+            var tr = document.createElement("tr");
+            var td = document.createElement("td");
+            td.className="td";
+            var div = document.createElement("div");
+            //div.className= "mdui-container";
+            div.style="line-height: 60px";
+            var row=document.createElement("div");
+            //row.className="mdui-row";
+            var text = document.createElement("div");
+            text.className="mdui-col-xs-8 font1";
+            text.innerText = result[i].title;//             text.innerText = jsonData[i].title;
+            var text1=document.createElement("div");
+            text1.className="mdui-col-xs-3";
+            if(result[i].status=0){
+            text1.innerText ="回答数目："+result[i].count;}// text1.innerText ="回答数目："+jsonData[i].count;
+            if(result[i].status=1){
+            var textdelete=document.createElement("del");
+            text1.style="text-align:right";
+            textdelete.innerText="已关闭";
+            text1.appendChild(textdelete);}
+            var row2=document.createElement("div");
+            //row2.className="mdui-row";
+            var text2 = document.createElement("div");
+            text2.className="mdui-col-xs-9";
+            text2.innerText = "发布时间："+result[i].time;//     text2.innerText = "发布时间："+jsonData[i].time;
+            var text3 = document.createElement("div");
+            text3.className="mdui-col-xs-1 font1 mdui-col-offset-xs-1";
+            // var button=document.createElement("button");
+            // button.innerText = "status";
+            // button.style="";
+            // button.className="mdui-btn";
+            // text3.appendChild(button);
+            row.appendChild(text);
+            row.appendChild(text1);
+            row2.appendChild(text2);
+            row2.appendChild(text3);
+            div.appendChild(row);
+            div.appendChild(row2);
+            td.appendChild(div);
+            tr.appendChild(td);
+            qtable.append(tr);             
+    }
+    $('.index').text(index);}
+// }})
+// }
+//渲染后台返回的结果
+function renderr() {
+    // $.ajax({
+    //     type: 'post',
+    //     url: "http://localhost:8080/profile/myResource",
+    //     data: JSON.stringify({}),
+    //     contentType: "application/json;charset=UTF-8",
+    //     dataType: "json", //预期服务器返回类
+    //     success: function (data) {
+    //         if (data.status != 200) {
+    //             alert(data.msg);
+    //         } else {
+    //             var rresult=data.data;//把json的data取出来
+    //             if(rlen<=4)
+    //     {
+    //         $('.page i').css("display","none");
+    //     }
+        for (var i = (index1 - 1) * num; i < (index1 - 1) * num + num; i++) {
+            if (i >= rlen)
+                break;
+                var tr = document.createElement("tr");
+                var td = document.createElement("td");
+                td.className="td ";
+                var div = document.createElement("div");
+                //div.className= "mdui-container";
+                div.style="line-height: 60px";
+                var row=document.createElement("div");
+                //row.className="mdui-row";
+                row.style="height:50px";
+                if(rresult[i].type=0)//word
+                {var pic = document.createElement("img");
+                pic.src = "../../statics/images/word.png";
+                pic.className="mdui-col-xs-1";}
+                if(rresult[i].type=1)//ppt
+                {var pic = document.createElement("img");
+                pic.src = "../../statics/images/ppt.png";
+                pic.className="mdui-col-xs-1";}
+                if(rresult[i].type=2)//pdf
+                {var pic = document.createElement("img");
+                pic.src = "../../statics/images/pdf.png";
+                pic.className="mdui-col-xs-1";}
+                if(rresult[i].type=3)//video
+                {var pic = document.createElement("img");
+                pic.src = "../../statics/images/vedio.png";
+                pic.className="mdui-col-xs-1";}
+                var pic = document.createElement("img");
+                pic.src = "../../statics/images/vedio.png";
+                pic.className="mdui-col-xs-1";
+                var text = document.createElement("div");
+                text.className="mdui-col-xs-5 font1";
+                text.innerText = rresult[i].title;
+                var text1=document.createElement("div");
+                text1.className="mdui-col-xs-3";
+                text1.innerText ="上传时间："+rresult[i].time;
+                var text2 = document.createElement("div");
+                text2.className="mdui-col-xs-3";
+                text2.innerText = "下载次数："+rresult[i].downloads;
+                var row2=document.createElement("div");
+                row2.className="mdui-col-offset-xs-10";
+                row2.style="height:50px";
+                // var button=document.createElement("button");
+                // button.innerText = "删除";
+                // button.id=i;
+                // button.onclick=function(i){ del(i);};
+                // button.className="btn";
+                row2.style="line-height: 10px";
+                //row2.appendChild(button);
+                row.appendChild(pic);
+                row.appendChild(text);
+                row.appendChild(text1);
+                row.appendChild(text2);
+                div.appendChild(row);
+                div.appendChild(row2);
+                td.appendChild(div);
+                tr.appendChild(td);
+                rtable.append(tr);             
+        }
+        $('.index1').text(index1);   
+    }
+// }})
+
+// }
+
+
 }.call(this));
 
 
@@ -84,67 +354,18 @@ function showc(){
   $("#tab1").hide();
   $("#tab2").hide();
   $("#tab3").show();//显示tab3
-  $("#tab3").myq;
   }
 
-      var title=undefined;
-      var time=undefined;
-      var count=undefined;
-      var status=undefined;
-function myq() {
-                $.post("/profile/myQuestion","",
-                    function (data, status) {
-                        if (data.status != 200) {
-                            alert(data.msg);
-                        } else {
-                        alert("数据: " + data + "\n状态: " + status);
-                        var html="";
-                        var jsonData=data.data;//把json的data取出来
-                        for(var i in jsonData)//对data遍历
-                        {
-                        var index=i%4;
-                        if(index=0){
-                            html+='<div class="mdui-container-fluid" style="height: 83px;"><div class="mdui-row"><div class="mdui-col-xs-9 font1">'+jsonData[i].title+'</div><div class="mdui-col-xs-3">回答数目：'+jsonData[i].count+'</div></div><div class="mdui-row"><div class="mdui-col-xs-9 font1">发布时间：'+jsonData[i].time+'</div><div class="mdui-col-xs-3">status</div></div></div>'
-                           // alert(html);
-                            $("#q1").append(html);
-                            mdui.mutation();
-                            html="";}
-                        if(index=1){ html+='<div class="mdui-container-fluid" style="height: 83px;"><div class="mdui-row"><div class="mdui-col-xs-9 font1">'+jsonData[i].title+'</div><div class="mdui-col-xs-3">回答数目：'+jsonData[i].count+'</div></div><div class="mdui-row"><div class="mdui-col-xs-9 font1">发布时间：'+jsonData[i].time+'</div><div class="mdui-col-xs-3">status</div></div></div>'
-                        // alert(html);
-                         $("#q2").append(html);
-                         mdui.mutation();
-                         html="";}
-                        if(index=2){ html+='<div class="mdui-container-fluid" style="height: 83px;"><div class="mdui-row"><div class="mdui-col-xs-9 font1">'+jsonData[i].title+'</div><div class="mdui-col-xs-3">回答数目：'+jsonData[i].count+'</div></div><div class="mdui-row"><div class="mdui-col-xs-9 font1">发布时间：'+jsonData[i].time+'</div><div class="mdui-col-xs-3">status</div></div></div>'
-                        // alert(html);
-                         $("#q3").append(html);
-                         mdui.mutation();
-                         html="";}
-                        if(index=3){ html+='<div class="mdui-container-fluid" style="height: 83px;"><div class="mdui-row"><div class="mdui-col-xs-9 font1">'+jsonData[i].title+'</div><div class="mdui-col-xs-3">回答数目：'+jsonData[i].count+'</div></div><div class="mdui-row"><div class="mdui-col-xs-9 font1">发布时间：'+jsonData[i].time+'</div><div class="mdui-col-xs-3">status</div></div></div>'
-                        // alert(html);
-                         $("#q4").append(html);
-                         mdui.mutation();
-                         html="";}
-                    }}
-                }
-            )}
+// function del(i)
+// {
+//     var flag = confirm("确认删除?"+i);
+//     if(flag) {
+//         document.getElementById(i).remove();
+//     }
+// }
 
 
-function myr() {
-        $.post("/profile/myResource","",
-            function (data, status) {
-                if (data.status != 200) {
-                    alert(data.msg);
-                } else {
-                alert("数据: " + data + "\n状态: " + status);
-                var html="";
-                var jsonData=data.data;//把json的data取出来
-                var sum=jsonData.length;//获得数据条数
-                for(var i in jsonData)//对data遍历
-                {
-                html+='<tr><td style="border:1px solid rgb(182, 172, 172)"><div class="mdui-container-fluid" style="height: 83px;"><div class="mdui-row"><div class="mdui-col-xs-5 font1">'+jsonData[i].title+'</div><div class="mdui-col-xs-4">上传时间：'+jsonData[i].time+'</div><div class="mdui-col-xs-3 font1">下载次数：'+jsonData[i].downloads+'</div></div></div></td></tr>'
-                alert(html);
-                $("#rtable").append(html);
-                mdui.mutation();
-            }}
-        }
-    )}
+
+
+
+  
