@@ -8,11 +8,12 @@
     <link rel="stylesheet" href="../../statics/css/lib/mdui.min.css">
     <link rel="stylesheet" href="../../statics/css/home.css">
     <link rel="stylesheet" href="../../statics/css/resource/search.css">
+    <link rel="stylesheet" href="../../statics/css/preview.css">
     <title>资源搜索</title>
 </head>
 
 <body>
-    <div class="mdui-container-fluid" style="height:1500px;">
+    <div class="mdui-container-fluid">
         <div style="position: fixed;background-color: white;height: 50px;width: 100%;"></div>
         <div class="mdui-row">
             <div class="mdui-col-xs-3 mdui-col-offset-xs-1 left">
@@ -37,20 +38,91 @@
             <div class="mdui-col-xs-8 mdui-col-offset-xs-4 right">
                 <div class="mdui-row" style="position: fixed;">
                     <div class="mdui-appbar topBar">
-                        <div class="mdui-tab mdui-color-theme" mdui-tab >
-                            <a href="../../index.html" class="mdui-ripple mdui-ripple-white">资源大厅</a>
-                            <a href="./search.html" class="mdui-ripple mdui-ripple-white">资源搜索</a>
+                        <div class="mdui-tab mdui-color-theme" mdui-tab>
+                            <a href="#" class="mdui-ripple mdui-ripple-white">资源大厅</a>
+                            <a href="#" class="mdui-ripple mdui-ripple-white">资源搜索</a>
                             <a style="position: fixed;right: 0px;">zq</a>
                         </div>
                     </div>
                 </div>
-                <div class="mdui-row con">
-                        your code
+                <div class="mdui-row con top">
+                    <div class="hint">猜你想要:</div>
+                    <div class="mdui-textfield searchCon">
+                        <input class="mdui-textfield-input words" type="text" placeholder="输入上传者或关键词" />
+                        <i class="mdui-icon material-icons" id="search">search</i>
+                    </div>
                 </div>
+
+                <div class="mdui-row botoom">
+                    <div class="hint">猜你想要:</div>
+                    <div class="list">
+                        <!-- <div class="item">
+                            <span class="titleCon">
+                                <span class="title">C++primer</span>
+                                <span class="type">pdf</span>
+                            </span>
+                            <span class="uploaderCon">
+                                上传者&nbsp;:
+                                <span class="uploader">zhangqian</span>
+                            </span>
+                            <span class="dowloadsCon">
+                                下载量&nbsp;:
+                                <span class="dowloads">123</span>
+                            </span>
+                        </div> -->
+                    </div>
+
+                    <div class="page">
+                        <span>
+                            <i class="mdui-icon material-icons pre">&#xe314;</i>
+                            <span class="index"> 1 </span>
+                            <i class="mdui-icon material-icons next">&#xe315;</i>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="mdui-dialog" id="resource_detail">
+                <center>资源详情</center>
+                <div class="mdui-typo">
+                    <hr/>
+                </div>
+
+                <div class="resource_info">
+                    文件名 :
+                    <span class="fileName">Python入门经典.pdf</span>
+                </div>
+                <div class="resource_info">
+                    文件类型 :
+                    <span class="fileType">PDF文件</span>
+                </div>
+                <div class="resource_info">
+                    上传者 :
+                    <span class="uploader">ZQ</span>
+                </div>
+                <div class="resource_info">
+                    下载次数 :
+                    <span class="downloads">312</span>
+                </div>
+
+                <div class="mdui-typo">
+                    <hr/>
+                </div>
+
+                <button class="mdui-btn deleteBtn">删除</button>
+                <a href="http://pbmqrl67c.bkt.clouddn.com/%E8%AE%B8%E5%B5%A9%20-%20%E5%A4%A7%E5%8D%83%E4%B8%96%E7%95%8C.mp4" download="test" class="mdui-btn downloadBtn">下载</but>
+                <a class="mdui-btn previewBtn">预览</a>
+                
             </div>
         </div>
     </div>
     <script src="../../statics/js/lib/mdui.min.js"></script>
+    <script src="../../statics/js/lib/jquery.js"></script>
+    <script src="../../statics/js/resource/search.js"></script>
+    <script src="../../statics/js/preview.js"></script>
 </body>
 
 </html>
