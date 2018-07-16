@@ -53,7 +53,7 @@
 .page{
     width: 100px;
     height: 30px;
-    margin: auto;
+    margin: 0 auto;
     text-align: center;
     margin-top: 32px;
 }

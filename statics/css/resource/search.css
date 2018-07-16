@@ -3,8 +3,62 @@
     width: 80%;
     padding: 2%;
 }
+.top{
+    margin-bottom: 8px;
+}
+.searchCon{
+    width: 60%;
+    margin: 0 auto;
+}
 #search
 {
     right: 0px;
+    cursor: pointer;
+    /* color: white;
+    background-color: #0a0c0a; */
+}
+.botoom{
+    width: 80%;
+    padding: 2%;
+    background-color: white;
+}
+
+.list>.item{
+    margin-top: 16px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    font-size: 16px;
+    cursor: pointer;
+}
+.titleCon{
+    width: 40%;
+}
+.uploaderCon{
+    width: 30%;
+}
+.dowloadsCon{
+    width: 30%;
+}
+.item .title{
+    color: #016690;
+}
+.item .type{
+    display: inline-block;
+    text-align: center;
+    color: gray;
+    font-size: 12px;
+    border: 2px solid #dbe0e2;
+    width: 30px;
+}
+
+.page{
+    width: 100px;
+    height: 30px;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 32px;
+}
+.page i{
     cursor: pointer;
 }
