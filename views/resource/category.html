@@ -124,10 +124,39 @@
             <div class="mdui-typo">
                 <hr/>
             </div>
-            <div class="mdui-textfield">
-                <label class="mdui-textfield-label">文件名</label>
-                <input class="mdui-textfield-input" type="text"/>
-              </div>
+
+            <form action="form_action.asp" method="POST" id="file">
+                <div class="fileName">
+                    <span>文件名:</span>
+                    <input class="newName" type="text" name="fname" />
+                </div>
+                <input id="realFile" type="file" name="file" accept="" />
+                <div class="file">
+                    <div class="mdui-btn fileChoose">选择本地文件</div>
+                    <div class="fileType">
+                        <select class="mdui-select" name="ftype" mdui-select form="file">
+                            <option value="1">word</option>
+                            <option value="2">ppt</option>
+                            <option value="3">pdf</option>
+                            <option value="4">视频</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="fileButton">
+                    <div id="uploadButton" class="mdui-btn">上传</div>
+                    <div id="cancel" class="mdui-btn">取消</div>
+                </div>
+
+                <div class="tags">
+                    <input class="tag1" name="tag1" value="" />
+                    <input class="tag2" name="tag2" value="" />
+                    <input class="tag3" name="tag3" value="" />
+                </div>
+                <input class="mdui-btn" id="realUploadButton" type="submit" value="上传" />
+
+            </form>
+
         </div>
     </div>
 

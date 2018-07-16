@@ -1,16 +1,17 @@
+// 资源对应的标签
+var tag1 = "前端开发",      //一级
+    tag2 = "React.js",     //二级
+    tag3 = "全部";         //三级
+
 (function () {
     // 资源大厅跳转时传递的参数
     var index1 = 0,
         index2 = 1,
         index3 = 0;
-    // 资源对应的标签
-    var tag1 = "前端开发",      //一级
-        tag2 = "React.js",     //二级
-        tag3 = "全部";         //三级
 
     var index = 1; //当前位于第几页
     var num = 10; //一页最多显示多少个
-    var result = new Array(11);
+    var result = new Array(61);
     var len = result.length;
     for (var k = 0; k < len; k++) {
         result[k] = k;
@@ -58,9 +59,6 @@
         render();
     }
     init();
-
-
-
 
 
     //渲染后台返回的结果
