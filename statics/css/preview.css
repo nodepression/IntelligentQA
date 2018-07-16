@@ -1,0 +1,29 @@
+#resource_detail
+{
+    width: 40%;
+    padding: 2%;
+}
+.resource_info{
+    margin-top: 32px;
+}
+.deleteBtn{
+    background-color: #e33535;
+    color: white;
+}
+.deleteBtn:hover{
+    background-color: red;
+}
+
+.previewBtn
+{   
+    background-color: #f5f5f5;
+    float: right;
+}
+.downloadBtn{
+    background-color: #016690;
+    color: white;
+    float: right;
+}
+.downloadBtn:hover{
+    background-color: #063346;
+}

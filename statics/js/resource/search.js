@@ -42,14 +42,14 @@
             item.appendChild(uploaderCon);
 
 
-            var dowloadsCon = document.createElement("span");
-            dowloadsCon.className = "dowloadsCon";
-            dowloadsCon.innerText = "下载量 : ";
-            var dowloads = document.createElement("span");
-            dowloads.className = "dowloads";
-            dowloads.innerText = result[i];
-            dowloadsCon.appendChild(dowloads)
-            item.appendChild(dowloadsCon);
+            var downloadsCon = document.createElement("span");
+            downloadsCon.className = "dowloadsCon";
+            downloadsCon.innerText = "下载量 : ";
+            var downloads = document.createElement("span");
+            downloads.className = "dowloads";
+            downloads.innerText = result[i];
+            downloadsCon.appendChild(downloads)
+            item.appendChild(downloadsCon);
 
 
             $('.list').append(item);
