@@ -5,6 +5,8 @@
     var tags = undefined;
     var question=undefined;
     //dom obj
+    var ok = $('#ok');//输入标签
+    var selected = $('#selected');//标签选择框
     var search = $('#search');//智能搜索
     var ask = $('#ask'); //提问按钮，点击求猿
     var filter = $('#filter');//点击传标签获得相应问题
@@ -16,6 +18,9 @@
     var aresult = new Array(12);
     var alen = aresult.length;
     var alastIndex = Math.floor(alen / anum) + 1; //最多显示到第几页
+    ok.click(function () {
+        oktag();
+      })
     search.click(function () {
         searchq();
       })
@@ -107,8 +112,8 @@ function rendera() {
     //         if (data.status != 200) {
     //             alert(data.msg);
     //         } else {
-    //             var aresult=data.data;//把json的data取出来
-    //             if(alen<=4)
+    //             [...aresult]=data.data;//把json的data取出来
+    //             if(alen<=anum)
     //     {
     //         $('.page i').css("display","none");
     //     }
@@ -182,20 +187,56 @@ var inst = new mdui.Dialog('#tag_dialog', { 'overlay': true, 'destroyOnClosed': 
         });   
   }
 
+  function oktag(){
+    var inputField=undefined;
+    inputField = $("#tags").val();
+    var div=document.createElement("div");
+        div.className="mdui-chip";
+        var span=document.createElement("span");
+        span.className="mdui-chip-title";
+        span.innerText=inputField;
+        var span1=document.createElement("span");
+        span1.className="mdui-chip-delete";
+        var i=document.createElement("i");
+        i.className="mdui-icon material-icons";
+        i.innerText="cancel";
+        span1.appendChild(i);
+        div.appendChild(span);
+        div.appendChild(span1);
+        selected .append(div);
 
-
- function clear() {    
-    if(TableBody){
-         var ind = TableBody.childNodes.length;
-         for (var i = ind - 1; i >= 0 ; i--) {
-             TableBody.removeChild(TableBody.childNodes[i]);
-         }
-         completeDiv.style.border = "none";
-    }
 }
+
+$("#demo").change(function(){
+    var options=$("#demo option:selected");  //获取选中的项
+    //alert(options.val());   //拿到选中项的值 
+    if(options.val()){
+        //alert(options.val());
+        var div=document.createElement("div");
+        div.className="mdui-chip";
+        var span=document.createElement("span");
+        span.className="mdui-chip-title";
+        span.innerText=options.val();
+        var span1=document.createElement("span");
+        span1.className="mdui-chip-delete";
+        var i=document.createElement("i");
+        i.className="mdui-icon material-icons";
+        i.innerText="cancel";
+        span1.appendChild(i);
+        div.appendChild(span);
+        div.appendChild(span1);
+        selected.append(div);
+    }
+
+    $('#tags').val("");
+});
+
+
 
 }.call(this));
 
+
+var a= $('#append');//自动匹配
 //自动匹配
 function find() {
     var inputField=undefined;
@@ -205,6 +246,7 @@ function find() {
     // var len=data.length;
     // for(var r=0;r<len;r++)
     // data[r]=r;
+    var arr=new Array;
     var data = [
         "0",
         "13",
@@ -213,13 +255,51 @@ function find() {
         "10000",
         ];
         var len=data.length;
+        var j=0;
     for (var i = 0; i < len; i++) {
         //alert(data[i]);
         //alert((data[i]).indexOf(inputField));
           if ((data[i]).indexOf(inputField)>=0){
-            alert(data[i]);
-            //arr.push(data[i]);
+            //alert(data[i]);
+            // arr.push(data[i]);
+            arr[j]=data[i];
+            j++;
+            //alert(arr[i]);
           }
      }
      set(arr);
 }
+
+var inst = $('#demo');//自动匹配
+//将符合的建议项逐条放置于弹出框中
+function set(arr) {            
+    var size = arr.length;
+    var nextNode=undefined;
+    //alert(size);
+   // for(var i=0;i<size;i++){alert(arr[i]);}
+    //setOffsets();
+    //alert($("#tags").val());
+   if(size>0) {inst.css("display","block"); }
+   else if(size==0||$('#tags').val==""){inst.css("display","none"); }
+    $('#demo').empty();
+    for (var i = 0; i < size; i++) {
+        var nextNode = arr[i];
+        //alert(nextNode+i);
+        $('#demo').append('<option>'+nextNode+'</option>');
+  //inst.handleUpdate();
+  
+  mdui.mutation();
+        //cell.onclick = function() { populate(this); } ;  //鼠标点击选项给输入框赋值          
+    }
+}
+
+var cancell = $('#cancell');//取消 清空
+cancell.click(function () {
+    clear();
+  })
+function clear(){
+    inst.css("display","none");
+    $('#tags').val("");
+}
+
+

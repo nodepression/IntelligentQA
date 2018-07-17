@@ -52,7 +52,7 @@
                        <tr><td><img class="mdui-img-fluid" src ="../../pics/monkey.png"></td>
                         <td><label class="mdui-textfield-label">您好，请问有什么疑问？</label></td></tr>
                        <tr><td></td><td><input class="inputlabel1" id="question" placeholder="请输入问题"/></input></td>
-                       <td><button class="mdui-btn" id="search" style="background-color: black;color: white;border-radius: 5px">提问</button></td></tr>
+                       <td><button class="mdui-btn" id="search" style="background-color: black;color: white;border-radius: 5px">搜索</button></td></tr>
                     </table>    
                       </div>
 
@@ -100,16 +100,21 @@
 <div class="mdui-dialog" id="tag_dialog" style=" width: 480px;height: 320px;left: 150px">
       <p class="mdui-text-center" id="edit">编辑标签</p>
       <div class="mdui-dialog-content mdui-typo">
-          <div class="mdui-textfield">标签：<input class="text" style=" width: 400px;" id="tags" onkeyup="find()"></div>
-          <div style="position:absolute;" id="popup">
-             <table id="append" border="0" cellspacing="0" cellpadding="0">        
-                  <tbody id="table_body"></tbody>
-             </table>
-          </div>
+          <div class="mdui-textfield">标签：<input class="text" style=" width: 300px;" id="tags" onkeyup="find()">
+          <button class="cancel mdui-ripple" mdui-dialog-confirm style="color:black;left: 20px;" id="ok">确定</button></div>
+          <select class="mdui-select" id="demo" style=" width: 400px;display: none;" >
+                <option style='display: none'></option>
+              </select>
           <div class="mdui-textfield">选择列表：</div>
-          <div class="mdui-dialog-actions">
+          <div class="mdui-dialog-actions" style="height: 270px;" id="selected"> </div>
+<!--                 
+                <div class="mdui-chip">
+                            <span class="mdui-chip-title">Example Chip</span>
+                            <span class="mdui-chip-delete"><i class="mdui-icon material-icons">cancel</i></span>
+                          </div> -->
+              <div style="margin-top: 90px;">
               <button class="save  mdui-ripple" mdui-dialog-close style="color: white;left: -200px;">保存</button>
-              <button class="cancel mdui-ripple" mdui-dialog-confirm style="color:black;left: -180px;">取消</button>
+              <button class="cancel mdui-ripple" mdui-dialog-confirm style="color:black;left: -180px;" id="cancell">取消</button>
             </div>
       </div>
 </div>
