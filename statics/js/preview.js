@@ -42,7 +42,7 @@
 
     (function init() {
         var inst = new mdui.Dialog('#resource_detail', { 'overlay': true, 'destroyOnClosed': true });
-        $('.preview').click(function (e) {
+        $('.list').click(function (e) {
 
 
             //获取数据

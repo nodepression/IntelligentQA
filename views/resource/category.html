@@ -127,10 +127,10 @@
                 <hr/>
             </div>
 
-            <form action="http://localhost:8080/resource/upLoad" method="POST" id="file">
+            <form action="http://localhost:8080/resource/upLoad" enctype="multipart/form-data" method="POST" id="file">
                 <div class="fileName">
                     <span>文件名:</span>
-                    <input class="newName" type="text" name="name" />
+                    <input class="newName" type="text" name="filename" />
                 </div>
                 <input id="realFile" type="file" name="file" accept="" />
                 <div class="file">
