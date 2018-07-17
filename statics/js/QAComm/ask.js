@@ -2,9 +2,13 @@
     // 前后端传输数据
     var title = undefined;
     var description = undefined;
-    var tags = undefined;
+    var tags = [];
+    var tag0 = undefined;
+    var tag1 = undefined;
+    var tag2 = undefined;
     var question=undefined;
     //dom obj
+    var save = $('.save')//保存标签
     var ok = $('#ok');//输入标签
     var selected = $('#selected');//标签选择框
     var search = $('#search');//智能搜索
@@ -18,6 +22,39 @@
     var aresult = new Array(12);
     var alen = aresult.length;
     var alastIndex = Math.floor(alen / anum) + 1; //最多显示到第几页
+
+
+    save.on("click",function(){
+        tag0 = $("#0").text();
+        tag1 = $("#1").text();
+        tag2 = $("#2").text();
+        alert(tag0);alert(tag1);alert(tag2);
+        
+    })
+
+    function askquestions() {
+        title = $("#title").val();//问题标题
+        description = $("#description").val();//问题描述
+        tags[0]=tag0;
+        tags[1]=tag1;
+        tags[2]=tag2;
+        alert( title + " " + description + " " + tags);
+        $.ajax({
+            type: 'post',
+            url: "http://localhost:8080/QAComm/quiz",
+            data: JSON.stringify({ "title": title, "description": description,"tags": tags}),
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json", //预期服务器返回类
+            success: function (data) {
+                if (data.status != 200) {
+                    alert(data.msg);
+                } else {
+                   alert("提问成功");
+                }
+            }
+        });   
+  }
+
     ok.click(function () {
         oktag();
       })
@@ -165,28 +202,11 @@ var inst = new mdui.Dialog('#tag_dialog', { 'overlay': true, 'destroyOnClosed': 
              inst.open();
       })
 
-    
-      function askquestions() {
-        title = $("#title").val();//问题标题
-        description = $("#description").val();//问题描述
-        tags = $("#tags").val();//标签
-        alert( title + " " + description + " " + tags);
-        $.ajax({
-            type: 'post',
-            url: "http://localhost:8080/QAComm/quiz",
-            data: JSON.stringify({ "title": title, "description": description,"tags": tags}),
-            contentType: "application/json;charset=UTF-8",
-            dataType: "json", //预期服务器返回类
-            success: function (data) {
-                if (data.status != 200) {
-                    alert(data.msg);
-                } else {
-                   alert("提问成功");
-                }
-            }
-        });   
-  }
 
+    
+
+    
+    
   function oktag(){
     var inputField=undefined;
     inputField = $("#tags").val();
@@ -210,30 +230,37 @@ var inst = new mdui.Dialog('#tag_dialog', { 'overlay': true, 'destroyOnClosed': 
 $("#demo").change(function(){
     var options=$("#demo option:selected");  //获取选中的项
     //alert(options.val());   //拿到选中项的值 
-    if(options.val()){
-        //alert(options.val());
+    if(options.val()&& ($(".mdui-chip").length<3)){
+        //alert(options.val());//第一个取不到为什么？？？？？？？？
         var div=document.createElement("div");
         div.className="mdui-chip";
         var span=document.createElement("span");
         span.className="mdui-chip-title";
+        span.id=$(".mdui-chip-title").length;
         span.innerText=options.val();
         var span1=document.createElement("span");
         span1.className="mdui-chip-delete";
         var i=document.createElement("i");
-        i.className="mdui-icon material-icons";
+        i.className="mdui-icon material-icons del";
         i.innerText="cancel";
         span1.appendChild(i);
         div.appendChild(span);
         div.appendChild(span1);
         selected.append(div);
+        //alert($('.mdui-chip-title').length);
+        $(".del").click(function(){
+            alert("a");
+        })
     }
+
 
     $('#tags').val("");
 });
 
-
-
 }.call(this));
+
+
+
 
 
 var a= $('#append');//自动匹配
@@ -300,6 +327,7 @@ cancell.click(function () {
 function clear(){
     inst.css("display","none");
     $('#tags').val("");
+    $('#selected').empty();
 }
 
 

@@ -8,7 +8,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "启动 Chrome 并打开 localhost",
-            "url": "file:///D:/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/IntelligentQA/views/QAComm/ask.html#&mdui-dialog",
+            "url": "file:///D:/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/IntelligentQA/views/QAComm/ask.html#",
             "webRoot": "${workspaceFolder}"
         }
     ]
