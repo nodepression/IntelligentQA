@@ -1,0 +1,225 @@
+(function () {  
+    // 前后端传输数据
+    var title = undefined;
+    var description = undefined;
+    var tags = undefined;
+    var question=undefined;
+    //dom obj
+    var search = $('#search');//智能搜索
+    var ask = $('#ask'); //提问按钮，点击求猿
+    var filter = $('#filter');//点击传标签获得相应问题
+    var apre = $('#apre');  // 上翻页
+    var anext = $('#anext');//下翻页
+    var atable = $('#questions');
+    var aindex = 1; //当前位于第几页
+    var anum = 6; //一页最多显示多少个
+    var aresult = new Array(12);
+    var alen = aresult.length;
+    var alastIndex = Math.floor(alen / anum) + 1; //最多显示到第几页
+    search.click(function () {
+        searchq();
+      })
+    //上一页
+    apre.click(function () {
+     anspre();
+    })
+    //下一页
+    anext.click(function(){
+       ansnext(); 
+    })
+    ask.click(function () { 
+        askquestions(); 
+      })
+    filter.click(function(){
+        rendera();
+    })
+
+    //智能搜索
+    function searchq(){
+        question = $("#question").val();   //问题
+        alert(question);
+        $.ajax({
+        type: 'post',
+        url: "http://localhost:8080/QAComm/search",
+        data: JSON.stringify({"question": question}),
+        contentType: "application/json;charset=UTF-8",
+        dataType: "json", //预期服务器返回类
+        success: function (data) {
+            if (data.status != 200) {
+                alert(data.msg);
+            } else{
+                //??
+            }
+    }
+})}
+    
+    //伸出猿手
+      function ansnext(){
+        atable.empty()
+        if (aindex == 1) {  //当前是第一页
+            apre.css("visibility", "visible");
+        }
+        if (aindex == (alastIndex - 1)) //当前是倒数第二页
+        {
+            anext.css("visibility", "hidden");
+        }
+        aindex++;
+        rendera();
+    
+      }
+
+      function anspre(){
+        atable.empty()
+     if (aindex == alastIndex) {  //当前是最后一页
+         anext.css("visibility", "visible");
+     } if (aindex == 2) //当前是第二页
+     {
+         apre.css("visibility", "hidden");
+     }
+     aindex--;
+     rendera();
+ 
+     }
+
+       
+//初始化
+function inita() {
+    apre.css("visibility", "hidden");
+    if (alen <= anum) {
+        anext.css("visibility", "hidden");
+    }
+    rendera();
+    
+}
+   inita();
+
+
+//渲染后台返回的结果
+function rendera() {
+    ftag = $("#ftag").val();//输入的标签
+    // $.ajax({
+    //     type: 'post',
+    //     url: "http://localhost:8080/QAComm/reply",
+    //     data: JSON.stringify({"ftag": ftag}),
+    //     contentType: "application/json;charset=UTF-8",
+    //     dataType: "json", //预期服务器返回类
+    //     success: function (data) {
+    //         if (data.status != 200) {
+    //             alert(data.msg);
+    //         } else {
+    //             var aresult=data.data;//把json的data取出来
+    //             if(alen<=4)
+    //     {
+    //         $('.page i').css("display","none");
+    //     }
+    for (var i = (aindex - 1) * anum; i < (aindex - 1) * anum + anum; i++) {
+        if (i >= alen)
+            break;
+            var li=document.createElement("li");
+            li.className="mdui-list-item";
+            var div=document.createElement("div");
+            div.className="mdui-list-item-content";
+            var div1=document.createElement("div");
+            div1.className="mdui-list-item-title font1";
+            div1.innerText=aresult[i];
+            var span=document.createElement("span");
+            span.style="color: gray;left: 10px";
+            var i=document.createElement("i")
+            i.className= "mdui-icon material-icons";
+            i.innerText="local_offer";
+            var span3=document.createElement("span");
+            span3.innerText="tags";
+            var span1=document.createElement("span");
+            span1.style="margin-left:330px";
+            span1.innerText="count";
+            var span2=document.createElement("span");
+            span2.style="margin-left:30px";
+            span2.innerText="time";
+            var li1=document.createElement("li");
+            li1.className="mdui-divider-inset mdui-m-y-0";
+            span.appendChild(i);
+            span.appendChild(span3);
+            div1.appendChild(span);
+            div.appendChild(div1);
+            li.appendChild(div);
+            li.appendChild(span1);
+            li.appendChild(span2);
+            atable.append(li);  
+            atable.append(li1);            
+    }
+    $('.aindex').text(aindex);}
+// }})
+// }
+
+
+
+//我要求猿
+var open = $('#open');//点击进入选择标签
+var inst = new mdui.Dialog('#tag_dialog', { 'overlay': true, 'destroyOnClosed': true });
+    open.click(function () {
+             inst.open();
+      })
+
+    
+      function askquestions() {
+        title = $("#title").val();//问题标题
+        description = $("#description").val();//问题描述
+        tags = $("#tags").val();//标签
+        alert( title + " " + description + " " + tags);
+        $.ajax({
+            type: 'post',
+            url: "http://localhost:8080/QAComm/quiz",
+            data: JSON.stringify({ "title": title, "description": description,"tags": tags}),
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json", //预期服务器返回类
+            success: function (data) {
+                if (data.status != 200) {
+                    alert(data.msg);
+                } else {
+                   alert("提问成功");
+                }
+            }
+        });   
+  }
+
+
+
+ function clear() {    
+    if(TableBody){
+         var ind = TableBody.childNodes.length;
+         for (var i = ind - 1; i >= 0 ; i--) {
+             TableBody.removeChild(TableBody.childNodes[i]);
+         }
+         completeDiv.style.border = "none";
+    }
+}
+
+}.call(this));
+
+//自动匹配
+function find() {
+    var inputField=undefined;
+    inputField = $("#tags").val();
+    //alert(inputField);
+    // var data=new Array(11);
+    // var len=data.length;
+    // for(var r=0;r<len;r++)
+    // data[r]=r;
+    var data = [
+        "0",
+        "13",
+        "101",
+        "122",
+        "10000",
+        ];
+        var len=data.length;
+    for (var i = 0; i < len; i++) {
+        //alert(data[i]);
+        //alert((data[i]).indexOf(inputField));
+          if ((data[i]).indexOf(inputField)>=0){
+            alert(data[i]);
+            //arr.push(data[i]);
+          }
+     }
+     set(arr);
+}
