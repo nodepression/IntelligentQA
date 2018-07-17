@@ -8,6 +8,8 @@ var tag1 = "前端开发",      //一级
     var index1 = 0,
         index2 = 1,
         index3 = 0;
+    var sort = 1;
+
 
     var index = 1; //当前位于第几页
     var num = 10; //一页最多显示多少个
@@ -18,6 +20,7 @@ var tag1 = "前端开发",      //一级
     }
     var lastIndex = Math.floor(len / num) + 1; //最多显示到第几页
 
+    //通过点击时的序列获取tag
     var tags = {
         "front": ["React.js", "Vue.js", "Node.js", "html/css", "Javascript", "Angular.js", "jQuery", "Bootstrap", "Sass/Less", "前端工具"],
         "back": ["Java", "SpringBoot", "C++", "Python", "爬虫", "Django", "go", "PHP", "Ruby", "C"],
@@ -39,26 +42,57 @@ var tag1 = "前端开发",      //一级
     }
 
     //初始化
-    function init() {
+    (function init() {
         index1 = getUrlParam("index1");
         index2 = getUrlParam("index2");
 
-        //根据资源大厅以及页面跳转时传来的 index 显示详细分类
+        //根据资源大厅以及页面跳转时传来的 index 显示详细分类  并初始化tag1 tag2
         var first = $(".first").find(".tag").eq(index1);
+        tag1 = first.text();
         first.css("backgroundColor", "#6db7d5");
         var aspect = first.attr("class").split(" ")[1]; //获取方向名
         changeSecond(aspect);
 
-        $(".second").find(".tag").eq(index2).css("backgroundColor", "#6db7d5");
+        var second = $(".second").find(".tag").eq(index2);
+        tag2 = second.text();
+        second.css("backgroundColor", "#6db7d5");
+
+
         $(".third").find(".tag").eq(index3).css("backgroundColor", "#6db7d5");
 
+
+        //初始化,获取数据.
+        getResult();
+        // 显示列表
         $('.pre').css("visibility", "hidden");
         if (len <= num) {
             $('.next').css("visibility", "hidden");
         }
+        //渲染数据
         render();
+    })();
+
+
+    //从后台获取数据
+    function getResult() {  
+        $.ajax({
+            type: 'post',
+            url: "http://localhost:8080/resource/getAll",
+            data: JSON.stringify({ "tag1":tag1,"tag2":tag2,"tag3":tag3,"sort":sort}),
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json", //预期服务器返回类
+            success: function (data) {
+                if (data.status != 200) {
+                    alert(data.msg);
+                } else {
+                    [ ...result ] = data.data;
+                    index = 1;
+                    len = result.length;
+                    lastIndex = Math.floor(len / num) + 1;
+                }
+            }
+        });
     }
-    init();
 
 
     //渲染后台返回的结果
@@ -91,9 +125,10 @@ var tag1 = "前端开发",      //一级
         }
     }
 
-    //类型选择
+    //方向选择
     $('.first').click(function (e) {
         if ($(e.target).hasClass("tag")) {
+            //改变方向，并初始化新的分类列表
             tag1 = $(e.target).text();
             $(".first>.tag").css("backgroundColor", "white");
             $(e.target).css("backgroundColor", "#6db7d5");
@@ -101,20 +136,39 @@ var tag1 = "前端开发",      //一级
             $('.second').empty();
             var aspect = $(e.target).attr("class").split(" ")[1];
             changeSecond(aspect);
+
+
+            //改变方向时 默认显示第一个分类
+            var second = $(".second").find(".tag").eq(0);
+            tag2 = second.text();
+            second.css("backgroundColor", "#6db7d5");
+
+            //tag1 tag2 改变。获取新的数据
+            getResult();
         }
     })
+    //改变分类
     $('.second').click(function (e) {
         if ($(e.target).hasClass("tag")) {
+            //改变分类
             tag2 = $(e.target).text();
             $(".second>.tag").css("backgroundColor", "white");
             $(e.target).css("backgroundColor", "#6db7d5");
+
+            //tag2 改变。获取新的数据
+            getResult();
         }
     })
+    //改变类型
     $('.third').click(function (e) {
         if ($(e.target).hasClass("tag")) {
+            //改变类型
             tag3 = $(e.target).text();
             $(".third>.tag").css("backgroundColor", "white");
             $(e.target).css("backgroundColor", "#6db7d5");
+
+            //tag3 改变。获取新的数据
+            getResult();
         }
     })
 
