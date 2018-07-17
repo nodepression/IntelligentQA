@@ -74,7 +74,7 @@
         $.ajax({
             type: 'post',
             url: "http://localhost:8080/resource/getUrl",
-            data: JSON.stringify({ "id": resourceId, "type": 1 }),
+            data: JSON.stringify({ "id": resourceId, "urlType": 1 }),
             contentType: "application/json;charset=UTF-8",
             dataType: "json", //预期服务器返回类
             success: function (data) {
@@ -100,7 +100,7 @@
         $.ajax({
             type: 'post',
             url: "http://localhost:8080/resource/getUrl",
-            data: JSON.stringify({ "id": resourceId, "type": 2 }),
+            data: JSON.stringify({ "id": resourceId, "urlType": 2 }),
             contentType: "application/json;charset=UTF-8",
             dataType: "json", //预期服务器返回类
             success: function (data) {
