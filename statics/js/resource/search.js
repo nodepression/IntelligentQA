@@ -16,7 +16,7 @@
             if (i >= len)
                 break;
             var item = document.createElement("div");
-            item.className = "item preview";
+            item.className = "item preview 1232344";
 
 
             var titleCon = document.createElement("span");
@@ -46,7 +46,7 @@
             downloadsCon.className = "dowloadsCon";
             downloadsCon.innerText = "下载量 : ";
             var downloads = document.createElement("span");
-            downloads.className = "dowloads";
+            downloads.className = "downloads";
             downloads.innerText = result[i];
             downloadsCon.appendChild(downloads)
             item.appendChild(downloadsCon);

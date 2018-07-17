@@ -25,15 +25,15 @@
                     </li>
                     <li class="mdui-list-item mdui-ripple ">
                         <i class="mdui-list-item-icon mdui-icon material-icons">search</i>
-                        <div class="mdui-list-item-content">资源平台</div>
+                        <div class="mdui-list-item-content resource">资源平台</div>
                     </li>
                     <li class="mdui-list-item mdui-ripple">
                         <i class="mdui-list-item-icon mdui-icon material-icons">question_answer</i>
-                        <div class="mdui-list-item-content">提问交流</div>
+                        <div class="mdui-list-item-content QAComm">提问交流</div>
                     </li>
                     <li class="mdui-list-item mdui-ripple">
                         <i class="mdui-list-item-icon mdui-icon material-icons">person</i>
-                        <div class="mdui-list-item-content">个人中心</div>
+                        <div class="mdui-list-item-content profile">个人中心</div>
                     </li>
                 </ul>
             </div>
@@ -41,8 +41,8 @@
                 <div class="mdui-row" style="position: fixed;">
                     <div class="mdui-appbar topBar">
                         <div class="mdui-tab mdui-color-theme" mdui-tab>
-                            <a href="#" class="mdui-ripple mdui-ripple-white">资源大厅</a>
-                            <a href="#" class="mdui-ripple mdui-ripple-white">资源搜索</a>
+                            <a href="#" class="mdui-ripple mdui-ripple-white hall">资源大厅</a>
+                            <a href="#" class="mdui-ripple mdui-ripple-white search">资源搜索</a>
                         </div>
                         <a style="position: fixed;right: 0px;top: 15px;" id="open">ZQ</a>
                     </div>
@@ -125,10 +125,10 @@
                 <hr/>
             </div>
 
-            <form action="form_action.asp" method="POST" id="file">
+            <form action="http://localhost:8080/resource/upLoad" method="POST" id="file">
                 <div class="fileName">
                     <span>文件名:</span>
-                    <input class="newName" type="text" name="fname" />
+                    <input class="newName" type="text" name="name" />
                 </div>
                 <input id="realFile" type="file" name="file" accept="" />
                 <div class="file">
@@ -164,6 +164,24 @@
     <script src="../../statics/js/lib/mdui.min.js"></script>
     <script src="../../statics/js/resource/category.js"></script>
     <script src="../../statics/js/resource/upload.js"></script>
+    <script>
+        $(".leftBar .resource").click(function (e) {
+            window.location.href = "../../index.html";
+        })
+        $(".leftBar .QAComm").click(function (e) {
+            // window.location.href = "../../index.html";
+        })
+        $(".leftBar .profile").click(function (e) {
+            // window.location.href = "../../index.html";
+        })
+
+        $(".topBar .hall").click(function (e) {
+            window.location.href = "../../index.html";
+        })
+        $(".topBar .search").click(function (e) {
+            window.location.href = "./search.html";
+        })
+    </script>
 </body>
 
 </html>

@@ -23,15 +23,15 @@
                     </li>
                     <li class="mdui-list-item mdui-ripple ">
                         <i class="mdui-list-item-icon mdui-icon material-icons">search</i>
-                        <div class="mdui-list-item-content">资源平台</div>
+                        <div class="mdui-list-item-content resource">资源平台</div>
                     </li>
                     <li class="mdui-list-item mdui-ripple">
                         <i class="mdui-list-item-icon mdui-icon material-icons">question_answer</i>
-                        <div class="mdui-list-item-content">提问交流</div>
+                        <div class="mdui-list-item-content QAComm">提问交流</div>
                     </li>
                     <li class="mdui-list-item mdui-ripple">
                         <i class="mdui-list-item-icon mdui-icon material-icons">person</i>
-                        <div class="mdui-list-item-content">个人中心</div>
+                        <div class="mdui-list-item-content profile">个人中心</div>
                     </li>
                 </ul>
             </div>
@@ -39,8 +39,8 @@
                 <div class="mdui-row" style="position: fixed;">
                     <div class="mdui-appbar topBar">
                         <div class="mdui-tab mdui-color-theme" mdui-tab>
-                            <a href="#" class="mdui-ripple mdui-ripple-white">资源大厅</a>
-                            <a href="#" class="mdui-ripple mdui-ripple-white">资源搜索</a>
+                            <a href="#" class="mdui-ripple mdui-ripple-white hall">资源大厅</a>
+                            <a href="#" class="mdui-ripple mdui-ripple-white search mdui-tab-active">资源搜索</a>
                             <a style="position: fixed;right: 0px;">zq</a>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                 <div class="mdui-row botoom">
                     <div class="hint">猜你想要:</div>
                     <div class="list">
-                        <!-- <div class="item">
+                        <!-- <div class="item preview">
                             <span class="titleCon">
                                 <span class="title">C++primer</span>
                                 <span class="type">pdf</span>
@@ -86,36 +86,7 @@
 
 
             <div class="mdui-dialog" id="resource_detail">
-                <center>资源详情</center>
-                <div class="mdui-typo">
-                    <hr/>
-                </div>
-
-                <div class="resource_info">
-                    文件名 :
-                    <span class="fileName">Python入门经典.pdf</span>
-                </div>
-                <div class="resource_info">
-                    文件类型 :
-                    <span class="fileType">PDF文件</span>
-                </div>
-                <div class="resource_info">
-                    上传者 :
-                    <span class="uploader">ZQ</span>
-                </div>
-                <div class="resource_info">
-                    下载次数 :
-                    <span class="downloads">312</span>
-                </div>
-
-                <div class="mdui-typo">
-                    <hr/>
-                </div>
-
-                <button class="mdui-btn deleteBtn">删除</button>
-                <a href="http://pbmqrl67c.bkt.clouddn.com/%E8%AE%B8%E5%B5%A9%20-%20%E5%A4%A7%E5%8D%83%E4%B8%96%E7%95%8C.mp4" download="test" class="mdui-btn downloadBtn">下载</but>
-                <a class="mdui-btn previewBtn">预览</a>
-                
+               
             </div>
         </div>
     </div>
@@ -123,6 +94,24 @@
     <script src="../../statics/js/lib/jquery.js"></script>
     <script src="../../statics/js/resource/search.js"></script>
     <script src="../../statics/js/preview.js"></script>
+    <script>
+            $(".leftBar .resource").click(function (e) {
+                window.location.href = "../../index.html";
+            })
+            $(".leftBar .QAComm").click(function (e) {
+                // window.location.href = "../../index.html";
+            })
+            $(".leftBar .profile").click(function (e) {
+                // window.location.href = "../../index.html";
+            })
+    
+            $(".topBar .hall").click(function (e) {
+                window.location.href = "../../index.html";
+            })
+            $(".topBar .search").click(function (e) {
+                window.location.href = "./search.html";
+            })
+    </script>
 </body>
 
 </html>
