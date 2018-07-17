@@ -42,8 +42,8 @@
 
     (function init() {
         var inst = new mdui.Dialog('#resource_detail', { 'overlay': true, 'destroyOnClosed': true });
-        $('.list').click(function (e) {
-
+        $('.result').click(function (e) {
+            console.log(e.target);
 
             //获取数据
             var previewItem;
@@ -53,10 +53,10 @@
                 previewItem = $(e.target).parents(".preview");
             }
             resourceId = previewItem.attr("class").split(" ")[2];
-            name = previewItem.find(".title").text();
-            type = previewItem.find(".type").text();
-            uploader = previewItem.find(".uploader").text();
-            downloads = previewItem.find(".downloads").text();
+            name =  previewItem.attr("class").split(" ")[3];
+            type =  previewItem.attr("class").split(" ")[4];
+            uploader = previewItem.attr("class").split(" ")[5];
+            downloads = previewItem.attr("class").split(" ")[6];
 
             //生存预览的html
             generateHtml();

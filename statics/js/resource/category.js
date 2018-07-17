@@ -16,7 +16,12 @@ var tag1 = "前端开发",      //一级
     var result = new Array(61);
     var len = result.length;
     for (var k = 0; k < len; k++) {
-        result[k] = k;
+        result[k] = {};
+        result[k].id = k;
+        result[k].uploader = "zq";
+        result[k].type = "word";
+        result[k].name = "中国通史";
+        result[k].downloads = k+k+1;
     }
     var lastIndex = Math.floor(len / num) + 1; //最多显示到第几页
 
@@ -62,7 +67,7 @@ var tag1 = "前端开发",      //一级
 
 
         //初始化,获取数据.
-        getResult();
+        // getResult();
         // 显示列表
         $('.pre').css("visibility", "hidden");
         if (len <= num) {
@@ -101,15 +106,18 @@ var tag1 = "前端开发",      //一级
             if (i >= len)
                 break;
             var file = document.createElement("div");
-            file.className = "item";
+            file.className = "item preview " + result[i].id + " " + result[i].name +  " " +  result[i].type + " " +  result[i].uploader+ " " +  result[i].downloads;
 
             var pic = document.createElement("img");
-            pic.src = "../../statics/images/pdf.png";
+            pic.src = `../../statics/images/${result[i].type}.png`
 
             var text = document.createElement("div");
-            text.innerText = result[i];
+            text.innerText = result[i].name;
+
             file.appendChild(pic);
             file.appendChild(text);
+
+
             $('.result').append(file);
         }
         $('.index').text(index);
