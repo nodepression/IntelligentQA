@@ -275,7 +275,7 @@ function find() {
     // data[r]=r;
     var arr=new Array;
     var data = [
-        "0",
+        "我是",
         "13",
         "101",
         "122",
