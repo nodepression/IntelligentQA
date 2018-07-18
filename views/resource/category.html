@@ -127,7 +127,7 @@
                 <hr/>
             </div>
 
-            <form action="http://localhost:8080/resource/upload" enctype="multipart/form-data" method="POST" id="file">
+            <form enctype="multipart/form-data" id="file">
                 <div class="fileName">
                     <span>文件名:</span>
                     <input class="newName" type="text" name="filename" />
@@ -136,7 +136,7 @@
                 <div class="file">
                     <div class="mdui-btn fileChoose">选择本地文件</div>
                     <div class="fileType">
-                        <select class="mdui-select" name="type" mdui-select form="file">
+                        <select class="mdui-select haha" name="type"  form="file" mdui-select>
                             <option value="docx">docx</option>
                             <option value="ppt">ppt</option>
                             <option value="pdf">pdf</option>
@@ -155,19 +155,18 @@
                     <input class="tag2" name="tag2" value="" />
                     <input class="tag3" name="tag3" value="" />
                 </div>
-                <input class="mdui-btn" id="realUploadButton" type="submit" value="上传" />
+
 
             </form>
         </div>
 
         <div class="mdui-dialog" id="resource_detail">
-                dsas
+                
         </div>
     </div>
 
     <script src="../../statics/js/lib/jquery.js"></script>
     <script src="../../statics/js/lib/jquery.cookie.js"></script>
-    <script src="../../statics/js/lib/jquery.form.js"></script>
     <script src="../../statics/js/lib/mdui.min.js"></script>
     <script src="../../statics/js/resource/category.js"></script>
     <script src="../../statics/js/resource/upload.js"></script>

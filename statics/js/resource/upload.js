@@ -5,15 +5,16 @@
 
 
 
-    //获取上传资源时所选择的tags
-    $('.tag1').val(tag1);
-    $('.tag2').val(tag2);
-    $('.tag3').val(tag3);
+
 
     //打开文件上传框
     var upload = $("#upload");
     var inst = new mdui.Dialog('#upload_dialog', { 'overlay': true, 'destroyOnClosed': true });
     upload.click(function () {
+        //获取上传资源时所选择的tags
+        $('.tag1').val(tag1);
+        $('.tag2').val(tag2);
+        $('.tag3').val(tag3);
         inst.open();
     })
 
@@ -35,7 +36,7 @@
     $('#uploadButton').click(function (e) {
         if (newName != " ") {
             if (oldName != " ") {
-                $("#realUploadButton").click();
+                uploadFile();
             } else {
                 alert("请选择文件");
             }
@@ -50,17 +51,29 @@
         inst.close();
     })
 
-    $('#realUploadButton').click(function (e) {
-        $(this).ajaxSubmit({
-            success: function (data) { // data 保存提交后返回的数据，一般为 json 数据
+
+    function uploadFile() {
+        var formData = new FormData($('#file')[0]);
+        inst.close();
+        $.ajax({
+            type: 'POST',
+            url: "http://localhost:8080/resource/upload",
+            data: formData,
+            cache: false,
+            processData: false,
+            contentType: false,
+            xhrFields: {
+                withCredentials: true
+            },
+            success: function (data) {
                 if (data.status != 200) {
                     alert(data.msg);
                 } else {
-                    alert("上传成功!")
+                    alert("上传成功");
+                    // alert($('.tag1').val() + " " + $('.tag2').val() + " " + $('.tag3').val());
                 }
             }
-        });
-        return false;
-    })
+        })
+    }
 
 }.call(this));

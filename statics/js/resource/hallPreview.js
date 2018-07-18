@@ -70,12 +70,15 @@
         });
     })();
 
-    function preview(e) {
+    function preview() {
         $.ajax({
             type: 'post',
             url: "http://localhost:8080/resource/getUrl",
             data: JSON.stringify({ "id": resourceId, "urlType": 1 }),
             contentType: "application/json;charset=UTF-8",
+            xhrFields: {
+                withCredentials: true
+            },
             dataType: "json", //预期服务器返回类
             success: function (data) {
                 if (data.status != 200) {
@@ -96,12 +99,15 @@
         });
     }
 
-    function download(e) {
+    function download() {
         $.ajax({
             type: 'post',
             url: "http://localhost:8080/resource/getUrl",
             data: JSON.stringify({ "id": resourceId, "urlType": 2 }),
             contentType: "application/json;charset=UTF-8",
+            xhrFields: {
+                withCredentials: true
+            },
             dataType: "json", //预期服务器返回类
             success: function (data) {
                 if (data.status != 200) {
@@ -116,11 +122,11 @@
     function addEvent() {
         //预览
         $(".previewBtn").click(function (e) {
-            window.open("https://view.officeapps.live.com/op/view.aspx?src=http://pbmqrl67c.bkt.clouddn.com/testWord.docx");
+           preview();
         })
         //下载
         $(".downloadBtn").click(function (e) {
-            download(e);
+            download();
         })
         //删除
     }
