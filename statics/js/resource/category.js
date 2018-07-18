@@ -1,6 +1,6 @@
 // 资源对应的标签
-var tag1 = "前端开发",      //一级
-    tag2 = "React.js",     //二级
+var tag1,      //一级
+    tag2,     //二级
     tag3 = "全部";         //三级
 
 (function () {
@@ -11,19 +11,25 @@ var tag1 = "前端开发",      //一级
     var sort = 1;
 
 
+    // var index = 1; //当前位于第几页
+    // var num = 10; //一页最多显示多少个
+    // var result = new Array(61);
+    // var len = result.length;
+    // for (var k = 0; k < len; k++) {
+    //     result[k] = {};
+    //     result[k].id = k;
+    //     result[k].uploader = "zq";
+    //     result[k].type = "word";
+    //     result[k].name = "中国通史";
+    //     result[k].downloads = k+k+1;
+    // }
+    // var lastIndex = Math.floor(len / num) + 1; //最多显示到第几页
+
     var index = 1; //当前位于第几页
     var num = 10; //一页最多显示多少个
-    var result = new Array(61);
-    var len = result.length;
-    for (var k = 0; k < len; k++) {
-        result[k] = {};
-        result[k].id = k;
-        result[k].uploader = "zq";
-        result[k].type = "word";
-        result[k].name = "中国通史";
-        result[k].downloads = k+k+1;
-    }
-    var lastIndex = Math.floor(len / num) + 1; //最多显示到第几页
+    var result = null;
+    var len;
+    var lastIndex; //最多显示到第几页
 
     //通过点击时的序列获取tag
     var tags = {
@@ -48,6 +54,16 @@ var tag1 = "前端开发",      //一级
 
     //初始化
     (function init() {
+
+        //显示当前用户
+        if(document.cookie!="")
+        {
+            var cookieUser = $.cookie("username").replace(/\"/g,"");
+            $("#userName").text(cookieUser);
+        }
+       
+
+
         index1 = getUrlParam("index1");
         index2 = getUrlParam("index2");
 
@@ -67,33 +83,40 @@ var tag1 = "前端开发",      //一级
 
 
         //初始化,获取数据.
-        // getResult();
-        // 显示列表
-        $('.pre').css("visibility", "hidden");
-        if (len <= num) {
-            $('.next').css("visibility", "hidden");
-        }
-        //渲染数据
-        render();
+        getResult();
+
+
     })();
 
 
     //从后台获取数据
-    function getResult() {  
+    function getResult() {
         $.ajax({
             type: 'post',
-            url: "http://localhost:8080/resource/getAll",
-            data: JSON.stringify({ "tag1":tag1,"tag2":tag2,"tag3":tag3,"sort":sort}),
+            url: "http://localhost:8080/resource/findByTag",
+            data: JSON.stringify({ "tag1": tag1, "tag2": tag2, "tag3": tag3, "sort": sort }),
             contentType: "application/json;charset=UTF-8",
+            xhrFields: {
+                withCredentials: true
+            },
             dataType: "json", //预期服务器返回类
             success: function (data) {
                 if (data.status != 200) {
                     alert(data.msg);
                 } else {
-                    [ ...result ] = data.data;
+                    [...result] = data.data;
                     index = 1;
                     len = result.length;
                     lastIndex = Math.floor(len / num) + 1;
+                    
+                    //显示列表
+                    $('.pre').css("visibility", "hidden");
+                    if (len <= num) {
+                        $('.next').css("visibility", "hidden");
+                    }
+                    $('.result').empty();
+                    //渲染数据
+                    render();
                 }
             }
         });
@@ -106,13 +129,13 @@ var tag1 = "前端开发",      //一级
             if (i >= len)
                 break;
             var file = document.createElement("div");
-            file.className = "item preview " + result[i].id + " " + result[i].name +  " " +  result[i].type + " " +  result[i].uploader+ " " +  result[i].downloads;
+            file.className = "item preview " + result[i].fileid + " " + result[i].title + " " + result[i].type + " " + result[i].uploader + " " + result[i].downloads;
 
             var pic = document.createElement("img");
             pic.src = `../../statics/images/${result[i].type}.png`
 
             var text = document.createElement("div");
-            text.innerText = result[i].name;
+            text.innerText = result[i].title;
 
             file.appendChild(pic);
             file.appendChild(text);
@@ -152,6 +175,7 @@ var tag1 = "前端开发",      //一级
             second.css("backgroundColor", "#6db7d5");
 
             //tag1 tag2 改变。获取新的数据
+
             getResult();
         }
     })

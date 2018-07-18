@@ -1,0 +1,75 @@
+.con
+{
+    width: 80%;
+    padding: 2%;
+}
+.top{
+    margin-bottom: 8px;
+}
+.searchCon{
+    width: 60%;
+    margin: 0 auto;
+}
+#search
+{
+    right: 0px;
+    cursor: pointer;
+    /* color: white;
+    background-color: #0a0c0a; */
+}
+.botoom{
+    width: 80%;
+    padding: 2%;
+    background-color: white;
+}
+
+
+.answer,.question{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    margin-top: 8px;
+    line-height: 24px;
+}
+
+.hint{
+    width: 10%;
+    font-weight: bold;
+}
+.text{
+    width: 80%;
+}
+
+.more{
+   color: #016690;
+}
+.state{
+    display: inline-block;
+    text-align: center;
+    background-color: #016690;
+    color: white;
+    border-radius: 5px;
+    width: 60px;
+}
+.que_text{
+    color: #016690;
+}
+
+.list>.item{
+    margin-top: 16px;
+    border: 1px solid #dde1e4;
+    padding: 5px;
+}
+
+
+
+.page{
+    width: 100px;
+    height: 30px;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 32px;
+}
+.page i{
+    cursor: pointer;
+}

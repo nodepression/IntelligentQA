@@ -45,7 +45,7 @@
                             <a href="#" class="mdui-ripple mdui-ripple-white hall">资源大厅</a>
                             <a href="#" class="mdui-ripple mdui-ripple-white search">资源搜索</a>
                         </div>
-                        <a style="position: fixed;right: 0px;top: 15px;" id="open">ZQ</a>
+                        <a style="position: fixed;right: 0px;top: 15px;" id="userName">访客</a>
                     </div>
                 </div>
                 <div class="mdui-row con">
@@ -127,7 +127,7 @@
                 <hr/>
             </div>
 
-            <form action="http://localhost:8080/resource/upLoad" enctype="multipart/form-data" method="POST" id="file">
+            <form action="http://localhost:8080/resource/upload" enctype="multipart/form-data" method="POST" id="file">
                 <div class="fileName">
                     <span>文件名:</span>
                     <input class="newName" type="text" name="filename" />
@@ -166,6 +166,8 @@
     </div>
 
     <script src="../../statics/js/lib/jquery.js"></script>
+    <script src="../../statics/js/lib/jquery.cookie.js"></script>
+    <script src="../../statics/js/lib/jquery.form.js"></script>
     <script src="../../statics/js/lib/mdui.min.js"></script>
     <script src="../../statics/js/resource/category.js"></script>
     <script src="../../statics/js/resource/upload.js"></script>

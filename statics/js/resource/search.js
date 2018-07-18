@@ -4,7 +4,7 @@
     var result = new Array(61);
     var len = result.length;
     for (var k = 0; k < len; k++) {
-        result[k] = k*(k+1);
+        result[k] = k * (k + 1);
     }
     var lastIndex = Math.floor(len / num) + 1; //最多显示到第几页
 
@@ -57,18 +57,18 @@
         $('.index').text(index);
     }
 
-    function getResult() {  
+    function getResult() {
         $.ajax({
             type: 'post',
             url: "http://localhost:8080/resource/search",
-            data: JSON.stringify({ "words":words}),
+            data: JSON.stringify({ "words": words }),
             contentType: "application/json;charset=UTF-8",
             dataType: "json", //预期服务器返回类
             success: function (data) {
                 if (data.status != 200) {
                     alert(data.msg);
                 } else {
-                    [ ...result ] = data.data;
+                    [...result] = data.data;
                     init();
                 }
             }
@@ -76,6 +76,13 @@
     }
 
     function init() {
+        //显示当前用户
+        
+        if (document.cookie!="") {
+            var cookieUser = $.cookie("username").replace(/\"/g, "");;
+            $("#userName").text(cookieUser);
+        }
+
         $('.pre').css("visibility", "hidden");
         if (len <= num) {
             $('.next').css("visibility", "hidden");
@@ -117,16 +124,16 @@
 
 
     //获取搜索关键词
-    $('.words').change(function(e){
+    $('.words').change(function (e) {
         words = $('.words').val();
     })
 
     //点击搜索
 
-    $('#search').click(function (e) {  
-        if(words!= ""){
+    $('#search').click(function (e) {
+        if (words != "") {
             getResult();
-        }else{
+        } else {
             alert("请输入上传者或者关键词");
         }
     })
