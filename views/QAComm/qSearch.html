@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="../../statics/css/lib/mdui.min.css">
     <link rel="stylesheet" href="../../statics/css/home.css">
-    <link rel="stylesheet" href="../../statics/css/resource/qSearch.css">
+    <link rel="stylesheet" href="../../statics/css/QAComm/qSearch.css">
     <title>问题搜索</title>
 </head>
 
@@ -45,30 +45,32 @@
                     </div>
                 </div>
                 <div class="mdui-row con top">
-                    <div class="hint">您好，请问有什么疑问？</div>
+                    <div>您好，请问有什么疑问？</div>
                     <div class="mdui-textfield searchCon">
-                        <input class="mdui-textfield-input words" type="text" placeholder="输入上传者或关键词" />
+                        <input class="mdui-textfield-input words" type="text" placeholder="请输入问题" />
                         <i class="mdui-icon material-icons" id="search">search</i>
                     </div>
                 </div>
 
                 <div class="mdui-row botoom">
-                    <div class="hint">猜你想要:</div>
                     <div class="list">
-                        <!-- <div class="item preview">
-                            <span class="titleCon">
-                                <span class="title">C++primer</span>
-                                <span class="type">pdf</span>
-                            </span>
-                            <span class="uploaderCon">
-                                上传者&nbsp;:
-                                <span class="uploader">zhangqian</span>
-                            </span>
-                            <span class="dowloadsCon">
-                                下载量&nbsp;:
-                                <span class="dowloads">123</span>
-                            </span>
+                        <!-- <div class="item">
+                            <div class="answer">
+                                <div class="hint">有猿说:</div>
+                                <div class="text">
+                                    <span class="ans_text">就是在反讽。 PHP这么一个脚本语言，虽然他是web开发中，使用者最多的语言，最快最简单的语言， 生态环境和社区积累最深厚的语言，但都不能否定它的语法垃圾，高层设计不好</span>
+                                    <span class="more">查看详情</span>
+                                </div>
+                            </div>
+                            <div class="question">
+                                <div class="hint">原问题:</div>
+                                <div class="text">
+                                    <span class="state">已解决</span>
+                                    <span class="que_text">当说php是最好的语言的时候，理由在哪里</span>
+                                </div>
+                            </div>
                         </div> -->
+                       
                     </div>
 
                     <div class="page">
@@ -88,22 +90,22 @@
     <script src="../../statics/js/lib/jquery.js"></script>
     <script src="../../statics/js/QAComm/qSearch.js"></script>
     <script>
-            $(".leftBar .resource").click(function (e) {
-                window.location.href = "../../index.html";
-            })
-            $(".leftBar .QAComm").click(function (e) {
-                // window.location.href = "../../index.html";
-            })
-            $(".leftBar .profile").click(function (e) {
-                // window.location.href = "../../index.html";
-            })
-    
-            $(".topBar .hall").click(function (e) {
-                window.location.href = "../../index.html";
-            })
-            $(".topBar .search").click(function (e) {
-                window.location.href = "./search.html";
-            })
+        $(".leftBar .resource").click(function (e) {
+            window.location.href = "../../index.html";
+        })
+        $(".leftBar .QAComm").click(function (e) {
+            // window.location.href = "../../index.html";
+        })
+        $(".leftBar .profile").click(function (e) {
+            // window.location.href = "../../index.html";
+        })
+
+        $(".topBar .hall").click(function (e) {
+            window.location.href = "../../index.html";
+        })
+        $(".topBar .search").click(function (e) {
+            window.location.href = "./search.html";
+        })
     </script>
 </body>
 

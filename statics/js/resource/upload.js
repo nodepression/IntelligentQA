@@ -1,9 +1,9 @@
 (function () {
 
-    var newName =$('.newName').val();
-    var oldName =" ";
+    var newName = $('.newName').val();
+    var oldName = " ";
 
-    
+
 
     //获取上传资源时所选择的tags
     $('.tag1').val(tag1);
@@ -18,38 +18,49 @@
     })
 
     //文件选择
-    $('.fileChoose').click(function (e) {  
+    $('.fileChoose').click(function (e) {
         $('#realFile').click();
     })
-    $('#realFile').change(function (e) {  
-        oldName =  $('#realFile').val().split("\\")[2];
+    $('#realFile').change(function (e) {
+        oldName = $('#realFile').val().split("\\")[2];
         $('.fileChoose').text(oldName);
     })
 
     //给上传的文件取名
-    $('.newName').change(function (e) {  
+    $('.newName').change(function (e) {
         newName = $('.newName').val();
     })
 
     //文件上传
-    $('#uploadButton').click(function(e){
-        if(newName!=" ")
-        {   
-            if(oldName!=" ")
-            {
+    $('#uploadButton').click(function (e) {
+        if (newName != " ") {
+            if (oldName != " ") {
                 $("#realUploadButton").click();
-            }else{
+            } else {
                 alert("请选择文件");
             }
         }
-        else{
+        else {
             alert("请输入文件名");
         }
     })
 
     //取消上传
-    $('#cancel').click(function (e) {  
+    $('#cancel').click(function (e) {
         inst.close();
+    })
+
+    $('#realUploadButton').click(function (e) {
+        $(this).ajaxSubmit({
+            success: function (data) { // data 保存提交后返回的数据，一般为 json 数据
+                if (data.status != 200) {
+                    alert(data.msg);
+                } else {
+                    alert("上传成功!")
+                }
+            }
+        });
+        return false;
     })
 
 }.call(this));
