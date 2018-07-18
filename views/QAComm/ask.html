@@ -96,26 +96,26 @@
                  </table>
         </div>
 </div>
+
 <!-- 选择标签 -->
 <div class="mdui-dialog" id="tag_dialog" style=" width: 480px;height: 320px;left: 150px">
       <p class="mdui-text-center" id="edit">编辑标签</p>
       <div class="mdui-dialog-content mdui-typo">
           <div class="mdui-textfield">标签：<input class="text" style=" width: 300px;" id="tags" onkeyup="find()">
-          <button class="cancel mdui-ripple" mdui-dialog-confirm style="color:black;left: 20px;" id="ok">确定</button></div>
+          <button class="cancel mdui-ripple" style="color:black;left: 20px;" id="ok">确定</button></div>
           <select class="mdui-select" id="demo" style=" width: 400px;display: none;" >
-                <option style='display: none'></option>
               </select>
           <div class="mdui-textfield">选择列表：</div>
-          <div class="mdui-dialog-actions" style="height: 270px;" id="selected"> </div>
+          <div class="mdui-dialog-actions" style="height: 200px;">
 <!--                 
                 <div class="mdui-chip">
                             <span class="mdui-chip-title">Example Chip</span>
                             <span class="mdui-chip-delete"><i class="mdui-icon material-icons">cancel</i></span>
                           </div> -->
-              <div style="margin-top: 90px;">
+              <div id="selected"></div><div style="margin-top: 50px;" ></div>
               <button class="save  mdui-ripple" mdui-dialog-close style="color: white;left: -200px;">保存</button>
               <button class="cancel mdui-ripple" mdui-dialog-confirm style="color:black;left: -180px;" id="cancell">取消</button>
-            </div>
+            </div> </div>
       </div>
 </div>
 <script src="../../statics/js/lib/jquery.js"></script>
