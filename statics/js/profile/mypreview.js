@@ -80,13 +80,12 @@
                     alert(data.msg);
                 } else {
                     url = data.data.url;
-                    if(type=="pdf"){
+                    if (type == "pdf") {
                         window.open("url");
                     }
-                    if(type=="vedio")
-                    {
+                    if (type == "vedio") {
                         window.open("url");
-                    }else{
+                    } else {
                         window.open("https://view.officeapps.live.com/op/view.aspx?src=" + url);
                     }
                 }
