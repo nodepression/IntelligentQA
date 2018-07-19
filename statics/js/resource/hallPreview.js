@@ -36,14 +36,12 @@
                         <hr/>
                     </div>
                     <button class="mdui-btn deleteBtn">删除</button>
-                    <a href="#" class="mdui-btn downloadBtn">下载</a>
+                    <div class="mdui-btn downloadBtn">下载</div>
                     <button class="mdui-btn previewBtn">预览</button>`;
     }
-
+    var inst = new mdui.Dialog('#resource_detail', { 'overlay': true, 'destroyOnClosed': true });
     (function init() {
-        var inst = new mdui.Dialog('#resource_detail', { 'overlay': true, 'destroyOnClosed': true });
         $('.result').click(function (e) {
-            console.log(e.target);
 
             //获取数据
             var previewItem;
@@ -53,8 +51,8 @@
                 previewItem = $(e.target).parents(".preview");
             }
             resourceId = previewItem.attr("class").split(" ")[2];
-            name =  previewItem.attr("class").split(" ")[3];
-            type =  previewItem.attr("class").split(" ")[4];
+            name = previewItem.attr("class").split(" ")[3];
+            type = previewItem.attr("class").split(" ")[4];
             uploader = previewItem.attr("class").split(" ")[5];
             downloads = previewItem.attr("class").split(" ")[6];
 
@@ -71,10 +69,11 @@
     })();
 
     function preview() {
+        // inst.close();
         $.ajax({
             type: 'post',
             url: "http://localhost:8080/resource/getUrl",
-            data: JSON.stringify({ "id": resourceId, "urlType": 1 }),
+            data: JSON.stringify({ "fileid": resourceId, "urlType": 1 }),
             contentType: "application/json;charset=UTF-8",
             xhrFields: {
                 withCredentials: true
@@ -84,14 +83,12 @@
                 if (data.status != 200) {
                     alert(data.msg);
                 } else {
-                    url = data.data.url;
-                    if(type=="pdf"){
-                        window.open("url");
-                    }
-                    if(type=="vedio")
-                    {
-                        window.open("url");
-                    }else{
+                    url = data.data;
+                    if (type == "pdf") {
+                        window.open("http://" + url);
+                    } else if (type == "mp4") {
+                        window.open("http://" + url);
+                    } else {
                         window.open("https://view.officeapps.live.com/op/view.aspx?src=" + url);
                     }
                 }
@@ -103,7 +100,7 @@
         $.ajax({
             type: 'post',
             url: "http://localhost:8080/resource/getUrl",
-            data: JSON.stringify({ "id": resourceId, "urlType": 2 }),
+            data: JSON.stringify({ "fileid": resourceId, "urlType": 2 }),
             contentType: "application/json;charset=UTF-8",
             xhrFields: {
                 withCredentials: true
@@ -113,8 +110,9 @@
                 if (data.status != 200) {
                     alert(data.msg);
                 } else {
-                    url = data.data.url;
-                    $('.downloadBtn').attr("href", url);
+                    url = data.data;
+                    $(".realDownlaod").attr("href", "http://" + url);
+                    $(".realDownlaod")[0].click();
                 }
             }
         });
@@ -122,7 +120,7 @@
     function addEvent() {
         //预览
         $(".previewBtn").click(function (e) {
-           preview();
+            preview();
         })
         //下载
         $(".downloadBtn").click(function (e) {

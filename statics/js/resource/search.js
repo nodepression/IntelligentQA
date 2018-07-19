@@ -75,9 +75,8 @@
         });
     }
 
-    function init() {
+    (function init() {
         //显示当前用户
-        
         if (document.cookie!="") {
             var cookieUser = $.cookie("username").replace(/\"/g, "");;
             $("#userName").text(cookieUser);
@@ -88,8 +87,7 @@
             $('.next').css("visibility", "hidden");
         }
         render();
-    }
-    init();
+    })();
 
 
     //页码选择 
