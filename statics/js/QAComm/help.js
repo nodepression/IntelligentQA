@@ -1,36 +1,14 @@
 (function () {
-    var best = $('.best');//设置最佳回答
-    var closeq = $('#closeq');//关闭问题
-    var like = $('.like');//点赞回答
+    var help = $('#help');//点击进入回答
+    var save = $('.save');//点击提交回答
+    var cancel = $('.cancel');//点击取消回答
+    var anstop = $('#anstop');//回答的显示框
+    var myans = $('#myans');//我的回答
 
     var id = undefined;// 问题id
-    var qid = undefined;// 提出问题者的id
-    var sid = undefined;// 登陆者的id
-    var result = null;
+    var myanswer = undefined;// 回答内容
 
-    like.click(function (e) {
-        var Id = $(e.target).id;
-        $.ajax({
-            type: 'post',
-            url: "http://localhost:8080/QAComm/like",
-            data: JSON.stringify({ "answerId": Id }),
-            contentType: "application/json;charset=UTF-8",
-            xhrFields: {
-                withCredentials: true
-            },
-            dataType: "json", //预期服务器返回类
-            success: function (data) {
-                if (data.status != 200) {
-                    alert(data.msg);
-                } else {
-                    result.answers[k].count_like++;
-                    like.disabled = 'disabled';
-                }
-            }
-        });
-    })
-
-
+  
     function DataTrans(obj) {
         var date = new Date(obj);
         var y = 1900 + date.getYear();
@@ -39,46 +17,6 @@
         return y + "-" + m.substring(m.length - 2, m.length) + "-" + d.substring(d.length - 2, d.length);
     }
 
-    best.click(function () {
-        var Id = $(e.target).id;
-        $.ajax({
-            type: 'post',
-            url: "http://localhost:8080/QAComm/chooseBest",
-            data: JSON.stringify({ "id": id, "answerId": Id }),
-            contentType: "application/json;charset=UTF-8",
-            dataType: "json", //预期服务器返回类
-            success: function (data) {
-                if (data.status != 200) {
-                    alert(data.msg);
-                } else {
-                    alert("最佳答案设置成功！");
-                    button1.style = "display:none;";
-                }
-            }
-        });
-    })
-
-    //关闭问题
-    closeq.click(function () {
-        $.ajax({
-            type: 'post',
-            url: "http://localhost:8080/QAComm/closeQuestion",
-            data: JSON.stringify({ "questionId": id, }),
-            contentType: "application/json;charset=UTF-8",
-            dataType: "json", //预期服务器返回类
-            success: function (data) {
-                if (data.status != 200) {
-                    alert(data.msg);
-                } else {
-                    alert("问题已关闭！");
-                    close.disabled = true;
-                    var textdelete = document.createElement("del");
-                    textdelete.innerText = "已关闭";
-                    close.appendChild(textdelete);
-                }
-            }
-        });
-    })
 
     //提取url参数
     function getUrlParam(name) {
@@ -88,6 +26,52 @@
     }
     id = getUrlParam("index");
     //alert(index);
+
+    //清空回答框
+    cancel.click(function () {
+        clear();
+    })
+    function clear() {
+        myans.val("");
+    }
+
+    //提交答案
+    save.click(function () {
+        saveans();
+
+        rendera();
+    })
+    function saveans() {
+        myanswer = myans.val();   //我的回答
+        alert(myanswer);
+        $.ajax({
+            type: 'post',
+            url: "http://localhost:8080/QAComm/replyques",
+            data: JSON.stringify({ "questionId": id, "answerDetails": myanswer }),
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json", //预期服务器返回类
+            xhrFields: {
+                withCredentials: true
+            },
+            success: function (data) {
+                if (data.status != 200) {
+                    alert(data.msg);
+                } else {
+                    alert("答案提交成功！");
+                    rendera();
+                }
+            }
+        });
+
+        myans.val("");
+    }
+
+    //回答问题的对话框
+    var ans = new mdui.Dialog('#help_dialog', { 'overlay': true, 'destroyOnClosed': true });
+
+    help.click(function () {
+        ans.open();
+    });
 
     (function init() {
         //显示当前用户
@@ -125,7 +109,6 @@
                         len = result.answers.length;
                     }
                     for (var k = 0; k < len; k++) {
-                        //alert(len);
                         var all = document.createElement("div");
                         all.className = "mdui-rowa";
                         var all1 = document.createElement("i");
@@ -163,10 +146,7 @@
                         span2.className = "mdui-col-offset-md-1"
                         var button2 = document.createElement("button");
                         button2.className = "mdui-btn-group button";
-                        if(result.answers[k].usertype=0)
-                        button2.innerText ="学生";//回答者身份
-                        if(result.answers[k].usertype=1)
-                        button2.innerText ="老师";//回答者身份
+                        button2.innerText = result.answers[k].usertype;//回答者身份tag
                         button2.style = "border-color: rgb(43,51,59);color: rgb(43,51,59);font-size: 15px;border-radius: 5px;left:15px;";
                         var span3 = document.createElement("span");
                         span3.className = "mdui-col-offset-md-1";
@@ -201,7 +181,7 @@
                         anstop.append(div1);
                         anstop.append(div2);
                     }
-
+                    
                 }
             }
         })

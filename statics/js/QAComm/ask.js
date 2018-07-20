@@ -6,23 +6,18 @@
     var tag0 = undefined;
     var tag1 = undefined;
     var tag2 = undefined;
-    var question = undefined;
-    var qid = undefined;
     //dom obj
     var save = $('.save')//保存标签
-    var ok = $('#ok');//输入标签
+    // var ok = $('#ok');//输入标签
     var selected = $('#selected');//标签选择框
-    var search = $('#search');//智能搜索
     var ask = $('#ask'); //提问按钮，点击求猿
-    var filter = $('#filter');//点击传标签获得相应问题
-    var apre = $('#apre');  // 上翻页
-    var anext = $('#anext');//下翻页
-    var atable = $('#questions');
-    var aindex = 1; //当前位于第几页
-    var anum = 6; //一页最多显示多少个
-    var aresult = new Array(12);
-    var alen = aresult.length;
-    var alastIndex = Math.floor(alen / anum) + 1; //最多显示到第几页
+
+    // ok.click(function () {
+    //     oktag();
+    // })
+    ask.click(function () {
+        askquestions();
+    })
 
     //保存标签
     save.on("click", function () {
@@ -57,157 +52,6 @@
         });
     }
 
-    ok.click(function () {
-        oktag();
-    })
-    search.click(function () {
-        searchq();
-    })
-    //上一页
-    apre.click(function () {
-        anspre();
-    })
-    //下一页
-    anext.click(function () {
-        ansnext();
-    })
-    ask.click(function () {
-        askquestions();
-    })
-    filter.click(function () {
-        rendera();
-    })
-
-    //智能搜索
-    function searchq() {
-        question = $("#question").val();   //问题
-        alert(question);
-        $.ajax({
-            type: 'post',
-            url: "http://localhost:8080/QAComm/search",
-            data: JSON.stringify({ "question": question }),
-            contentType: "application/json;charset=UTF-8",
-            dataType: "json", //预期服务器返回类
-            success: function (data) {
-                if (data.status != 200) {
-                    alert(data.msg);
-                } else {
-                    //??
-                }
-            }
-        })
-    }
-
-    //伸出猿手
-    function ansnext() {
-        atable.empty()
-        if (aindex == 1) {  //当前是第一页
-            apre.css("visibility", "visible");
-        }
-        if (aindex == (alastIndex - 1)) //当前是倒数第二页
-        {
-            anext.css("visibility", "hidden");
-        }
-        aindex++;
-        rendera();
-
-    }
-
-    function anspre() {
-        atable.empty()
-        if (aindex == alastIndex) {  //当前是最后一页
-            anext.css("visibility", "visible");
-        } if (aindex == 2) //当前是第二页
-        {
-            apre.css("visibility", "hidden");
-        }
-        aindex--;
-        rendera();
-
-    }
-
-
-    //初始化
-    function inita() {
-        apre.css("visibility", "hidden");
-        if (alen <= anum) {
-            anext.css("visibility", "hidden");
-        }
-        // rendera();
-
-    }
-    inita();
-
-
-    //渲染后台返回的结果
-    function rendera() {
-        ftag = $("#ftag").val();//输入的标签
-
-        $.ajax({
-            type: 'post',
-            url: "http://localhost:8080/QAComm/reply",
-            data: JSON.stringify({ "questionLabel1": ftag }),
-            contentType: "application/json;charset=UTF-8",
-            xhrFields: {
-                withCredentials: true
-            },
-            dataType: "json", //预期服务器返回类
-            success: function (data) {
-                if (data.status != 200) {
-                    alert(data.msg);
-                } else {
-                    [...aresult] = data.data;//把json的data取出来
-                    if (alen <= anum) {
-                        $('.page i').css("display", "none");
-                    }
-
-                    
-                    for (var i = (aindex - 1) * anum; i < (aindex - 1) * anum + anum; i++) {
-                        if (i >= alen)
-                            break;
-
-                        var li = document.createElement("li");
-                        li.className = "mdui-list-item li";
-                        li.id = aresult[i].id;
-                        var div = document.createElement("div");
-                        div.className = "mdui-list-item-content";
-                        var div1 = document.createElement("div");
-                        div1.className = "mdui-list-item-title font1";
-                        div1.innerText = aresult[i].title;
-                        var span = document.createElement("span");
-                        span.style = "color: gray;left: 10px";
-                        var icon = document.createElement("i")
-                        icon.className = "mdui-icon material-icons";
-                        icon.innerText = "local_offer";
-                        var span3 = document.createElement("span");
-
-                        span3.innerText =  aresult[i].tags[0];
-                        var span1 = document.createElement("span");
-                        span1.style = "margin-left:330px";
-                        span1.innerText = aresult[i].count;
-                        var span2 = document.createElement("span");
-                        span2.style = "margin-left:30px";
-                        span2.innerText = aresult[i].time;
-                        var li1 = document.createElement("li");
-                        li1.className = "mdui-divider-inset mdui-m-y-0";
-                        span.appendChild(icon);
-                        span.appendChild(span3);
-                        div1.appendChild(span);
-                        div.appendChild(div1);
-                        li.appendChild(div);
-                        li.appendChild(span1);
-                        li.appendChild(span2);
-                        atable.append(li);
-                        atable.append(li1);
-                    }
-                    $('.aindex').text(aindex);
-                }
-            }
-        })
-
-
-    }
-
 
 
     //我要求猿
@@ -217,30 +61,25 @@
         inst.open();
     })
 
+    // function oktag() {
+    //     var inputField = undefined;
+    //     inputField = $("#tags").val();
+    //     var div = document.createElement("div");
+    //     div.className = "mdui-chip";
+    //     var span = document.createElement("span");
+    //     span.className = "mdui-chip-title";
+    //     span.innerText = inputField;
+    //     var span1 = document.createElement("span");
+    //     span1.className = "mdui-chip-delete";
+    //     var i = document.createElement("i");
+    //     i.className = "mdui-icon material-icons";
+    //     i.innerText = "cancel";
+    //     span1.appendChild(i);
+    //     div.appendChild(span);
+    //     div.appendChild(span1);
+    //     selected.append(div);
 
-
-
-
-
-    function oktag() {
-        var inputField = undefined;
-        inputField = $("#tags").val();
-        var div = document.createElement("div");
-        div.className = "mdui-chip";
-        var span = document.createElement("span");
-        span.className = "mdui-chip-title";
-        span.innerText = inputField;
-        var span1 = document.createElement("span");
-        span1.className = "mdui-chip-delete";
-        var i = document.createElement("i");
-        i.className = "mdui-icon material-icons";
-        i.innerText = "cancel";
-        span1.appendChild(i);
-        div.appendChild(span);
-        div.appendChild(span1);
-        selected.append(div);
-
-    }
+    // }
 
     $('#demo')[0].selectedIndex = -1;
     $("#demo").change(function () {
@@ -273,23 +112,16 @@
                 tagItem.remove();
             })
         }
-
-
         $('#tags').val("");
     });
 
 }.call(this));
 
 
-
-
-
 var a = $('#append');//自动匹配
-//自动匹配
-function find() {
-    var inputField = undefined;
-    inputField = $("#tags").val();
-    var arr = new Array;
+
+//获得所有标签
+function alltags(){
     $.ajax({
         type: 'post',
         url: "http://localhost:8080/QAComm/getTags",
@@ -307,21 +139,18 @@ function find() {
             }
         }
     })
+}
 
+
+function find() {
+    var inputField = undefined;
+    inputField = $("#tags").val();
+    var arr = new Array;
     // var Tags = [
-    //     "调试", "智能合约", "cdn", "选择器", "抓包过滤", "a", "fis3打包", "ssh-key", "cgo", "比特币", "powerbi", "sharding",
-    //     "spring-mvc", "android相关问题", "cli", "静态网站", "cmd", "ping", "cms", "pip3", "异步编程", "代理", "注册", "cpu",
-    //     "mapper", "伪元素", "模块化开发", "反射", "sketch", "css", "csv", "for循环", "element", "ansible", "celery", "kubernetes",
-    //     "作用域链", "memory", "实体类", "下载", "srping", "dotnet", "tensorflow", "fluentd", "fetch", "分库分表", "redis-cluster",
-    //     "dba", "异步请求", "摄像头", "适配器", "js-xlsx", "mycat", "spark-submit", "qrcode", "小白求助", "dma", "u盘", "自动化",
-    //     "反编译", "dom", "虚函数表", "emoji", "networking", "nginx", "ip伪造", "根目录", "网页设计", "dtd", "删除文件", "泛型",
-    //     "软件开发", "索引", "fixed导航栏", "银行卡", "js异步编程", "游戏开发", "wordpress", "navigator", "逻辑", "line-height",
-    //     "语音合成", "apple", "跨域", "bash", "分页", "内存溢出", "全文检索", "eslint", "ec2", "facebook", "html", "stylesheets",
-    //     "devtool", "jackson", "async", "kibana", "next.js", "cocos", "框架", "BI", "ejs", "elk", "http", "http首部", "codeigniter",
-    //     "管道", "tcp抓包", "超时", "蓝牙", "symfony3", "es5", "es7", "es6", "循环", "echarts", "phabricator", "etl", "验证码",
-    //     "印象笔记", "mongodb",
+    //     "调试", "智能合约", "cdn", "选择器", "抓包过滤", 
+    //     "spring-mvc", "android相关问题", "cli", "静态网站", 
     // ];
-    var len = tags.length;
+    var len = Tags.length;
     var j = 0;
     for (var i = 0; i < len; i++) {
         if ((Tags[i]).indexOf(inputField) >= 0) {
@@ -343,7 +172,6 @@ function set(arr) {
     $('#demo').append('<option>' + '--请选择--' + '</option>');
     for (var i = 0; i < size; i++) {
         var nextNode = arr[i];
-        //alert(nextNode+i);
         $('#demo').append('<option>' + nextNode + '</option>');
         mdui.mutation();
     }
@@ -356,7 +184,8 @@ cancell.click(function () {
 function clear() {
     inst.css("display", "none");
     $('#tags').val("");
-    $('#selected').empty();
+    //$('#selected').empty();
+    $('#selected').val("");
 }
 //点击问题跳转
 $('#questions').click(function (e) {
