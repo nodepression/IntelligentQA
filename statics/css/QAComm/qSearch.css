@@ -42,6 +42,7 @@
 
 .more{
    color: #016690;
+   cursor: pointer;
 }
 .state{
     display: inline-block;
