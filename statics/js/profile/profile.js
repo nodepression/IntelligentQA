@@ -118,10 +118,9 @@
             else {
                 password = $("#password").val();   //原密码
                 newpassword = $("#newpassword").val();   //新密码
-                // alert(password + " " + newpassword + " " + repassword);
                 $.ajax({
                     type: 'post',
-                    url: "211.87.230.35:8080/profile/modifyPass",
+                    url: "http://localhost:8080/profile/modifyPass",
                     data: JSON.stringify({ "password": password, "newpassword": newpassword }),
                     contentType: "application/json;charset=UTF-8",
                     xhrFields: {
@@ -133,6 +132,7 @@
                             alert(data.msg);
                         } else {
                             alert("密码修改成功！");
+                            $('.text').val("");
                         }
                     }
                 });
@@ -275,7 +275,6 @@
         $.ajax({
             type: 'post',
             url: "http://localhost:8080/profile/myResource",
-            data: JSON.stringify({}),
             contentType: "application/json;charset=UTF-8",
             xhrFields: {
                 withCredentials: true
@@ -299,33 +298,12 @@
                         div.style = "line-height: 60px";
                         var row = document.createElement("div");
                         row.style = "height:50px";
-                        if (rresult[i].type = 0)//word
-                        {
-                            var pic = document.createElement("img");
-                            pic.src = "../../statics/images/word.png";
-                            pic.className = "mdui-col-xs-1 type";
-                        }
-                        if (rresult[i].type = 1)//ppt
-                        {
-                            var pic = document.createElement("img");
-                            pic.src = "../../statics/images/ppt.png";
-                            pic.className = "mdui-col-xs-1 type";
-                        }
-                        if (rresult[i].type = 2)//pdf
-                        {
-                            var pic = document.createElement("img");
-                            pic.src = "../../statics/images/pdf.png";
-                            pic.className = "mdui-col-xs-1 type";
-                        }
-                        if (rresult[i].type = 3)//video
-                        {
-                            var pic = document.createElement("img");
-                            pic.src = "../../statics/images/mp4.png";
-                            pic.className = "mdui-col-xs-1 type";
-                        }
+
+
                         var pic = document.createElement("img");
-                        pic.src = "../../statics/images/mp4.png";
+                        pic.src = `../../statics/images/${rresult[i].type}.png`;
                         pic.className = "mdui-col-xs-1 type";
+
                         var text = document.createElement("div");
                         text.className = "mdui-col-xs-5 font1 title";
                         text.innerText = rresult[i].title;
@@ -373,6 +351,7 @@
         $("#tab1").hide();
         $("#tab2").hide();
         $("#tab3").show();//显示tab3
+        renderq();
     }
     
 
