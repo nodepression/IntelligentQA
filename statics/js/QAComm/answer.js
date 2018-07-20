@@ -29,6 +29,9 @@
             url: "http://localhost:8080/QAComm/like",
             data: JSON.stringify({ "answerId": Id }),
             contentType: "application/json;charset=UTF-8",
+            xhrFields: {
+                withCredentials: true
+            },
             dataType: "json", //预期服务器返回类
             success: function (data) {
                 if (data.status != 200) {

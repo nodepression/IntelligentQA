@@ -121,9 +121,12 @@
                 // alert(password + " " + newpassword + " " + repassword);
                 $.ajax({
                     type: 'post',
-                    url: "211.87.230.21:8080/profile/modifyPass",
+                    url: "211.87.230.35:8080/profile/modifyPass",
                     data: JSON.stringify({ "password": password, "newpassword": newpassword }),
                     contentType: "application/json;charset=UTF-8",
+                    xhrFields: {
+                        withCredentials: true
+                    },
                     dataType: "json", //预期服务器返回类
                     success: function (data) {
                         if (data.status != 200) {
@@ -195,6 +198,9 @@
             url: "http://localhost:8080/profile/myQuestion",
             data: JSON.stringify({}),
             contentType: "application/json;charset=UTF-8",
+            xhrFields: {
+                withCredentials: true
+            },
             dataType: "json", //预期服务器返回类
             success: function (data) {
                 if (data.status != 200) {
@@ -271,6 +277,9 @@
             url: "http://localhost:8080/profile/myResource",
             data: JSON.stringify({}),
             contentType: "application/json;charset=UTF-8",
+            xhrFields: {
+                withCredentials: true
+            },
             dataType: "json", //预期服务器返回类
             success: function (data) {
                 if (data.status != 200) {
