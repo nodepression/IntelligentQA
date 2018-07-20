@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../../statics/css/home.css">
     <link rel="stylesheet" href="../../statics/css/QAComm/answer.css">
     <link rel="stylesheet" href="../../statics/css/QAComm/ask.css">
-    <title>问题界面</title>
+    <title>问题详情</title>
 </head>
 
 <body>
@@ -27,58 +27,77 @@
                     </li>
                     <li class="mdui-list-item mdui-ripple">
                         <i class="mdui-list-item-icon mdui-icon material-icons">question_answer</i>
-                        <div class="mdui-list-item-content">提问交流</div>
+                        <div class="mdui-list-item-content"> 
+                            <a href="../QAComm/ask.html">提问交流</a></div>
                     </li>
                     <li class="mdui-list-item mdui-ripple">
                         <i class="mdui-list-item-icon mdui-icon material-icons">person</i>
-                        <div class="mdui-list-item-content"><a href="../profile.html">个人中心</a></div>
+                        <div class="mdui-list-item-content">
+                            <a href="../profile/profile.html">个人中心</a>
+                        </div>
                     </li>
                 </ul>
             </div>
             <div class="mdui-col-xs-8 mdui-col-offset-xs-4 right">
                 <div class="mdui-row" style="position: fixed;">
                     <div class="mdui-appbar topBar">
-                        <div class="mdui-tab mdui-color-theme" mdui-tab >
-                            <a href="#" class="mdui-ripple mdui-ripple-white">资源大厅</a>
-                            <a href="#" class="mdui-ripple mdui-ripple-white">资源搜索</a>
+                        <div class="mdui-tab mdui-color-theme" mdui-tab>
+                            <a href="#" onclick="showa()" class="mdui-ripple mdui-ripple-white" id="taba">智能搜索</a>
+                            <a href="#" onclick="showb()" class="mdui-ripple mdui-ripple-white" id="tabb">伸出猿手</a>
+                            <a href="#" onclick="showc()" class="mdui-ripple mdui-ripple-white" id="tabc">我要求猿</a>
                             <a style="position: fixed;right: 0px;">zq</a>
                         </div>
                     </div>
                 </div>
                 <div class="mdui-row con">
-                        <div class="mdui-container">
-                                <div class="mdui-rowa" >
-                                  <div class="mdui-col-xs-10" style="font-size: 20px" style="margin-bottom:  15px" id="qtitle">python里每一行语句后面需要用分号来结束吗？</div>
-                                  <div class="mdui-col-xs-2" style="font-size: 20px"><button class="mdui-btn-dense mdui-btn" id="closeq" style="background-color: rgb(152, 236, 25)"><span style="color: white">关闭问题</button></span></div>
-                                </div>
-                                <div class="mdui-rowa">
-                                  <div class="mdui-col-xs-9" style="font-size: 15px;left: 25px">Java这类语言都需要分号，所以习惯了在行末加分号是杀手是杀手所所所所所所所所所所所所所所所所所所所所是杀手是杀手所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所</div>
-                                </div>
-                                <div class="mdui-rowa"></div>
-                                <div class="mdui-rowb">
-                                  <div class="mdui-col-xs-7" style="font-size: 15px" id="help"><button id="help" class="mdui-btn-group button" style="color: #016690;font-size: 15px">猿助一下</button></div>
-                                  <div class="mdui-col-xs-5" style="font-size: 15px">提问时间：</div>
-                                </div> 
-                                <div class="mdui-rowa"><div class="mdui-divider-dark"></div>
-                                  <i class="mdui-icon material-icons" style="color:  rgb(1,102,144)">flag</i><span style="color: #016690">最佳答案</style></span>
-                                </div>
-                                <div id="anstop">
-                                <!-- <div class="mdui-rowa">在C、Java等语言的语法中规定，必须以分号作为语句结束的标识。Python也支持分号，同样用于一条语句的结束标识。但在Python中分号的作用已经不像C、Java中那么重要了，Python中的分号可以省略，主要通过换行来识别语句的结束。</div>
-                                <div class="mdui-rowa"><button class="mdui-btn-group button" style="color: rgb(1,102,144);font-size: 15px;border-radius: 5px"><i class="mdui-icon material-icons">thumb_up</i>count</button></div>
-                                <div class="mdui-rowc"><div class="mdui-divider-dark"></div> -->
+                    <div class="mdui-container">
+                        <div class="mdui-rowa">
+                            <div class="mdui-col-xs-10" style="font-size: 20px" style="margin-bottom:  15px" id="qtitle"></div>
+                            <div class="mdui-col-xs-2" style="font-size: 20px">
+                                <button class="mdui-btn-dense mdui-btn" id="closeq" style="background-color: rgb(152, 236, 25)">
+                                    <span style="color: white">关闭问题</button>
+                                </span>
                             </div>
                         </div>
-                        <!-- 回答问题 -->
-<div class="mdui-dialog" id="help_dialog" style=" width: 480px;height: 320px;left: 150px">
-   <div class="mdui-col-xs-12" style="text-align: center;padding-top: 10px">答案编辑</span>
-<div class="mdui-rowa"><div class="mdui-divider-dark"></div>   <div class="mdui-rowa"></div>
-<textarea class="ansdialog" placeholder="在这里输入你的回答"></textarea></div>
-<div class="mdui-dialog-actions">
-        <button class="save  mdui-ripple" style="left: -180px;"  mdui-dialog-close ><span style="color: white;">发布</span></button>
-        <button class="cancel mdui-ripple" style="left: -160px;" mdui-dialog-confirm style="color:black;">取消</button>
-      </div>
-        </div>
-  </div>            
+                        <div class="mdui-rowa">
+                            <div class="mdui-col-xs-9" style="font-size: 15px;left: 25px" id="qtitle"></div>
+                        </div>
+                        <div class="mdui-rowa" id="qdesc"></div>
+                        <div class="mdui-rowb">
+                            <div class="mdui-col-xs-7" style="font-size: 15px" id="help">
+                                <button id="help" class="mdui-btn-group button" style="color: #016690;font-size: 15px;position: relative;top: -10px;">猿助一下</button>
+                            </div>
+                            <div class="mdui-col-xs-5" style="font-size: 15px">提问时间：<div id="qtime" style="display: inline;"></div></div>
+                        </div>
+                        <div class="mdui-divider-dark"></div>
+                        <div id="anstop">
+                                <!-- <div class="mdui-rowa">
+                                        <div class="mdui-divider-dark"></div>
+                                        <i class="mdui-icon material-icons" style="color:  rgb(1,102,144)">flag</i>
+                                        <span style="color: #016690">最佳答案</style>
+                                        </span>
+                                    </div> -->
+                         <!--    <div class="mdui-rowa">在C、Java等语言的语法中规定，必须以分号作为语句结束的标识。Python也支持分号，同样用于一条语句的结束标识。但在Python中分号的作用已经不像C、Java中那么重要了，Python中的分号可以省略，主要通过换行来识别语句的结束。</div>
+                                <div class="mdui-rowa"><button class="mdui-btn-group button" style="color: rgb(1,102,144);font-size: 15px;border-radius: 5px"><i class="mdui-icon material-icons">thumb_up</i>count</button></div>
+                                <div class="mdui-rowc"><div class="mdui-divider-dark"></div>
+                        </div> -->
+                    </div>
+                    <!-- 回答问题 -->
+                    <div class="mdui-dialog" id="help_dialog" style=" width: 480px;height: 320px;left: 150px">
+                        <div class="mdui-col-xs-12" style="text-align: center;padding-top: 10px">答案编辑</span>
+                            <div class="mdui-rowa">
+                                <div class="mdui-divider-dark"></div>
+                                <div class="mdui-rowa"></div>
+                                <textarea class="ansdialog" placeholder="在这里输入你的回答" id="myans"></textarea>
+                            </div>
+                            <div class="mdui-dialog-actions">
+                                <button class="save  mdui-ripple" style="left: -180px;" mdui-dialog-close>
+                                    <span style="color: white;">发布</span>
+                                </button>
+                                <button class="cancel mdui-ripple" style="left: -160px;" mdui-dialog-confirm style="color:black;">取消</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
