@@ -7,6 +7,7 @@
     var tag1 = undefined;
     var tag2 = undefined;
     var question = undefined;
+    var qid = undefined;
     //dom obj
     var save = $('.save')//保存标签
     var ok = $('#ok');//输入标签
@@ -23,7 +24,7 @@
     var alen = aresult.length;
     var alastIndex = Math.floor(alen / anum) + 1; //最多显示到第几页
 
-
+    //保存标签
     save.on("click", function () {
         tag0 = $("#0").text();
         tag1 = $("#1").text();
@@ -32,7 +33,7 @@
         $('#demo')[0].selectedIndex = -1;
 
     })
-
+    //提问
     function askquestions() {
         title = $("#title").val();//问题标题
         description = $("#description").val();//问题描述
@@ -43,7 +44,7 @@
         $.ajax({
             type: 'post',
             url: "http://localhost:8080/QAComm/quiz",
-            data: JSON.stringify({ "title": title, "description": description, "tags": tags }),
+            data: JSON.stringify({ "questionTitle": title, "questionDescription": description, "tags": tags }),
             contentType: "application/json;charset=UTF-8",
             dataType: "json", //预期服务器返回类
             success: function (data) {
@@ -141,44 +142,46 @@
     //渲染后台返回的结果
     function rendera() {
         ftag = $("#ftag").val();//输入的标签
-        if (ftag = "") {// $.ajax({
-            //     type: 'post',
-            //     url: "http://localhost:8080/QAComm/showques",
-            //     data: JSON.stringify({}),
-            //     contentType: "application/json;charset=UTF-8",
-            //     dataType: "json", //预期服务器返回类
-            //     success: function (data) {
-            //         if (data.status != 200) {
-            //             alert(data.msg);
-            //         } else {
-            //             [...aresult]=data.data;//把json的data取出来
-            //             if(alen<=anum)
-            //     {
-            //         $('.page i').css("display","none");
-            //     }
+        if (ftag = "") {
+             $.ajax({
+                type: 'post',
+                url: "http://localhost:8080/QAComm/showques",
+                data: JSON.stringify({}),
+                contentType: "application/json;charset=UTF-8",
+                dataType: "json", //预期服务器返回类
+                success: function (data) {
+                    if (data.status != 200) {
+                        alert(data.msg);
+                    } else {
+                        [...aresult]=data.data;//把json的data取出来
+                        if(alen<=anum)
+                {
+                    $('.page i').css("display","none");
+                }
             for (var i = (aindex - 1) * anum; i < (aindex - 1) * anum + anum; i++) {
                 if (i >= alen)
                     break;
                 var li = document.createElement("li");
                 li.className = "mdui-list-item";
+                li.id=aresult[i].id;
                 var div = document.createElement("div");
                 div.className = "mdui-list-item-content";
                 var div1 = document.createElement("div");
                 div1.className = "mdui-list-item-title font1";
-                div1.innerText = aresult[i];
+                div1.innerText = aresult[i].title;
                 var span = document.createElement("span");
                 span.style = "color: gray;left: 10px";
                 var i = document.createElement("i")
                 i.className = "mdui-icon material-icons";
                 i.innerText = "local_offer";
                 var span3 = document.createElement("span");
-                span3.innerText = "tags";
+                span3.innerText = aresult[i].tags;
                 var span1 = document.createElement("span");
                 span1.style = "margin-left:330px";
-                span1.innerText = "count";
+                span1.innerText = aresult[i].count;
                 var span2 = document.createElement("span");
                 span2.style = "margin-left:30px";
-                span2.innerText = "time";
+                span2.innerText = aresult[i].time;
                 var li1 = document.createElement("li");
                 li1.className = "mdui-divider-inset mdui-m-y-0";
                 span.appendChild(i);
@@ -193,46 +196,48 @@
             }
             $('.aindex').text(aindex);
         }
-        // }})}
+        }})}
         else {
-            // $.ajax({
-            //     type: 'post',
-            //     url: "http://localhost:8080/QAComm/reply",
-            //     data: JSON.stringify({"tag": ftag}),
-            //     contentType: "application/json;charset=UTF-8",
-            //     dataType: "json", //预期服务器返回类
-            //     success: function (data) {
-            //         if (data.status != 200) {
-            //             alert(data.msg);
-            //         } else {
-            //             [...aresult]=data.data;//把json的data取出来
-            //             if(alen<=anum)
-            //     {
-            //         $('.page i').css("display","none");
-            //     }
+            $.ajax({
+                type: 'post',
+                url: "http://localhost:8080/QAComm/showques",
+                data: JSON.stringify({"tag": ftag}),
+                contentType: "application/json;charset=UTF-8",
+                dataType: "json", //预期服务器返回类
+                success: function (data) 
+            {
+                    if (data.status != 200) {
+                        alert(data.msg);
+                    } else {
+                        [...aresult]=data.data;//把json的data取出来
+                        if(alen<=anum)
+                {
+                    $('.page i').css("display","none");
+                }
             for (var i = (aindex - 1) * anum; i < (aindex - 1) * anum + anum; i++) {
                 if (i >= alen)
                     break;
                 var li = document.createElement("li");
-                li.className = "mdui-list-item";
+                li.className = "mdui-list-item li";
+                li.id=aresult[i].id;
                 var div = document.createElement("div");
                 div.className = "mdui-list-item-content";
                 var div1 = document.createElement("div");
                 div1.className = "mdui-list-item-title font1";
-                div1.innerText = aresult[i];
+                div1.innerText = aresult[i].title;
                 var span = document.createElement("span");
                 span.style = "color: gray;left: 10px";
                 var i = document.createElement("i")
                 i.className = "mdui-icon material-icons";
                 i.innerText = "local_offer";
                 var span3 = document.createElement("span");
-                span3.innerText = "tags";
+                span3.innerText = aresult[i].tags;
                 var span1 = document.createElement("span");
                 span1.style = "margin-left:330px";
-                span1.innerText = "count";
+                span1.innerText = aresult[i].count;
                 var span2 = document.createElement("span");
                 span2.style = "margin-left:30px";
-                span2.innerText = "time";
+                span2.innerText = aresult[i].time;
                 var li1 = document.createElement("li");
                 li1.className = "mdui-divider-inset mdui-m-y-0";
                 span.appendChild(i);
@@ -246,10 +251,10 @@
                 atable.append(li1);
             }
             $('.aindex').text(aindex);
-        }
+        }}})
     }
-    // }})
-    // }
+    
+     }
 
 
 
@@ -290,7 +295,6 @@
         var options = $("#demo option:selected");  //获取选中的项
         //alert(options.val());   //拿到选中项的值 
         if (options.val() && ($(".mdui-chip").length < 3)) {
-            //alert(options.val());//第一个取不到为什么？？？？？？？？
             var div = document.createElement("div");
             div.className = "mdui-chip";
             var span = document.createElement("span");
@@ -307,7 +311,6 @@
             div.appendChild(span);
             div.appendChild(span1);
             selected.append(div);
-            //alert($('.mdui-chip-title').length);
             $("#selected").click(function (e) {
                 var tagItem;
                 if ($(e.target).hasClass("mdui-chip")) {
@@ -334,255 +337,39 @@ var a = $('#append');//自动匹配
 function find() {
     var inputField = undefined;
     inputField = $("#tags").val();
-    //alert(inputField);
-    // var data=new Array(11);
-    // var len=data.length;
-    // for(var r=0;r<len;r++)
-    // data[r]=r;
     var arr = new Array;
-    var data = [
-        "调试",
-        "智能合约",
-        "cdn",
-        "选择器",
-        "抓包过滤",
-        "a",
-        "fis3打包",
-        "c",
-        "ssh-key",
-        "p",
-        "w",
-        "cgo",
-        "比特币",
-        "powerbi",
-        "sharding",
-        "spring-mvc",
-        "android相关问题",
-        "cli",
-        "静态网站",
-        "cmd",
-        "ping",
-        "cms",
-        "pip3",
-        "异步编程",
-        "代理",
-        "注册",
-        "cpu",
-        "mapper",
-        "伪元素",
-        "模块化开发",
-        "反射",
-        "sketch",
-        "css",
-        "csv",
-        "for循环",
-        "element",
-        "ansible",
-        "celery",
-        "kubernetes",
-        "作用域链",
-        "memory",
-        "实体类",
-        "下载",
-        "srping",
-        "dotnet",
-        "tensorflow",
-        "fluentd",
-        "fetch",
-        "分库分表",
-        "redis-cluster",
-        "dba",
-        "异步请求",
-        "摄像头",
-        "适配器",
-        "js-xlsx",
-        "mycat",
-        "spark-submit",
-        "qrcode",
-        "小白求助",
-        "dma",
-        "u盘",
-        "自动化",
-        "反编译",
-        "dom",
-        "虚函数表",
-        "emoji",
-        "networking",
-        "nginx",
-        "ip伪造",
-        "根目录",
-        "网页设计",
-        "dtd",
-        "删除文件",
-        "泛型",
-        "软件开发",
-        "索引",
-        "fixed导航栏",
-        "银行卡",
-        "js异步编程",
-        "游戏开发",
-        "wordpress",
-        "navigator",
-        "逻辑",
-        "line-height",
-        "语音合成",
-        "apple",
-        "跨域",
-        "bash",
-        "分页",
-        "内存溢出",
-        "全文检索",
-        "eslint",
-        "ec2",
-        "facebook",
-        "html",
-        "stylesheets",
-        "devtool",
-        "jackson",
-        "async",
-        "kibana",
-        "next.js",
-        "cocos",
-        "框架",
-        "BI",
-        "ejs",
-        "elk",
-        "http",
-        "http首部",
-        "codeigniter",
-        "管道",
-        "tcp抓包",
-        "超时",
-        "蓝牙",
-        "symfony3",
-        "es5",
-        "es7",
-        "es6",
-        "循环",
-        "echarts",
-        "phabricator",
-        "etl",
-        "验证码",
-        "印象笔记",
-        "mongodb",
-        "render",
-        "axios",
-        "软件工程",
-        "相似度检测",
-        "qq互联",
-        "openresty",
-        "template.js",
-        "ubuntu14.04",
-        "gradle",
-        "require.js",
-        "bitbucket",
-        "高并发",
-        "字符",
-        "thymeleaf",
-        "linode",
-        "button",
-        "hyper-v",
-        "antdesign",
-        "instruments",
-        "okhttp",
-        "gopath",
-        "apk反编译-源代码-xml",
-        "opencv2",
-        "recyclerview",
-        "tornado",
-        "opengl",
-        "部署",
-        "setinterval",
-        "material-ui",
-        "generator",
-        "硬盘",
-        "opencv",
-        "c#",
-        "reactnative",
-        "bp",
-        "selenium",
-        "include_path",
-        "puppeteer",
-        "ci",
-        "adobe",
-        "r.js",
-        "flask-mail",
-        "db",
-        "sequelize",
-        "el",
-        "gc",
-        "angularui",
-        "二叉排序树",
-        "fork",
-        "form",
-        "经纬度坐标",
-        "https",
-        "in",
-        "io",
-        "ip",
-        "定时器",
-        "clientheight",
-        "百度地图api",
-        "fsm",
-        "ftp",
-        "webhooks",
-        "swagger",
-        "mq",
-        "angularjs",
-        "chrome-extension",
-        "版本控制",
-        "pr",
-        "ps",
-        "qq",
-        "qt",
-        "执行上下文",
-        "myisam",
-        "calendar",
-        "rocketmq",
-        "七牛云存储",
-        "fastjson",
-        "loader",
-        "ui",
-        "vb",
-        "深入理解javascript系列",
-        "单片机",
-        "forge",
-        "sort方法",
-        "gbk",
-        "gcc",
-        "gcm",
-        "公众号",
-        "openbsd",
-        "微信运营",
-        "重构",
-        "get",
-        "属性",
-        "支付",
-        "unslider",
-        "盒子模型",
-        "oclazyload",
-        "scala",
-        "gis",
-        "git",
-        "gitlab-ce",
-        "three.js",
-        "draggable",
-        "roadhog",
-        "协程",
-        "微信开放平台",
-        "gps",
+    $.ajax({
+            type: 'post',
+            url: "http://localhost:8080/QAComm/getTags",
+            data: JSON.stringify({}),
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json", //预期服务器返回类
+            success: function (data) {
+                if (data.status != 200) {
+                    alert(data.msg);
+                } else {
+                    [...Tags]=data.data;//把json的data取出来}}
+    }}})
+
+    var Tags = [
+        "调试", "智能合约", "cdn","选择器","抓包过滤","a","fis3打包","ssh-key", "cgo","比特币","powerbi","sharding",
+        "spring-mvc","android相关问题","cli","静态网站","cmd","ping","cms","pip3","异步编程","代理","注册","cpu",
+        "mapper","伪元素","模块化开发","反射","sketch","css","csv","for循环","element","ansible","celery","kubernetes",
+        "作用域链","memory","实体类","下载","srping","dotnet","tensorflow","fluentd","fetch","分库分表","redis-cluster",
+        "dba","异步请求","摄像头","适配器","js-xlsx","mycat","spark-submit","qrcode","小白求助","dma","u盘","自动化",
+        "反编译","dom","虚函数表","emoji","networking","nginx","ip伪造","根目录","网页设计","dtd","删除文件","泛型",
+        "软件开发","索引","fixed导航栏","银行卡","js异步编程","游戏开发","wordpress","navigator","逻辑","line-height",
+        "语音合成","apple","跨域","bash","分页","内存溢出","全文检索","eslint","ec2","facebook","html","stylesheets",
+        "devtool","jackson","async","kibana","next.js","cocos","框架","BI","ejs","elk","http","http首部","codeigniter",
+        "管道","tcp抓包","超时","蓝牙","symfony3","es5","es7","es6","循环","echarts","phabricator","etl","验证码",
+        "印象笔记","mongodb",
     ];
-    var len = data.length;
+    var len = Tags.length;
     var j = 0;
     for (var i = 0; i < len; i++) {
-        //alert(data[i]);
-        //alert((data[i]).indexOf(inputField));
-        if ((data[i]).indexOf(inputField) >= 0) {
-            //alert(data[i]);
-            // arr.push(data[i]);
-            arr[j] = data[i];
+        if ((Tags[i]).indexOf(inputField) >= 0) {
+            arr[j] = Tags[i];
             j++;
-            //alert(arr[i]);
         }
     }
     set(arr);
@@ -615,4 +402,15 @@ function clear() {
     $('#selected').empty();
 }
 
-
+    //点击问题跳转
+    $('#questions').click(function(e){
+        var tagItem;
+        if ($(e.target).hasClass("li")) {
+            tagItem = $(e.target);
+        } else {
+            tagItem = $(e.target).parents(".li");
+        }
+        //  //获取问题id
+         qid = tagItem.attr("id");
+         window.location.href='../QAComm/answer.html?index='+ qid;
+    })

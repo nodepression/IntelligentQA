@@ -23,9 +23,9 @@
     var index = 1; //当前位于第几页
     var index1 = 1; //当前位于第几页
     var num = 4; //一页最多显示多少个
-    var result = new Array(10);
+    var qresult = new Array(10);
     var rresult = new Array(7);
-    var len = result.length;
+    var len = qresult.length;
     var rlen = rresult.length;
     var lastIndex = Math.floor(len / num) + 1; //最多显示到第几页
     var rlastIndex = Math.floor(rlen / num) + 1; //最多显示到第几页
@@ -33,7 +33,7 @@
         rresult[r] = r;
     }
     for (var k = 0; k < len; k++) {
-        result[k] = k;
+        qresult[k] = k;
     }
     submit.click(function () {
         changepassword();
@@ -117,10 +117,11 @@
             }
             else {
                 password = $("#password").val();   //原密码
-                alert(password + " " + newpassword + " " + repassword);
+                newpassword = $("#newpassword").val();   //新密码
+                // alert(password + " " + newpassword + " " + repassword);
                 $.ajax({
                     type: 'post',
-                    url: "http://localhost:8080/profile/modifyPass",
+                    url: "211.87.230.21:8080/profile/modifyPass",
                     data: JSON.stringify({ "password": password, "newpassword": newpassword }),
                     contentType: "application/json;charset=UTF-8",
                     dataType: "json", //预期服务器返回类
@@ -189,58 +190,51 @@
 
     //渲染后台返回的结果
     function renderq() {
-        // $.ajax({
-        //     type: 'post',
-        //     url: "http://localhost:8080/profile/myQuestion",
-        //     data: JSON.stringify({}),
-        //     contentType: "application/json;charset=UTF-8",
-        //     dataType: "json", //预期服务器返回类
-        //     success: function (data) {
-        //         if (data.status != 200) {
-        //             alert(data.msg);
-        //         } else {
-        //             [...qresult]=data.data;//把json的data取出来
-        //             if(qlen<=4)
-        //     {
-        //         $('.page i').css("display","none");
-        //     }
+        $.ajax({
+            type: 'post',
+            url: "http://localhost:8080/profile/myQuestion",
+            data: JSON.stringify({}),
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json", //预期服务器返回类
+            success: function (data) {
+                if (data.status != 200) {
+                    alert(data.msg);
+                } else {
+                    [...qresult]=data.data;//把json的data取出来
+                    if(qlen<=4)
+            {
+                $('.page i').css("display","none");
+            }
         for (var i = (index - 1) * num; i < (index - 1) * num + num; i++) {
             if (i >= len)
                 break;
             var tr = document.createElement("tr");
             var td = document.createElement("td");
             td.className = "td";
+            td.id=qresult[i].id;//qresult[i].id
             var div = document.createElement("div");
-            //div.className= "mdui-container";
             div.style = "line-height: 60px";
             var row = document.createElement("div");
-            //row.className="mdui-row";
             var text = document.createElement("div");
             text.className = "mdui-col-xs-8 font1";
-            text.innerText = result[i].title;//             text.innerText = jsonData[i].title;
+            text.innerText = qresult[i].title;// qresult[i].title;
             var text1 = document.createElement("div");
             text1.className = "mdui-col-xs-3";
-            if (result[i].status = 0) {
-                text1.innerText = "回答数目：" + result[i].count;
-            }// text1.innerText ="回答数目："+jsonData[i].count;
-            if (result[i].status = 1) {
+            if (qresult[i].status = 0) {
+                text1.innerText = "回答数目：" + qresult[i].count;//qresult[i].count_answer;
+            }
+            if (qresult[i].status = 1) {
                 var textdelete = document.createElement("del");
                 text1.style = "text-align:right";
                 textdelete.innerText = "已关闭";
                 text1.appendChild(textdelete);
             }
             var row2 = document.createElement("div");
-            //row2.className="mdui-row";
             var text2 = document.createElement("div");
             text2.className = "mdui-col-xs-9";
-            text2.innerText = "发布时间：" + result[i].time;//     text2.innerText = "发布时间："+jsonData[i].time;
+            text2.innerText = "发布时间：" + qresult[i].time;//qresult[i].time;
             var text3 = document.createElement("div");
             text3.className = "mdui-col-xs-1 font1 mdui-col-offset-xs-1";
-            // var button=document.createElement("button");
-            // button.innerText = "status";
-            // button.style="";
-            // button.className="mdui-btn";
-            // text3.appendChild(button);
             row.appendChild(text);
             row.appendChild(text1);
             row2.appendChild(text2);
@@ -253,25 +247,40 @@
         }
         $('.index').text(index);
     }
-    // }})
-    // }
+    }})
+    }
+
+    //点击问题跳转
+    $('#qtable').click(function(e){
+        qid = this.id;
+        var tagItem;
+        if ($(e.target).hasClass("td")) {
+            tagItem = $(e.target);
+        } else {
+            tagItem = $(e.target).parents(".td");
+        }
+        //  //获取问题id
+         qid = tagItem.attr("id");
+         window.location.href='../QAComm/answer.html?index='+ qid;
+    })
+
     //渲染后台返回的结果
     function renderr() {
-        // $.ajax({
-        //     type: 'post',
-        //     url: "http://localhost:8080/profile/myResource",
-        //     data: JSON.stringify({}),
-        //     contentType: "application/json;charset=UTF-8",
-        //     dataType: "json", //预期服务器返回类
-        //     success: function (data) {
-        //         if (data.status != 200) {
-        //             alert(data.msg);
-        //         } else {
-        //             [...rresult]=data.data;//把json的data取出来
-        //             if(rlen<=4)
-        //     {
-        //         $('.page i').css("display","none");
-        //     }
+        $.ajax({
+            type: 'post',
+            url: "http://localhost:8080/profile/myResource",
+            data: JSON.stringify({}),
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json", //预期服务器返回类
+            success: function (data) {
+                if (data.status != 200) {
+                    alert(data.msg);
+                } else {
+                    [...rresult]=data.data;//把json的data取出来
+                    if(rlen<=4)
+            {
+                $('.page i').css("display","none");
+            }
         for (var i = (index1 - 1) * num; i < (index1 - 1) * num + num; i++) {
             if (i >= rlen)
                 break;
@@ -279,10 +288,8 @@
             var td = document.createElement("td");
             td.className = "td mypreview";
             var div = document.createElement("div");
-            //div.className= "mdui-container";
             div.style = "line-height: 60px";
             var row = document.createElement("div");
-            //row.className="mdui-row";
             row.style = "height:50px";
             if (rresult[i].type = 0)//word
             {
@@ -305,11 +312,11 @@
             if (rresult[i].type = 3)//video
             {
                 var pic = document.createElement("img");
-                pic.src = "../../statics/images/vedio.png";
+                pic.src = "../../statics/images/mp4.png";
                 pic.className = "mdui-col-xs-1 type";
             }
             var pic = document.createElement("img");
-            pic.src = "../../statics/images/vedio.png";
+            pic.src = "../../statics/images/mp4.png";
             pic.className = "mdui-col-xs-1 type";
             var text = document.createElement("div");
             text.className = "mdui-col-xs-5 font1 title";
@@ -323,13 +330,7 @@
             var row2 = document.createElement("div");
             row2.className = "mdui-col-offset-xs-10";
             row2.style = "height:50px";
-            // var button=document.createElement("button");
-            // button.innerText = "删除";
-            // button.id=i;
-            // button.onclick=function(i){ del(i);};
-            // button.className="btn";
             row2.style = "line-height: 10px";
-            //row2.appendChild(button);
             row.appendChild(pic);
             row.appendChild(text);
             row.appendChild(text1);
@@ -342,9 +343,9 @@
         }
         $('.index1').text(index1);
     }
-    // }})
+    }})
 
-    // }
+    }
 
 
 }.call(this));
