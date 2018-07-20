@@ -77,7 +77,7 @@
     function getResult(start, num) {
         $.ajax({
             type: 'get',
-            url: "http://211.87.230.21:8983/solr/test_core/select",
+            url: "http://118.25.4.52:8983/solr/test_core/select",
             data: { "q": words, "start": start, "rows": num },
             contentType: "application/json;charset=UTF-8",
             dataType: "json", //预期服务器返回类
