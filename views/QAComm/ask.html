@@ -23,19 +23,15 @@
                     </li>
                     <li class="mdui-list-item mdui-ripple ">
                         <i class="mdui-list-item-icon mdui-icon material-icons">search</i>
-                        <div class="mdui-list-item-content">资源平台</div>
+                        <div class="mdui-list-item-content resource">资源平台</div>
                     </li>
                     <li class="mdui-list-item mdui-ripple">
                         <i class="mdui-list-item-icon mdui-icon material-icons">question_answer</i>
-                        <div class="mdui-list-item-content">
-                            <a href="#">提问交流</a>
-                        </div>
+                        <div class="mdui-list-item-content QAComm">提问交流</div>
                     </li>
                     <li class="mdui-list-item mdui-ripple">
                         <i class="mdui-list-item-icon mdui-icon material-icons">person</i>
-                        <div class="mdui-list-item-content">
-                            <a href="../profile/profile.html">个人中心</a>
-                        </div>
+                        <div class="mdui-list-item-content profile">个人中心</div>
                     </li>
                 </ul>
             </div>
@@ -43,48 +39,26 @@
                 <div class="mdui-row" style="position: fixed;">
                     <div class="mdui-appbar topBar">
                         <div class="mdui-tab mdui-color-theme" mdui-tab>
-                            <a href="#" onclick="showa()" class="mdui-ripple mdui-ripple-white" id="taba">智能搜索</a>
-                            <a href="#" onclick="showb()" class="mdui-ripple mdui-ripple-white" id="tabb">伸出猿手</a>
-                            <a href="#" onclick="showc()" class="mdui-ripple mdui-ripple-white" id="tabc">我要求猿</a>
-                            <a style="position: fixed;right: 0px;">zq</a>
+                            <a href="#" onclick="showa()" class="mdui-ripple mdui-ripple-white searchNav">智能搜索</a>
+                            <a href="#" onclick="showb()" class="mdui-ripple mdui-ripple-white answerNav">伸出猿手</a>
+                            <a href="#" onclick="showc()" class="mdui-ripple mdui-ripple-white askNav">我要求猿</a>
                         </div>
+                        <a style="position: fixed;right: 0px;top: 15px;" id="userName">访客</a>
                     </div>
                 </div>
                 <div class="mdui-row con">
-                    <div id="tab1">
-                        <div class="mdui-textfield">
-                            <table class="table1">
-                                <tr>
-                                    <td>
-                                        <img class="mdui-img-fluid" src="../../pics/monkey.png">
-                                    </td>
-                                    <td>
-                                        <label class="mdui-textfield-label">您好，请问有什么疑问？</label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>
-                                        <input class="inputlabel1" id="question" placeholder="请输入问题" /></input>
-                                    </td>
-                                    <td>
-                                        <button class="mdui-btn" id="search" style="background-color: black;color: white;border-radius: 5px">搜索</button>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
 
-                    </div>
-                    <div id="tab2" style="display: none;">
-                        <table class=" alltop " cellspacing="15">
-                            <td style="font-size: 16px;font-family: Microsoft YaHei">问题列表：</td>
-                            <td style="text-align: right">
-                                <input class="inputlabel" placeholder="输入标签" id="ftag" /></input>
-                                <button class="btn" style="color: rgb(1, 102, 144)" id="filter">筛选</button>
-                            </td>
-                        </table>
-                        <ul class="mdui-list" style="max-width: 900px;" id="questions">
-                            <!-- <li class="mdui-list-item">
+                </div>
+                <div id="tab2" style="display: block;">
+                    <table class=" alltop " cellspacing="15">
+                        <td style="font-size: 16px;font-family: Microsoft YaHei">问题列表：</td>
+                        <td style="text-align: right">
+                            <input class="inputlabel" placeholder="输入标签" id="ftag" /></input>
+                            <button class="btn" style="color: rgb(1, 102, 144)" id="filter">筛选</button>
+                        </td>
+                    </table>
+                    <ul class="mdui-list" style="max-width: 900px;" id="questions">
+                        <!-- <li class="mdui-list-item">
                           <div class="mdui-list-item-content">
                             <div class="mdui-list-item-title font1" >为什么说PHP是最好的语言？<span style="color: gray;left: 10px"><i class="mdui-icon material-icons">local_offer</i>tags</span>
                                 <span style="margin-left:330px">count</span>
@@ -93,80 +67,136 @@
                           </div>
                         </li>
                         <li class="mdui-divider-inset mdui-m-y-0"></li> -->
-                        </ul>
-                        <table class=" allbottom ">
-                            <div class="apage">
-                                <span style="text-align: center;display:block">
-                                    <i class="mdui-icon material-icons" id="apre">&#xe314;</i>
-                                    <span class="aindex"> 1 </span>
-                                    <i class="mdui-icon material-icons" id="anext">&#xe315;</i>
-                                </span>
-                            </div>
-                        </table>
-                    </div>
-                    <div id="tab3" style="display: none">
-                        <table style=" position: relative;top: 10px">
-                            <tr>
-                                <td width="130px">
-                                    <span style="margin-left: 20px">标题：</span>
-                                </td>
-                                <td>
-                                    <input type="text" id="title" class="text1" maxlength="30" placeholder="输入不超过30字">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="vertical-align: top">
-                                    <span style="margin-left: 20px">说明：</span>
-                                </td>
-                                <td style="vertical-align: top">
-                                    <textarea id="description" class="text2" maxlength="50" placeholder="输入不超过50字"></textarea>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="vertical-align:sub">
-                                    <span style="margin-left: 20px">标签：</span>
-                                </td>
-                                <td class="mdui-btn mdui-ripple" id="open" style="color: rgb(77, 148, 177)">点击选择</td>
-                            </tr>
-                            <tr>
-                                <td style="height: 70px;position: relative;left: 150px">
-                                    <input type="submit" id="ask" value="求猿!" class="font2 mdui-btn" style="background-color: rgb(1,102,144)" />
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- 选择标签 -->
-                <div class="mdui-dialog" id="tag_dialog" style=" width: 480px;height: 320px;left: 150px">
-                    <p class="mdui-text-center" id="edit">编辑标签</p>
-                    <div class="mdui-dialog-content mdui-typo">
-                        <div class="mdui-textfield">标签：
-                            <input class="text" style=" width: 300px;" id="tags" onkeyup="find()">
-                            <!-- <button class="cancel mdui-ripple" style="color:black;left: 20px;" id="ok">确定</button> -->
+                    </ul>
+                    <table class=" allbottom ">
+                        <div class="apage">
+                            <span style="text-align: center;display:block">
+                                <i class="mdui-icon material-icons" id="apre">&#xe314;</i>
+                                <span class="aindex"> 1 </span>
+                                <i class="mdui-icon material-icons" id="anext">&#xe315;</i>
+                            </span>
                         </div>
-                        <select class="mdui-select" id="demo" style=" width: 400px;display: none;">
-                        </select>
-                        <div class="mdui-textfield" id="selected">选择列表：</div>
-                        <div class="mdui-dialog-actions" style="height: 160px;">
-                            <!--                 
+                    </table>
+                </div>
+                <div id="tab3" style="display: none">
+                    <table style=" position: relative;top: 10px">
+                        <tr>
+                            <td width="130px">
+                                <span style="margin-left: 20px">标题：</span>
+                            </td>
+                            <td>
+                                <input type="text" id="title" class="text1" maxlength="30" placeholder="输入不超过30字">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align: top">
+                                <span style="margin-left: 20px">说明：</span>
+                            </td>
+                            <td style="vertical-align: top">
+                                <textarea id="description" class="text2" maxlength="50" placeholder="输入不超过50字"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align:sub">
+                                <span style="margin-left: 20px">标签：</span>
+                            </td>
+                            <td class="mdui-btn mdui-ripple" id="open" style="color: rgb(77, 148, 177)">点击选择</td>
+                        </tr>
+                        <tr>
+                            <td style="height: 70px;position: relative;left: 150px">
+                                <input type="submit" id="ask" value="求猿!" class="font2 mdui-btn" style="background-color: rgb(1,102,144)" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 选择标签 -->
+            <div class="mdui-dialog" id="tag_dialog" style=" width: 480px;height: 320px;left: 150px">
+                <p class="mdui-text-center" id="edit">编辑标签</p>
+                <div class="mdui-dialog-content mdui-typo">
+                    <div class="mdui-textfield">标签：
+                        <input class="text" style=" width: 300px;" id="tags" onkeyup="find()">
+                        <!-- <button class="cancel mdui-ripple" style="color:black;left: 20px;" id="ok">确定</button> -->
+                    </div>
+                    <select class="mdui-select" id="demo" style=" width: 400px;display: none;">
+                    </select>
+                    <div class="mdui-textfield" id="selected">选择列表：</div>
+                    <div class="mdui-dialog-actions" style="height: 160px;">
+                        <!--                 
                 <div class="mdui-chip">
                             <span class="mdui-chip-title">Example Chip</span>
                             <span class="mdui-chip-delete"><i class="mdui-icon material-icons">cancel</i></span>
                           </div> -->
-                            <!-- <div id="selected"></div><div style="margin-top: 20px;" ></div> -->
-                            <div>
-                                <button class="save  mdui-ripple" mdui-dialog-close style="color: white;left: -250px;">保存</button>
-                                <button class="cancel mdui-ripple" mdui-dialog-confirm id="cancell" style="color:black;left: -200px;margin-top: 20px;">取消</button>
-                            </div>
+                        <!-- <div id="selected"></div><div style="margin-top: 20px;" ></div> -->
+                        <div>
+                            <button class="save  mdui-ripple" mdui-dialog-close style="color: white;left: -250px;">保存</button>
+                            <button class="cancel mdui-ripple" mdui-dialog-confirm id="cancell" style="color:black;left: -200px;margin-top: 20px;">取消</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <script src="../../statics/js/lib/jquery.js"></script>
-            <script src="../../statics/js/lib/mdui.min.js"></script>
-            <script src="../../statics/js/profile/profile.js"></script>
-            <script src="../../statics/js/QAComm/ask.js"></script>
+        </div>
+        <script src="../../statics/js/lib/jquery.js"></script>
+        <script src="../../statics/js/lib/mdui.min.js"></script>
+        <script src="../../statics/js/lib/jquery.cookie.js"></script>
+        <script src="../../statics/js/QAComm/ask.js"></script>
+        <script>
+            (function () {
+
+                //跳转事件
+                $(".leftBar .resource").click(function (e) { //跳转到资源平台
+                    window.location.href = "../../index.html";
+                })
+                $(".leftBar .QAComm").click(function (e) {   //跳转到提问交流
+                    window.location.href = "./qSearch.html"
+                })
+                $(".leftBar .profile").click(function (e) {  //跳转到个人中心
+                    window.location.href = "../profile/profile.html";
+                })
+
+
+                $(".topBar .searchNav").click(function (e) {      //跳转到问题搜索
+                    window.location.href = "./qSearch.html"
+                })
+                $(".topBar .answerNav").click(function (e) {      //跳转到伸出猿手
+                    $("#tab2").show();
+                    $("#tab3").hide();
+                })
+                $(".topBar .askNav").click(function (e) {    //跳转到我要求援
+                    $("#tab2").hide();
+                    $("#tab3").show();
+                })
+
+
+                //判断从智能搜索跳转到了哪个页面
+                //提取url参数
+                function getUrlParam(name) {
+                    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+                    var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+                    if (r != null) return unescape(r[2]); return null; //返回参数值
+                }
+
+                var index = getUrlParam("index");
+                if (index == 2) {
+                    $("#tab2").show();
+                    $("#tab3").hide();
+                    $(".answerNav").addClass("mdui-tab-active");
+                } else if (index == 3) {
+                    $("#tab2").hide();
+                    $("#tab3").show();
+                    $(".askNav").addClass("mdui-tab-active");
+                }
+                //显示当前用户
+                if (document.cookie != "") {
+                    var cookieUser = $.cookie("username").replace(/\"/g, "");;
+                    $("#userName").text(cookieUser);
+                }
+
+
+            })()
+
+        </script>
 </body>
 
 </html>

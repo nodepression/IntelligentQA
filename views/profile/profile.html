@@ -23,19 +23,15 @@
                     </li>
                     <li class="mdui-list-item mdui-ripple ">
                         <i class="mdui-list-item-icon mdui-icon material-icons">search</i>
-                        <div class="mdui-list-item-content">资源平台</div>
+                        <div class="mdui-list-item-content resource">资源平台</div>
                     </li>
                     <li class="mdui-list-item mdui-ripple">
                         <i class="mdui-list-item-icon mdui-icon material-icons">question_answer</i>
-                        <div class="mdui-list-item-content">
-                            <a href="../QAComm/ask.html">提问交流</a>
-                        </div>
+                        <div class="mdui-list-item-content QAComm">提问交流</div>
                     </li>
                     <li class="mdui-list-item mdui-ripple">
                         <i class="mdui-list-item-icon mdui-icon material-icons">person</i>
-                        <div class="mdui-list-item-content">
-                            <a href="#">个人中心</a>
-                        </div>
+                        <div class="mdui-list-item-content profile">个人中心</div>
                     </li>
                 </ul>
             </div>
@@ -46,8 +42,8 @@
                             <a href="#" onclick="showa()" class="mdui-ripple mdui-ripple-white" id="taba">个人信息修改</a>
                             <a href="#" onclick="showb()" class="mdui-ripple mdui-ripple-white" id="tabb">我的资源</a>
                             <a href="#" onclick="showc()" class="mdui-ripple mdui-ripple-white" id="tabc">我的提问</a>
-                            <a style="position: fixed;right: 0px;">zq</a>
                         </div>
+                        <a style="position: fixed;right: 0px;top: 15px;" id="userName">访客</a>
                     </div>
                 </div>
                 <div class="mdui-row con">
@@ -126,8 +122,29 @@
     </div>
     <script src="../../statics/js/lib/jquery.js"></script>
     <script src="../../statics/js/lib/mdui.min.js"></script>
+    <script src="../../statics/js/lib/jquery.cookie.js"></script>
     <script src="../../statics/js/profile/profile.js"></script>
     <script src="../../statics/js/profile/mypreview.js"></script>
+    <script>
+        (function () {
+            $(".leftBar .resource").click(function (e) { //跳转到资源平台
+                window.location.href = "../../index.html";
+            })
+            $(".leftBar .QAComm").click(function (e) {   //跳转到提问交流
+                window.location.href = "../QAComm/qSearch.html"
+            })
+            $(".leftBar .profile").click(function (e) {  //跳转到个人中心
+                window.location.href = "./profile.html";
+            })
+
+            //显示当前用户
+            if (document.cookie != "") {
+                var cookieUser = $.cookie("username").replace(/\"/g, "");;
+                $("#userName").text(cookieUser);
+            }
+        })();
+
+    </script>
 </body>
 
 </html>
