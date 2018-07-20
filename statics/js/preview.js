@@ -52,6 +52,8 @@
             } else {
                 previewItem = $(e.target).parents(".preview");
             }
+
+            
             resourceId = previewItem.attr("class").split(" ")[2];
             name = previewItem.find(".title").text();
             type = previewItem.find(".type").text();
