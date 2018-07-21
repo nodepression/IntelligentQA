@@ -5,12 +5,13 @@
     var qtable = $('#qtable');
     var index = 1; //当前位于第几页
     var num = 4; //一页最多显示多少个
-    // var qresult = new Array(10);
+
+    var qresult = new Array(10);
     var len = qresult.length;
     var lastIndex = Math.floor(len / num) + 1; //最多显示到第几页
-    // for (var k = 0; k < len; k++) {
-    //     qresult[k] = k;
-    // }
+    for (var k = 0; k < len; k++) {
+        qresult[k] = k;
+    }
 
     //时间戳转换
     function DataTrans(obj) {
