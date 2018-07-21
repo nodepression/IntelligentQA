@@ -27,8 +27,8 @@
                 } else {
                     [...rresult] = data.data;//把json的data取出来
                     var index1 = 1; //当前位于第几页
-                    var rlen = rresult.length;
-                    var rlastIndex = Math.floor(rlen / num) + 1; //最多显示到第几页
+                    rlen = rresult.length;
+                    rlastIndex = Math.floor(rlen / num) + 1; //最多显示到第几页
                     listresource();
                 }
             }
