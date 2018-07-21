@@ -80,7 +80,6 @@
             },
             dataType: "json", //预期服务器返回类
             success: function (data) {
-                alert("data");
                 if (data.status != 200) {
                     alert(data.msg);
                 } else {

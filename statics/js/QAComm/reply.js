@@ -16,6 +16,13 @@
     //显示问题
     function listq(){
        
+=======
+        [...aresult] = data.data;//把json的data取出来
+        var aindex = 1; //当前位于第几页
+        var anum = 6; //一页最多显示多少个
+        var alen = aresult.length;
+        var alastIndex = Math.floor(alen / anum) + 1; //最  多显示到第几页
+>>>>>>> 5c82558f7a6112c542380c3cce8a90faa5b2d755
         for (var i = (aindex - 1) * anum; i < (aindex - 1) * anum + anum; i++) {
             if (i >= alen)
                 break;

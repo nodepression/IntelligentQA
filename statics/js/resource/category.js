@@ -11,20 +11,6 @@ var tag1,      //一级
     var sort = 1;
 
 
-    // var index = 1; //当前位于第几页
-    // var num = 10; //一页最多显示多少个
-    // var result = new Array(61);
-    // var len = result.length;
-    // for (var k = 0; k < len; k++) {
-    //     result[k] = {};
-    //     result[k].id = k;
-    //     result[k].uploader = "zq";
-    //     result[k].type = "word";
-    //     result[k].name = "中国通史";
-    //     result[k].downloads = k+k+1;
-    // }
-    // var lastIndex = Math.floor(len / num) + 1; //最多显示到第几页
-
     var index = 1; //当前位于第几页
     var num = 10; //一页最多显示多少个
     var result = null;
@@ -111,6 +97,7 @@ var tag1,      //一级
                     
                     //显示列表
                     $('.pre').css("visibility", "hidden");
+                    $('.next').css("visibility", "visible");
                     if (len <= num) {
                         $('.next').css("visibility", "hidden");
                     }
