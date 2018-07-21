@@ -1,35 +1,42 @@
+//我要求猿界面
 (function () {
     // 前后端传输数据
     var title = undefined;
     var description = undefined;
-    var tags = [];
+    var Tags;//后台返回的所有标签
+    var tags = [];//给所提问题选择添加的标签
     var tag0 = undefined;
     var tag1 = undefined;
     var tag2 = undefined;
     //dom obj
+    var inst = $('#demo');//自动匹配
+    // var a = $('#append');//自动匹配
     var save = $('.save')//保存标签
-    // var ok = $('#ok');//输入标签
+    var cancell = $('#cancell');//取消 清空
     var selected = $('#selected');//标签选择框
     var ask = $('#ask'); //提问按钮，点击求猿
+    var open = $('#open');//点击进入选择标签
 
-    var Tags;
 
-    // ok.click(function () {
-    //     oktag();
-    // })
-    ask.click(function () {
-        askquestions();
-    })
-
-    //保存标签
-    save.on("click", function () {
-        tag0 = $("#0").text();
-        tag1 = $("#1").text();
-        tag2 = $("#2").text();
-        // alert(tag0); alert(tag1); alert(tag2);
-        $('#demo')[0].selectedIndex = -1;
-
-    })
+    //获得所有标签
+    function alltags() {
+        $.ajax({
+            type: 'post',
+            url: "http://localhost:8080/QAComm/getTags",
+            xhrFields: {
+                withCredentials: true
+            },
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json", //预期服务器返回类
+            success: function (data) {
+                if (data.status != 200) {
+                    alert(data.msg);
+                } else {
+                    [...Tags] = data.data;//把json的data取出来}}
+                }
+            }
+        })
+    }
 
     //初始化
     function init() {
@@ -50,7 +57,6 @@
         tags[0] = tag0;
         tags[1] = tag1;
         tags[2] = tag2;
-        //alert(title + " " + description + " " + tags);
         $.ajax({
             type: 'post',
             url: "http://localhost:8080/QAComm/quiz",
@@ -71,15 +77,7 @@
     }
 
 
-
-    //我要求猿
-    var open = $('#open');//点击进入选择标签
-    var tag_dialog = new mdui.Dialog('#tag_dialog', { 'overlay': true, 'destroyOnClosed': true });
-    open.click(function () {
-        tag_dialog.open();
-    })
-
-
+    //自动匹配
     $('#demo')[0].selectedIndex = -1;
     $("#demo").change(function () {
         var options = $("#demo option:selected");  //获取选中的项
@@ -114,52 +112,6 @@
         $('#tags').val("");
     });
 
-    var a = $('#append');//自动匹配
-
-    //获得所有标签
-    function alltags() {
-        $.ajax({
-            type: 'post',
-            url: "http://localhost:8080/QAComm/getTags",
-            xhrFields: {
-                withCredentials: true
-            },
-            data: JSON.stringify({}),
-            contentType: "application/json;charset=UTF-8",
-            dataType: "json", //预期服务器返回类
-            success: function (data) {
-                if (data.status != 200) {
-                    alert(data.msg);
-                } else {
-                    [...Tags] = data.data;//把json的data取出来}}
-                    // console.log(Tags);
-                }
-            }
-        })
-    }
-
-
-    function find() {
-        var inputField = undefined;
-        inputField = $("#tags").val();
-        var arr = new Array;
-        // var Tags = [
-        //     "调试", "智能合约", "cdn", "选择器", "抓包过滤", 
-        //     "spring-mvc", "android相关问题", "cli", "静态网站", 
-        // ];
-        console.log(Tags);
-        var len = Tags.length;
-        var j = 0;
-        for (var i = 1; i < len; i++) {
-            if ((Tags[i]).indexOf(inputField) >= 0) {
-                arr[j] = Tags[i];
-                j++;
-            }
-        }
-        set(arr);
-    }
-
-    var inst = $('#demo');//自动匹配
     //将符合的建议项逐条放置于弹出框中
     function set(arr) {
         var size = arr.length;
@@ -175,16 +127,49 @@
         }
     }
 
-    var cancell = $('#cancell');//取消 清空
-    cancell.click(function () {
-        clear();
-    })
+    function find() {
+        var inputField = undefined;
+        inputField = $("#tags").val();
+        var arr = new Array;
+        // var Tags = [
+        //     "调试", "智能合约", "cdn", "选择器", "抓包过滤", 
+        //     "spring-mvc", "android相关问题", "cli", "静态网站", 
+        // ];
+        var len = Tags.length;
+        var j = 0;
+        for (var i = 1; i < len; i++) {
+            if ((Tags[i]).indexOf(inputField) >= 0) {
+                arr[j] = Tags[i];
+                j++;
+            }
+        }
+        set(arr);
+    }
+
+
+
+
+    //清空选择框
     function clear() {
         inst.css("display", "none");
         $('#tags').val("");
-        //$('#selected').empty();
         $('#selected').val("");
     }
+
+
+    cancell.click(function () {
+        clear();
+    })
+
+
+
+    //我要求猿
+
+    var tag_dialog = new mdui.Dialog('#tag_dialog', { 'overlay': true, 'destroyOnClosed': true });
+    open.click(function () {
+        tag_dialog.open();
+    })
+
     //点击问题跳转
     $('#questions').click(function (e) {
         var tagItem;
@@ -198,9 +183,24 @@
         window.location.href = '../QAComm/answer.html?index=' + qid;
     })
 
+
+
+    ask.click(function () {
+        askquestions();
+    })
+
     //根据输入匹配标签
     $("#tags").keyup(function () {
         find();
+    })
+
+
+    //保存标签
+    save.on("click", function () {
+        tag0 = $("#0").text();
+        tag1 = $("#1").text();
+        tag2 = $("#2").text();
+        $('#demo')[0].selectedIndex = -1;
     })
 
 

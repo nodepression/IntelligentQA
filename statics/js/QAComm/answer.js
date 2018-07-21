@@ -1,3 +1,4 @@
+//点进问题的问题详情界面
 (function () {
     var best = $('.best');//设置最佳回答
     var closeq = $('#closeq');//关闭问题
@@ -8,29 +9,8 @@
     var sid = undefined;// 登陆者的id
     var result = null;
 
-    like.click(function (e) {
-        var Id = $(e.target).id;
-        $.ajax({
-            type: 'post',
-            url: "http://localhost:8080/QAComm/like",
-            data: JSON.stringify({ "answerId": Id }),
-            contentType: "application/json;charset=UTF-8",
-            xhrFields: {
-                withCredentials: true
-            },
-            dataType: "json", //预期服务器返回类
-            success: function (data) {
-                if (data.status != 200) {
-                    alert(data.msg);
-                } else {
-                    result.answers[k].count_like++;
-                    like.disabled = 'disabled';
-                }
-            }
-        });
-    })
-
-
+   
+    //时间戳转换
     function DataTrans(obj) {
         var date = new Date(obj);
         var y = 1900 + date.getYear();
@@ -39,52 +19,6 @@
         return y + "-" + m.substring(m.length - 2, m.length) + "-" + d.substring(d.length - 2, d.length);
     }
 
-    best.click(function () {
-        var Id = $(e.target).id;
-        $.ajax({
-            type: 'post',
-            url: "http://localhost:8080/QAComm/chooseBest",
-            data: JSON.stringify({ "id": id, "answerId": Id }),
-            contentType: "application/json;charset=UTF-8",
-            xhrFields: {
-                withCredentials: true
-            },
-            dataType: "json", //预期服务器返回类
-            success: function (data) {
-                if (data.status != 200) {
-                    alert(data.msg);
-                } else {
-                    alert("最佳答案设置成功！");
-                    button1.style = "display:none;";
-                }
-            }
-        });
-    })
-
-    //关闭问题
-    closeq.click(function () {
-        $.ajax({
-            type: 'post',
-            url: "http://localhost:8080/QAComm/closeQuestion",
-            data: JSON.stringify({ "questionId": id, }),
-            contentType: "application/json;charset=UTF-8",
-            xhrFields: {
-                withCredentials: true
-            },
-            dataType: "json", //预期服务器返回类
-            success: function (data) {
-                if (data.status != 200) {
-                    alert(data.msg);
-                } else {
-                    alert("问题已关闭！");
-                    close.disabled = true;
-                    var textdelete = document.createElement("del");
-                    textdelete.innerText = "已关闭";
-                    close.appendChild(textdelete);
-                }
-            }
-        });
-    })
 
     //提取url参数
     function getUrlParam(name) {
@@ -93,7 +27,7 @@
         if (r != null) return unescape(r[2]); return null; //返回参数值
     }
     id = getUrlParam("index");
-    //alert(index);
+
 
     (function init() {
         //显示当前用户
@@ -101,7 +35,6 @@
             var cookieUser = $.cookie("username").replace(/\"/g, "");;
             $("#userName").text(cookieUser);
         }
-        
         rendera();
     })();
 
@@ -122,7 +55,6 @@
                     alert(data.msg);
                 } else {
                     result = data.data;//把json的data取出来
-
                     $('#qtitle').append(result.question.title);
                     $('#qdesc').append(result.question.description);
                     $('#qtime').append(DataTrans(result.question.time));
@@ -163,7 +95,7 @@
                         button.appendChild(span);
                         div1.appendChild(button);
                         var span1 = document.createElement("span");
-                        span1.innerText = result.answers[k].user_id;//回答者名name
+                        span1.innerText = result.answers[k].username;//回答者名name
                         span1.style = "margin-left:380px;";
                         var span2 = document.createElement("span");
                         span2.className = "mdui-col-offset-md-1"
@@ -212,6 +144,80 @@
             }
         })
     }
+
+
+    //设置最佳答案
+    best.click(function () {
+        var Id = $(e.target).id;
+        $.ajax({
+            type: 'post',
+            url: "http://localhost:8080/QAComm/chooseBest",
+            data: JSON.stringify({ "id": id, "answerId": Id }),
+            contentType: "application/json;charset=UTF-8",
+            xhrFields: {
+                withCredentials: true
+            },
+            dataType: "json", //预期服务器返回类
+            success: function (data) {
+                if (data.status != 200) {
+                    alert(data.msg);
+                } else {
+                    alert("最佳答案设置成功！");
+                    button1.style = "display:none;";
+                }
+            }
+        });
+    })
+
+    //关闭问题
+    closeq.click(function () {
+        $.ajax({
+            type: 'post',
+            url: "http://localhost:8080/QAComm/closeQuestion",
+            data: JSON.stringify({ "questionId": id, }),
+            contentType: "application/json;charset=UTF-8",
+            xhrFields: {
+                withCredentials: true
+            },
+            dataType: "json", //预期服务器返回类
+            success: function (data) {
+                if (data.status != 200) {
+                    alert(data.msg);
+                } else {
+                    alert("问题已关闭！");
+                    close.disabled = true;
+                    var textdelete = document.createElement("del");
+                    textdelete.innerText = "已关闭";
+                    close.appendChild(textdelete);
+                }
+            }
+        });
+    })
+
+
+    //点赞
+    like.click(function (e) {
+        var Id = $(e.target).id;
+        $.ajax({
+            type: 'post',
+            url: "http://localhost:8080/QAComm/like",
+            data: JSON.stringify({ "answerId": Id }),
+            contentType: "application/json;charset=UTF-8",
+            xhrFields: {
+                withCredentials: true
+            },
+            dataType: "json", //预期服务器返回类
+            success: function (data) {
+                if (data.status != 200) {
+                    alert(data.msg);
+                } else {
+                    result.answers[k].count_like++;
+                    like.disabled = 'disabled';
+                }
+            }
+        });
+    })
+
 }.call(this));
 
 

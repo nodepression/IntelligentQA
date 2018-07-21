@@ -1,14 +1,15 @@
+//猿助一下界面
 (function () {
     var help = $('#help');//点击进入回答
     var save = $('.save');//点击提交回答
     var cancel = $('.cancel');//点击取消回答
     var anstop = $('#anstop');//回答的显示框
     var myans = $('#myans');//我的回答
-
     var id = undefined;// 问题id
     var myanswer = undefined;// 回答内容
+    var ans = new mdui.Dialog('#help_dialog', { 'overlay': true, 'destroyOnClosed': true });//回答问题的对话框
 
-  
+    //时间戳转换
     function DataTrans(obj) {
         var date = new Date(obj);
         var y = 1900 + date.getYear();
@@ -25,25 +26,12 @@
         if (r != null) return unescape(r[2]); return null; //返回参数值
     }
     id = getUrlParam("index");
-    //alert(index);
 
-    //清空回答框
-    cancel.click(function () {
-        clear();
-    })
-    function clear() {
-        myans.val("");
-    }
+
 
     //提交答案
-    save.click(function () {
-        saveans();
-
-        rendera();
-    })
     function saveans() {
         myanswer = myans.val();   //我的回答
-        alert(myanswer);
         $.ajax({
             type: 'post',
             url: "http://localhost:8080/QAComm/replyques",
@@ -58,28 +46,25 @@
                     alert(data.msg);
                 } else {
                     alert("答案提交成功！");
-                    rendera();
                 }
             }
         });
-
-        myans.val("");
+        clear();//清空回答框
     }
 
-    //回答问题的对话框
-    var ans = new mdui.Dialog('#help_dialog', { 'overlay': true, 'destroyOnClosed': true });
+        //清空回答框
+        function clear() {
+            myans.val("");
+        }
 
-    help.click(function () {
-        ans.open();
-    });
 
+        //初始化
     (function init() {
         //显示当前用户
         if (document.cookie != "") {
             var cookieUser = $.cookie("username").replace(/\"/g, "");;
             $("#userName").text(cookieUser);
         }
-        
         rendera();
     })();
 
@@ -140,7 +125,7 @@
                         button.appendChild(span);
                         div1.appendChild(button);
                         var span1 = document.createElement("span");
-                        span1.innerText = result.answers[k].user_id;//回答者名name
+                        span1.innerText = result.answers[k].username;//回答者名name
                         span1.style = "margin-left:380px;";
                         var span2 = document.createElement("span");
                         span2.className = "mdui-col-offset-md-1"
@@ -186,6 +171,24 @@
             }
         })
     }
+
+    //打开回答问题的对话框 
+       help.click(function () {
+        ans.open();
+    });
+
+
+    //提交答案
+    save.click(function () {
+        saveans();
+        anstop.empty();
+        rendera();
+    })
+
+    //清空回答框
+    cancel.click(function () {
+        clear();
+    })
 }.call(this));
 
 
