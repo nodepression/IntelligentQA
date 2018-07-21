@@ -78,11 +78,11 @@
         $.ajax({
             type: 'post',
             url: "http://localhost:8080/QAComm/search",
-            data: { "q": words, "start": start, "rows": num },
+            data:  JSON.stringify({ "q": words, "start": start, "rows": num }),
             contentType: "application/json;charset=UTF-8",
             dataType: "json", //预期服务器返回类
             success: function (data) {
-                [...result] = data.response.docs;
+                [...result] = data.data.response.docs;
                 render();
             }
         });

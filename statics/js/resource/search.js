@@ -1,10 +1,9 @@
 (function () {
     var index = 1; //当前位于第几页
-    var num = 10; //一页最多显示多少个
+    var num = 5; //一页最多显示多少个
     var result;
     var len;
     var lastIndex; //最多显示到第几页
-
     var words = $(".words").val();
 
 
@@ -13,17 +12,17 @@
             if (i >= len)
                 break;
             var item = document.createElement("div");
-            item.className = "item preview 1232344";
+            item.className = "item preview "+ result[i].fileid;
 
 
             var titleCon = document.createElement("span");
             titleCon.className = "titleCon";
             var title = document.createElement("span");
             title.className = "title";
-            title.innerText = "中国通史";
+            title.innerText = result[i].title;
             var type = document.createElement("span");
             type.className = "type";
-            type.innerText = "pdf";
+            type.innerText = result[i].type;
             titleCon.appendChild(title);
             titleCon.appendChild(type);
             item.appendChild(titleCon);
@@ -34,7 +33,7 @@
             uploaderCon.innerText = "上传者 : ";
             var uploader = document.createElement("span");
             uploader.className = "uploader";
-            uploader.innerText = "zhang";
+            uploader.innerText = result[i].uploader;
             uploaderCon.appendChild(uploader)
             item.appendChild(uploaderCon);
 
@@ -44,7 +43,7 @@
             downloadsCon.innerText = "下载量 : ";
             var downloads = document.createElement("span");
             downloads.className = "downloads";
-            downloads.innerText = result[i];
+            downloads.innerText = result[i].downloads;
             downloadsCon.appendChild(downloads)
             item.appendChild(downloadsCon);
 
@@ -66,11 +65,21 @@
                     alert(data.msg);
                 } else {
                     [...result] = data.data;
+                    console.log(result);
                     index = 1
                     len = result.length;
-                    lastIndex = Math.floor(len / num) + 1;
+                    if(len % num == 0)
+                    {
+                        lastIndex = len / num;
+                    }else{
+                        lastIndex = Math.floor(len / num) + 1;
+                    }
+                    
+                    $('.list').empty()
 
                     $('.pre').css("visibility", "hidden");
+                    $('.next').css("visibility", "visible");
+                    
                     if (len <= num) {
                         $('.next').css("visibility", "hidden");
                     }

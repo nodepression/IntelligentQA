@@ -72,25 +72,28 @@
         });
     })();
 
-    function preview(e) {
+    function preview() {
+        // inst.close();
         $.ajax({
             type: 'post',
             url: "http://localhost:8080/resource/getUrl",
-            data: JSON.stringify({ "id": resourceId, "urlType": 1 }),
+            data: JSON.stringify({ "fileid": resourceId, "urlType": 1 }),
             contentType: "application/json;charset=UTF-8",
+            xhrFields: {
+                withCredentials: true
+            },
             dataType: "json", //预期服务器返回类
             success: function (data) {
                 if (data.status != 200) {
                     alert(data.msg);
                 } else {
-                    url = data.data.url;
-                    if(type=="pdf"){
-                        window.open("url");
-                    }
-                    if(type=="vedio")
-                    {
-                        window.open("url");
-                    }else{
+                    url = data.data;
+                   
+                    if (type == "pdf") {
+                        window.open("http://" + url);
+                    } else if (type == "mp4") {
+                        window.open("http://" + url);
+                    } else {
                         window.open("https://view.officeapps.live.com/op/view.aspx?src=" + url);
                     }
                 }
@@ -98,31 +101,35 @@
         });
     }
 
-    function download(e) {
+    function download() {
         $.ajax({
             type: 'post',
             url: "http://localhost:8080/resource/getUrl",
-            data: JSON.stringify({ "id": resourceId, "urlType": 2 }),
+            data: JSON.stringify({ "fileid": resourceId, "urlType": 2 }),
             contentType: "application/json;charset=UTF-8",
+            xhrFields: {
+                withCredentials: true
+            },
             dataType: "json", //预期服务器返回类
             success: function (data) {
                 if (data.status != 200) {
                     alert(data.msg);
                 } else {
-                    url = data.data.url;
-                    $('.downloadBtn').attr("href", url);
+                    url = data.data;
+                    $(".realDownlaod").attr("href", "http://" + url);
+                    $(".realDownlaod")[0].click();
                 }
             }
         });
     }
     function addEvent() {
         //预览
-        $(".previewBtn").click(function (e) {
-            window.open("https://view.officeapps.live.com/op/view.aspx?src=http://pbmqrl67c.bkt.clouddn.com/testWord.docx");
+        $(".previewBtn").click(function () {
+           preview();
         })
         //下载
-        $(".downloadBtn").click(function (e) {
-            download(e);
+        $(".downloadBtn").click(function () {
+            download();
         })
         //删除
     }
