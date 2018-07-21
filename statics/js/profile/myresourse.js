@@ -56,7 +56,6 @@
         if (rlen <= num) {
             rnext.css("visibility", "hidden");
         }
-        // renderr();
 
     }
     initr();

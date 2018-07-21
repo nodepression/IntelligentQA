@@ -46,6 +46,9 @@
             url: "http://localhost:8080/QAComm/chooseBest",
             data: JSON.stringify({ "id": id, "answerId": Id }),
             contentType: "application/json;charset=UTF-8",
+            xhrFields: {
+                withCredentials: true
+            },
             dataType: "json", //预期服务器返回类
             success: function (data) {
                 if (data.status != 200) {
@@ -65,6 +68,9 @@
             url: "http://localhost:8080/QAComm/closeQuestion",
             data: JSON.stringify({ "questionId": id, }),
             contentType: "application/json;charset=UTF-8",
+            xhrFields: {
+                withCredentials: true
+            },
             dataType: "json", //预期服务器返回类
             success: function (data) {
                 if (data.status != 200) {
@@ -100,7 +106,7 @@
     })();
 
 
-    //渲染后台返回的结果
+    //渲染后台返回的结果  回答按时间排序
     function rendera() {
         $.ajax({
             type: 'post',
@@ -163,9 +169,9 @@
                         span2.className = "mdui-col-offset-md-1"
                         var button2 = document.createElement("button");
                         button2.className = "mdui-btn-group button";
-                        if(result.answers[k].usertype=0)
+                        if(result.answers[k].usertype==0)
                         button2.innerText ="学生";//回答者身份
-                        if(result.answers[k].usertype=1)
+                        if(result.answers[k].usertype==1)
                         button2.innerText ="老师";//回答者身份
                         button2.style = "border-color: rgb(43,51,59);color: rgb(43,51,59);font-size: 15px;border-radius: 5px;left:15px;";
                         var span3 = document.createElement("span");

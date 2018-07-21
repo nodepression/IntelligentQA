@@ -15,7 +15,6 @@
     $(".topBar .answerNav").click(function (){  
         renderall();
         atable.val("");//清空问题列表
-        alltags();
     })
 
     //上一页
@@ -68,7 +67,7 @@
         if (alen <= anum) {
             anext.css("visibility", "hidden");
         }
-        // rendera();
+        renderall();
 
     }
     inita();
@@ -140,6 +139,8 @@
 
     }
 
+
+    //一点进伸出援手 出现的问题列表
     function renderall() {
         ftag = $("#ftag").val();//输入的标签
 

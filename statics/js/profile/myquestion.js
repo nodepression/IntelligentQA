@@ -75,7 +75,6 @@
         $.ajax({
             type: 'post',
             url: "http://localhost:8080/profile/myQuestion",
-            data: JSON.stringify({}),
             contentType: "application/json;charset=UTF-8",
             xhrFields: {
                 withCredentials: true
@@ -105,10 +104,10 @@
                         text.innerText = qresult[i].title;// qresult[i].title;
                         var text1 = document.createElement("div");
                         text1.className = "mdui-col-xs-3";
-                        if (qresult[i].status = 0) {
-                            text1.innerText = "回答数目：" + qresult[i].count;//qresult[i].count_answer;
+                        if (qresult[i].isclose == 0) {
+                            text1.innerText = "回答数目：" + qresult[i].count_answer;//qresult[i].count_answer;
                         }
-                        if (qresult[i].status = 1) {
+                        if (qresult[i].isclose == 1) {
                             var textdelete = document.createElement("del");
                             text1.style = "text-align:right";
                             textdelete.innerText = "已关闭";
@@ -162,5 +161,6 @@
         showc();
         renderq();
     })
+
 }.call(this));
 
