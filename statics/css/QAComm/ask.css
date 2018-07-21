@@ -45,4 +45,23 @@
 
 
   
-  
+  /* zq */
+  .li{
+      display: flex;
+      flex-flow: row nowrap;
+      padding: 8px;
+      margin-left: 7%;
+      cursor: pointer;
+  }
+  .li>.ques{
+      width: 70%;
+  }
+  .li>.ansCount{
+      width: 15%;
+      text-align: center;
+
+  }
+  .li>.ansDate{
+      width: 15%;
+      text-align: center;
+  }

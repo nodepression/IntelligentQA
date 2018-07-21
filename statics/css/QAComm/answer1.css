@@ -1,0 +1,118 @@
+.con
+{
+    width: 80%;
+    padding: 2%;
+}
+.title{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    height: 50px;
+    line-height: 50px;
+}
+.title>.text{
+    width: 80%;
+    font-size: 24px;
+}
+.title>.closeQue{
+    border: 1px solid #016690;
+    color: #016690;
+}
+
+.disc{
+    padding: 24px;
+    line-height: 24px;
+}
+.replyBtn{
+    border: 1px solid #016690;
+    color: #016690;
+}
+
+.best{
+    background-color:  #016690;
+    width: 100px;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 5px;
+    color: white;
+}
+
+
+.anslist>.item>.text{
+    padding: 16px;
+    text-indent: 16px;
+    line-height: 24px;
+}
+.anslist>.item{
+    border:  1px solid #dde2e4;
+    margin-top: 16px;
+    padding: 16px;
+}
+.info{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+}
+.info>.like{
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    color: #016690;
+    border: 1px solid #016690;
+    border-radius: 15px;
+}
+.info>.setBest{
+    height: 24px;
+    line-height: 24px;
+    text-align: left;
+    margin-right: 20%;
+}
+
+.info>.user{
+    height: 24px;
+    line-height: 24px;
+    width:20%;
+}
+
+.info>.status{
+    width: 30px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    border:  1px solid #dde2e4;
+}
+.info>.date{
+    width: 20%;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+}
+
+
+
+#reply_dialog{
+    width: 40%;
+    height: 400px;
+}
+.ansDialog{
+    display: block;
+    width:80%;
+    height: 250px;
+    margin: 0 auto;
+    padding: 8px;
+    background-color: #dfdfdf;
+}
+.action{
+    width: 200px;
+    height: 30px;
+    margin: 0 auto;
+}
+.action>.mdui-btn{
+    margin-top: 16px;
+    border: 1px solid #cbd0d3;
+}
+.action>.mdui-btn:hover{
+    background-color: #016690;
+    color: white;
+}

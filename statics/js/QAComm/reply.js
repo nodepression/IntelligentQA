@@ -21,25 +21,25 @@
                 break;
 
             var li = document.createElement("li");
-            li.className = "mdui-list-item li";
+            li.className = "li";
             li.id = aresult[i].id;
             var div = document.createElement("div");
-            div.className = "mdui-list-item-content";
+            div.className = "ques";
             var div1 = document.createElement("div");
-            div1.className = "mdui-list-item-title font1 mdui-col-xs-7";
-            div1.innerText = aresult[i].title;
+            div1.className = "font1 ";
+            div1.innerText = setString(aresult[i].title,60);
             var span = document.createElement("span");
             span.style = "color: gray";
-            span.className = "mdui-col-xs-3 "
             var icon = document.createElement("i")
             icon.className = "mdui-icon material-icons";
             icon.innerText = "local_offer";
             var span3 = document.createElement("span");
             span3.innerText = aresult[i].tags[0];
             var span1 = document.createElement("span");
-            span1.innerText = aresult[i].count + "回答";
-            span1.className = "mdui-col-xs-1 "
+            span1.className = "ansCount";
+            span1.innerText = aresult[i].count + " 回答";
             var span2 = document.createElement("span");
+            span2.className = "ansDate";
             span2.innerText = aresult[i].time;
             var li1 = document.createElement("li");
             li1.className = "mdui-divider-inset mdui-m-y-0";
@@ -54,6 +54,29 @@
             atable.append(li1);
         }
     }
+
+
+    //长度截取
+    function setString(str, len) {
+        if (str != "") {
+            var strlen = 0;
+            var s = "";
+            for (var i = 0; i < str.length; i++) {
+                if (str.charCodeAt(i) > 128) {
+                    strlen += 2
+                } else {
+                    strlen++
+                }
+                s += str.charAt(i);
+                if (strlen >= len) {
+                    return s + "..."
+                }
+            }
+            return s
+        }
+
+    }
+
 
     //一点进伸出援手 出现的问题列表
     function renderall() {
@@ -179,7 +202,7 @@
         }
         //  //获取问题id
         qid = tagItem.attr("id");
-        window.location.href = '../QAComm/answer.html?index=' + qid;
+        window.location.href = '../QAComm/answer1.html?index=' + qid;
     })
 
     $(".topBar .answerNav").click(function () {

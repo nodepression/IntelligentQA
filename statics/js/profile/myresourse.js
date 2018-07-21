@@ -43,33 +43,29 @@
             var tr = document.createElement("tr");
             var td = document.createElement("td");
             td.className = "td mypreview";
-            var div = document.createElement("div");
-            div.style = "line-height: 60px";
+    
             var row = document.createElement("div");
-            row.style = "height:50px";
+            row.className = "item";
             var pic = document.createElement("img");
             pic.src = `../../statics/images/${rresult[i].type}.png`;
-            pic.className = "mdui-col-xs-1 type";
+            pic.className = " ype";
             var text = document.createElement("div");
-            text.className = "mdui-col-xs-5 font1 title";
+            text.className = " font1 title";
             text.innerText = rresult[i].title;
             var text1 = document.createElement("div");
-            text1.className = "mdui-col-xs-3 time";
+            text1.className = " time";
             text1.innerText = "上传时间：" + rresult[i].time;
             var text2 = document.createElement("div");
-            text2.className = "mdui-col-xs-3 downloads";
+            text2.className = " downloads";
             text2.innerText = "下载次数：" + rresult[i].downloads;
             var row2 = document.createElement("div");
-            row2.className = "mdui-col-offset-xs-10";
-            row2.style = "height:50px";
-            row2.style = "line-height: 10px";
+        
             row.appendChild(pic);
             row.appendChild(text);
             row.appendChild(text1);
             row.appendChild(text2);
-            div.appendChild(row);
-            div.appendChild(row2);
-            td.appendChild(div);
+    
+            td.appendChild(row);
             tr.appendChild(td);
             rtable.append(tr);
         }

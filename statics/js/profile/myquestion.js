@@ -161,7 +161,7 @@
         }
         //  //获取问题id
         qid = tagItem.attr("id");
-        window.location.href = '../QAComm/answer.html?index=' + qid;
+        window.location.href = '../QAComm/answer1.html?index=' + qid;
     })
 
 }.call(this));

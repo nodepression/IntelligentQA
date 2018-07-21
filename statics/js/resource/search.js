@@ -54,6 +54,7 @@
     }
 
     function getResult() {
+        $('.list').empty()
         $.ajax({
             type: 'post',
             url: "http://localhost:8080/resource/search",
@@ -65,7 +66,6 @@
                     alert(data.msg);
                 } else {
                     [...result] = data.data;
-                    console.log(result);
                     index = 1
                     len = result.length;
                     if(len % num == 0)
@@ -75,7 +75,7 @@
                         lastIndex = Math.floor(len / num) + 1;
                     }
                     
-                    $('.list').empty()
+                   
 
                     $('.pre').css("visibility", "hidden");
                     $('.next').css("visibility", "visible");

@@ -54,8 +54,8 @@
 }
 .que_text{
     color: #016690;
+    cursor: pointer;
 }
-
 .list>.item{
     margin-top: 16px;
     border: 1px solid #dde1e4;

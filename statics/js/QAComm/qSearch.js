@@ -22,7 +22,7 @@
                 <div class="question">
                     <div class="hint">原问题:</div>
                     <div class="text">
-                        <span class="state" style="display:${item.closed ? "inline-block" : "none"}">已解决</span>
+                        <span class="state" style="display:${item.hasOwnProperty("answer_best") ? "inline-block" : "none"}">已解决</span>
                         <span class="que_text">${item.title}</span>
                     </div>
                 </div>
@@ -54,7 +54,7 @@
                 }
                 s += str.charAt(i);
                 if (strlen >= len) {
-                    return s + "..."
+                    return s + "......"
                 }
             }
             return s
@@ -83,9 +83,7 @@
             dataType: "json", //预期服务器返回类
             success: function (data) {
                 [...result] = data.data.response.docs;
-                if(result.length<=num){
-                    index = 1;
-                }
+                
                 render();
             }
         });
@@ -133,14 +131,21 @@
 
 
     //获取搜索关键词
-    $('.words').keyup(function (e) {
-        $('.list').empty();
-        words = $('.words').val();
-        if (words != " ") {
-            index = 1;
-            getResult(num * (index - 1), num);
-        }
+    var timer;
+    $('.words').keyup(function () {
 
+        if(timer){
+            console.log("清除timer");
+            clearTimeout(timer);
+        }
+        timer = setTimeout(function(){
+            $('.list').empty();
+            words = $('.words').val();
+            if (words != " ") {
+                index = 1;
+                getResult(num * (index - 1), num);
+            }
+        },200);
     })
 
     //点击搜索
@@ -155,5 +160,15 @@
             alert("请输入上传者或者关键词");
         }
     })
+
+    //点击问题进入详情页
+    $('.list').click(function(e){
+        var qId;
+        if($(e.target).hasClass("more")||$(e.target).hasClass("que_text")){
+            qId = $(e.target).parents(".item").attr("class").split(" ")[1];
+            window.location.href = '../QAComm/answer1.html?index=' + qId;
+        }
+    })
+
 
 }.call(this));

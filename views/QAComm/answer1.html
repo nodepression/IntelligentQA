@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../../statics/css/lib/mdui.min.css">
+    <link rel="stylesheet" href="../../statics/css/home.css">
+    <link rel="stylesheet" href="../../statics/css/QAComm/answer1.css">
+    <title>问题详情</title>
+</head>
+
+<body>
+    <div class="mdui-container-fluid">
+        <div style="position: fixed;background-color: white;height: 50px;width: 100%;"></div>
+        <div class="mdui-row">
+            <div class="mdui-col-xs-3 mdui-col-offset-xs-1 left">   
+                <ul class="mdui-list leftBar">
+                    <li class="logo">
+                        <div class="mdui-list-item-content" id="logo">猿助</div>
+                    </li>
+                    <li class="mdui-list-item mdui-ripple ">
+                        <i class="mdui-list-item-icon mdui-icon material-icons">search</i>
+                        <div class="mdui-list-item-content resource">资源平台</div>
+                    </li>
+                    <li class="mdui-list-item mdui-ripple">
+                        <i class="mdui-list-item-icon mdui-icon material-icons">question_answer</i>
+                        <div class="mdui-list-item-content QAComm">提问交流</div>
+
+                    </li>
+                    <li class="mdui-list-item mdui-ripple">
+                        <i class="mdui-list-item-icon mdui-icon material-icons">person</i>
+                        <div class="mdui-list-item-content profile">个人中心</div>
+                    </li>
+                </ul>
+            </div>
+            <div class="mdui-col-xs-8 mdui-col-offset-xs-4 right">
+                <div class="mdui-row" style="position: fixed;">
+                    <div class="mdui-appbar topBar">
+                        <div class="mdui-tab mdui-color-theme" mdui-tab>
+                            <a href="#" class="mdui-ripple mdui-ripple-white">问题详情</a>
+                        </div>
+                        <a style="position: fixed;right: 0px;top: 15px;" id="userName">访客</a>
+                    </div>
+                </div>
+                <div class="mdui-row con">
+                    <div class="que">
+                        <div class="title">
+                            <div class="text">
+                                element-ui 如何修改nav menu 带有二级的title样式
+                            </div>
+                            <div class="mdui-btn closeQue">关闭问题</div>
+                        </div>
+                        <div class="disc">
+                            给所有的 el-menu-item 标签修改了样式，唯独带有二级菜单的，样式就应用不上去二级菜单是使用slot添加的， 单独给这个slot添加样式，等渲染出来，样式却没有了。求大神指教呀！
+                        </div>
+                        <div class="mdui-btn replyBtn">猿助一下</div>
+                    </div>
+
+                    <div class="mdui-typo">
+                        <hr/>
+                    </div>
+
+                    <div class="best">最佳答案</div>
+                    <div class="anslist">
+                        <!-- <div class="item">
+                            <div class="text">
+                                建议先在浏览器端调试下看response是否返回带有Set-Cookie的头信息, 没有的话很遗憾, 每次请求都是一个全新的session. 检查依赖包是否包含用户认证模块, 如spring-security, shiro 等
+                            </div>
+                            <div class="info">
+                                <div class="like mdui-btn mdui-ripple">
+                                    <i class="mdui-icon material-icons mdui-icon-left">&#xe8dc;</i>
+                                    <span> 28</span>
+                                </div>
+                                <div class="mdui-btn setBest">设置为最佳答案</div>
+                                <div class="user">浮生若梦</div>
+                                <div class="status">学生</div>
+                                <div class="date">2018-7-22</div>
+                            </div>
+                        </div> -->
+
+                    </div>
+                </div>
+
+                <div class="mdui-dialog" id="reply_dialog">
+
+                    <center style=" margin-top: 16px;">答案编辑</center>
+                    <div class="mdui-typo">
+                        <hr/>
+                    </div>
+                    <textarea class="ansDialog" placeholder="在这里输入你的回答"></textarea>
+                    <div class="action">
+                        <div class="mdui-btn reply">发布</div>
+                        <div class="mdui-btn cancel">取消</div>
+                    </div>
+
+                </div>
+            </div>
+            <script src="../../statics/js/lib/mdui.min.js"></script>
+            <script src="../../statics/js/lib/jquery.js"></script>
+            <script src="../../statics/js/lib/jquery.cookie.js"></script>
+            <script src="../../statics/js/QAComm/answer1.js"></script>
+            <script>
+                (function () {
+
+                    //跳转事件
+                    $(".leftBar .resource").click(function (e) { //跳转到资源平台
+                        window.location.href = "../../index.html";
+                    })
+                    $(".leftBar .QAComm").click(function (e) {   //跳转到提问交流
+                        window.location.href = "./qSearch.html"
+                    })
+                    $(".leftBar .profile").click(function (e) {  //跳转到个人中心
+                        window.location.href = "../profile/profile.html";
+                    })
+
+                })()
+
+            </script>
+</body>
+
+</html>

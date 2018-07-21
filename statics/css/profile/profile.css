@@ -68,9 +68,7 @@
 } */
 
 .td{
-  border: 1px;
-  border-style: solid;
-  border-color: rgb(173, 182, 172);
+  border: 1px solid #dde2e4;
 }
 
 .btn {
@@ -91,3 +89,32 @@
   border:none;
 
 }
+
+
+
+/* zq */
+
+.item{
+  height: 50px;
+  line-height: 60px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  padding: 16px;
+}
+.item img{
+   height: 36px;
+   margin-top: 7px;
+   margin-right: 24px;
+}
+.item>.title{
+  width: 30%;
+}
+.item>.time{
+  width: 30%;
+}
+.item>.downloads{
+  width: 30%;
+  text-align: center;
+  /* background-color: aquamarine; */
+} 

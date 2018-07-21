@@ -10,6 +10,7 @@ body::-webkit-scrollbar {
 .left{
   position: fixed;
   height: 100%;
+  /* z-index: 2; */
 }
 .left>.leftBar{
   width: 220px;

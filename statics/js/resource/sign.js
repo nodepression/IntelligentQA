@@ -30,6 +30,10 @@
             open.text(cookieUser);
             open.attr("disabled", "disabled");
             open.unbind();
+            $("#signout").show();
+        }
+        else{
+            $("#signout").hide();
         }
     })();
 
@@ -97,6 +101,7 @@
                             open.text(username);
                             open.attr("disabled", "disabled");
                             open.unbind();
+                            $("#signout").show();
                         }
                     }
                 });
@@ -211,6 +216,15 @@
                     passEqual = true;
                 }
             }
+        })
+
+        //注销
+        $("#signout").click(function(){
+            $.cookie('username', '', { expires: -1 })
+            $.cookie('id', '', { expires: -1 })
+            $.cookie('type', '', { expires: -1 })
+            alert("退出成功");
+            location.reload();
         })
 
     }
