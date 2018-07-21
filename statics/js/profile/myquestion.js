@@ -5,13 +5,9 @@
     var qtable = $('#qtable');
     var index = 1; //当前位于第几页
     var num = 4; //一页最多显示多少个
-
-    var qresult = new Array(10);
-    var len = qresult.length;
-    var lastIndex = Math.floor(len / num) + 1; //最多显示到第几页
-    for (var k = 0; k < len; k++) {
-        qresult[k] = k;
-    }
+    var qresult;
+    var len ;
+    var lastIndex ; //最多显示到第几页
 
     //时间戳转换
     function DataTrans(obj) {
@@ -36,6 +32,10 @@
                 if (data.status != 200) {
                     alert(data.msg);
                 } else {
+                    [...qresult] = data.data;//把json的data取出来
+                    index = 1;
+                    len = qresult.length;
+                    var lastIndex = Math.floor(len / num) + 1; //最多显示到第几页
                     listquestions();
                 }
             }
@@ -44,11 +44,6 @@
 
     //我的提问展示
     function listquestions() {
-        [...qresult] = data.data;//把json的data取出来
-        index = 1;
-        var num = 4; //一页最多显示多少个
-        var len = qresult.length;
-        var lastIndex = Math.floor(len / num) + 1; //最多显示到第几页
         for (var i = (index - 1) * num; i < (index - 1) * num + num; i++) {
             if (i >= len)
                 break;
