@@ -83,6 +83,9 @@
             dataType: "json", //预期服务器返回类
             success: function (data) {
                 [...result] = data.data.response.docs;
+                if(result.length<=num){
+                    index = 1;
+                }
                 render();
             }
         });
@@ -94,6 +97,8 @@
             var cookieUser = $.cookie("username").replace(/\"/g, "");;
             $("#userName").text(cookieUser);
         }
+
+        $('.list').empty();
 
         //当前是第一页，隐藏左翻页
         $('.pre').css("visibility", "hidden");
@@ -112,6 +117,7 @@
         }
 
         getResult(num * (index - 1), num);
+        
     })
 
     //下一页
@@ -128,7 +134,7 @@
 
     //获取搜索关键词
     $('.words').keyup(function (e) {
-        $('.list').empty()
+        $('.list').empty();
         words = $('.words').val();
         if (words != " ") {
             index = 1;
@@ -140,7 +146,7 @@
     //点击搜索
 
     $('#search').click(function (e) {
-        $('.list').empty()
+        $('.list').empty();
 
         if (words != "") {
             index = 1;

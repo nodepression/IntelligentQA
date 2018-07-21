@@ -9,21 +9,13 @@
     var atable = $('#questions');
     var aindex = 1; //当前位于第几页
     var anum = 6; //一页最多显示多少个
- var alen;
-     var alastIndex ; //最多显示到第几页
+    var alen;
+    var alastIndex; //最多显示到第几页
 
-    
+
     //显示问题
-    function listq(){
-<<<<<<< HEAD
+    function listq() {
        
-=======
-        [...aresult] = data.data;//把json的data取出来
-        var aindex = 1; //当前位于第几页
-        var anum = 6; //一页最多显示多少个
-        var alen = aresult.length;
-        var alastIndex = Math.floor(alen / anum) + 1; //最  多显示到第几页
->>>>>>> 5c82558f7a6112c542380c3cce8a90faa5b2d755
         for (var i = (aindex - 1) * anum; i < (aindex - 1) * anum + anum; i++) {
             if (i >= alen)
                 break;
@@ -43,9 +35,9 @@
             icon.className = "mdui-icon material-icons";
             icon.innerText = "local_offer";
             var span3 = document.createElement("span");
-            span3.innerText =  aresult[i].tags[0];
+            span3.innerText = aresult[i].tags[0];
             var span1 = document.createElement("span");
-            span1.innerText = aresult[i].count+"回答";
+            span1.innerText = aresult[i].count + "回答";
             span1.className = "mdui-col-xs-1 "
             var span2 = document.createElement("span");
             span2.innerText = aresult[i].time;
@@ -61,7 +53,7 @@
             atable.append(li);
             atable.append(li1);
         }
-      }
+    }
 
     //一点进伸出援手 出现的问题列表
     function renderall() {
@@ -78,17 +70,24 @@
                 if (data.status != 200) {
                     alert(data.msg);
                 } else {
+
+
                     [...aresult] = data.data;//把json的data取出来
-                     aindex = 1; //当前位于第几页
-                     alen = aresult.length;
-                     alastIndex = Math.floor(alen / anum) + 1; //最多显示到第几页
+                    aindex = 1; //当前位于第几页
+                    alen = aresult.length;
+                    if(alen % anum==0){
+                        alastIndex = alen / anum;
+                    }else{
+                        alastIndex = Math.floor(alen / anum) + 1; //最多显示到第几页
+                    }
+                    
                     listq();
                 }
             }
         })
     }
 
-       //初始化
+    //初始化
     function inita() {
         apre.css("visibility", "hidden");
         if (alen <= anum) {
@@ -108,8 +107,8 @@
         {
             anext.css("visibility", "hidden");
         }
-         aindex++;
-         $('.aindex').text(aindex);
+        aindex++;
+        $('.aindex').text(aindex);
         listq();
     }
 
@@ -122,9 +121,9 @@
         {
             apre.css("visibility", "hidden");
         }
-         aindex--;
-         $('.aindex').text(aindex);
-       listq();
+        aindex--;
+        $('.aindex').text(aindex);
+        listq();
     }
 
 
@@ -145,11 +144,10 @@
                     alert(data.msg);
                 } else {
                     [...aresult] = data.data;//把json的data取出来
-                  aindex = 1; //当前位于第几页
-                   
-                     alen = aresult.length;
-                     alastIndex = Math.floor(alen / anum) + 1; //最多显示到第几页
-                  listq();
+                    aindex = 1; //当前位于第几页
+                    alen = aresult.length;
+                    alastIndex = Math.floor(alen / anum) + 1; //最多显示到第几页
+                    listq();
                 }
             }
         })
@@ -171,23 +169,23 @@
         rendera();
     })
 
-//点击问题跳转
-$('#questions').click(function (e) {
-    var tagItem;
-    if ($(e.target).hasClass("li")) {
-        tagItem = $(e.target);
-    } else {
-        tagItem = $(e.target).parents(".li");
-    }
-    //  //获取问题id
-    qid = tagItem.attr("id");
-    window.location.href = '../QAComm/answer.html?index=' + qid;
-})
+    //点击问题跳转
+    $('#questions').click(function (e) {
+        var tagItem;
+        if ($(e.target).hasClass("li")) {
+            tagItem = $(e.target);
+        } else {
+            tagItem = $(e.target).parents(".li");
+        }
+        //  //获取问题id
+        qid = tagItem.attr("id");
+        window.location.href = '../QAComm/answer.html?index=' + qid;
+    })
 
-$(".topBar .answerNav").click(function (){  
-    atable.empty();//清空问题列表
-    renderall();
-})
+    $(".topBar .answerNav").click(function () {
+        atable.empty();//清空问题列表
+        renderall();
+    })
 
 
 }.call(this));
