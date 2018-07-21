@@ -90,6 +90,7 @@
                         i.innerText = "thumb_up";
                         var span = document.createElement("span");
                         span.innerText = result.answers[k].count_like;//点赞数count
+                        span.id="up";
                         button.id = "answerID";
                         button.appendChild(i);
                         button.appendChild(span);
@@ -211,7 +212,8 @@
                 if (data.status != 200) {
                     alert(data.msg);
                 } else {
-                    result.answers[k].count_like++;
+                   
+                    $('.up').text( result.answers[k].count_like++);
                     like.disabled = 'disabled';
                 }
             }
