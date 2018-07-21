@@ -114,7 +114,7 @@
                 <p class="mdui-text-center" id="edit">编辑标签</p>
                 <div class="mdui-dialog-content mdui-typo">
                     <div class="mdui-textfield">标签：
-                        <input class="text" style=" width: 300px;" id="tags" onkeyup="find()">
+                        <input class="text" style=" width: 300px;" id="tags">
                         <!-- <button class="cancel mdui-ripple" style="color:black;left: 20px;" id="ok">确定</button> -->
                     </div>
                     <select class="mdui-select" id="demo" style=" width: 400px;display: none;">
@@ -186,11 +186,7 @@
                     $("#tab3").show();
                     $(".askNav").addClass("mdui-tab-active");
                 }
-                //显示当前用户
-                if (document.cookie != "") {
-                    var cookieUser = $.cookie("username").replace(/\"/g, "");;
-                    $("#userName").text(cookieUser);
-                }
+                
 
 
             })()
