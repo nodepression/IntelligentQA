@@ -1,12 +1,9 @@
 (function () {
     var index = 1; //当前位于第几页
     var num = 10; //一页最多显示多少个
-    var result = new Array(61);
-    var len = result.length;
-    for (var k = 0; k < len; k++) {
-        result[k] = k * (k + 1);
-    }
-    var lastIndex = Math.floor(len / num) + 1; //最多显示到第几页
+    var result;
+    var len;
+    var lastIndex; //最多显示到第几页
 
     var words = $(".words").val();
 
@@ -69,7 +66,15 @@
                     alert(data.msg);
                 } else {
                     [...result] = data.data;
-                    init();
+                    index = 1
+                    len = result.length;
+                    lastIndex = Math.floor(len / num) + 1;
+
+                    $('.pre').css("visibility", "hidden");
+                    if (len <= num) {
+                        $('.next').css("visibility", "hidden");
+                    }
+                    render();
                 }
             }
         });
@@ -77,16 +82,10 @@
 
     (function init() {
         //显示当前用户
-        if (document.cookie!="") {
+        if (document.cookie != "") {
             var cookieUser = $.cookie("username").replace(/\"/g, "");;
             $("#userName").text(cookieUser);
         }
-
-        $('.pre').css("visibility", "hidden");
-        if (len <= num) {
-            $('.next').css("visibility", "hidden");
-        }
-        render();
     })();
 
 
