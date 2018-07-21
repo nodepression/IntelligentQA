@@ -9,17 +9,13 @@
     var atable = $('#questions');
     var aindex = 1; //当前位于第几页
     var anum = 6; //一页最多显示多少个
-    // var alen = aresult.length;
-    // var alastIndex = Math.floor(alen / anum) + 1; //最多显示到第几页
+ var alen;
+     var alastIndex ; //最多显示到第几页
 
     
     //显示问题
     function listq(){
-        [...aresult] = data.data;//把json的data取出来
-        var aindex = 1; //当前位于第几页
-        var anum = 6; //一页最多显示多少个
-        var alen = aresult.length;
-        var alastIndex = Math.floor(alen / anum) + 1; //最多显示到第几页
+       
         for (var i = (aindex - 1) * anum; i < (aindex - 1) * anum + anum; i++) {
             if (i >= alen)
                 break;
@@ -74,6 +70,10 @@
                 if (data.status != 200) {
                     alert(data.msg);
                 } else {
+                    [...aresult] = data.data;//把json的data取出来
+                     aindex = 1; //当前位于第几页
+                     alen = aresult.length;
+                     alastIndex = Math.floor(alen / anum) + 1; //最多显示到第几页
                     listq();
                 }
             }
@@ -136,6 +136,11 @@
                 if (data.status != 200) {
                     alert(data.msg);
                 } else {
+                    [...aresult] = data.data;//把json的data取出来
+                  aindex = 1; //当前位于第几页
+                   
+                     alen = aresult.length;
+                     alastIndex = Math.floor(alen / anum) + 1; //最多显示到第几页
                   listq();
                 }
             }
