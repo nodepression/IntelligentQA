@@ -15,6 +15,7 @@
     
     //显示问题
     function listq(){
+<<<<<<< HEAD
        
 =======
         [...aresult] = data.data;//把json的data取出来
