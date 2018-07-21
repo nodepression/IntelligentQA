@@ -76,8 +76,8 @@
     //点击搜索或者翻页的时候用
     function getResult(start, num) {
         $.ajax({
-            type: 'get',
-            url: "http://118.25.4.52:8983/solr/test_core/select",
+            type: 'post',
+            url: "http://localhost:8080/QAComm/search",
             data: { "q": words, "start": start, "rows": num },
             contentType: "application/json;charset=UTF-8",
             dataType: "json", //预期服务器返回类
