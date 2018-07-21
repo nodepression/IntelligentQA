@@ -25,6 +25,10 @@
                 if (data.status != 200) {
                     alert(data.msg);
                 } else {
+                    [...rresult] = data.data;//把json的data取出来
+                    var index1 = 1; //当前位于第几页
+                    var rlen = rresult.length;
+                    var rlastIndex = Math.floor(rlen / num) + 1; //最多显示到第几页
                     listresource();
                 }
             }
@@ -33,11 +37,6 @@
 
     //显示我的资源
     function listresource() {
-        [...rresult] = data.data;//把json的data取出来
-        var index1 = 1; //当前位于第几页
-        var num = 4; //一页最多显示多少个
-        var rlen = rresult.length;
-        var rlastIndex = Math.floor(rlen / num) + 1; //最多显示到第几页
         for (var i = (index1 - 1) * num; i < (index1 - 1) * num + num; i++) {
             if (i >= rlen)
                 break;
