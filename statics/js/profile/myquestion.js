@@ -54,11 +54,12 @@
             var div = document.createElement("div");
             div.style = "line-height: 60px";
             var row = document.createElement("div");
+            row.className = "myParent"
             var text = document.createElement("div");
-            text.className = "mdui-col-xs-8 font1";
+            text.className = " myRight font1";
             text.innerText = qresult[i].title;// qresult[i].title;
             var text1 = document.createElement("div");
-            text1.className = "mdui-col-xs-3";
+            text1.className = " myLeft";
             if (qresult[i].isclose == 0) {
                 text1.innerText = "回答数目：" + qresult[i].count_answer;//qresult[i].count_answer;
             }
