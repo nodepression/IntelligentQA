@@ -131,10 +131,6 @@
         var inputField = undefined;
         inputField = $("#tags").val();
         var arr = new Array;
-        // var Tags = [
-        //     "调试", "智能合约", "cdn", "选择器", "抓包过滤", 
-        //     "spring-mvc", "android相关问题", "cli", "静态网站", 
-        // ];
         var len = Tags.length;
         var j = 0;
         for (var i = 1; i < len; i++) {
@@ -170,18 +166,18 @@
         tag_dialog.open();
     })
 
-    //点击问题跳转
-    $('#questions').click(function (e) {
-        var tagItem;
-        if ($(e.target).hasClass("li")) {
-            tagItem = $(e.target);
-        } else {
-            tagItem = $(e.target).parents(".li");
-        }
-        //  //获取问题id
-        qid = tagItem.attr("id");
-        window.location.href = '../QAComm/answer1.html?index=' + qid;
-    })
+    // //点击问题跳转
+    // $('#questions').click(function (e) {
+    //     var tagItem;
+    //     if ($(e.target).hasClass("li")) {
+    //         tagItem = $(e.target);
+    //     } else {
+    //         tagItem = $(e.target).parents(".li");
+    //     }
+    //     //  //获取问题id
+    //     qid = tagItem.attr("id");
+    //     window.location.href = '../QAComm/answer1.html?index=' + qid;
+    // })
 
 
 

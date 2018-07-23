@@ -94,6 +94,7 @@
         if (len <= num) {
             qnext.css("visibility", "hidden");
         }
+        renderq();
     }
     initq();
 
@@ -139,7 +140,6 @@
     //点击我的提问
     $('#tabc').click(function () {
         showc();
-        renderq();
     })
 
     //上一页

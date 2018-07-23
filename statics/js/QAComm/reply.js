@@ -11,6 +11,7 @@
     var anum = 6; //一页最多显示多少个
     var alen;
     var alastIndex; //最多显示到第几页
+    var ftag = "";
 
 
     //显示问题
@@ -19,7 +20,6 @@
         for (var i = (aindex - 1) * anum; i < (aindex - 1) * anum + anum; i++) {
             if (i >= alen)
                 break;
-
             var li = document.createElement("li");
             li.className = "li";
             li.id = aresult[i].id;
@@ -34,7 +34,20 @@
             icon.className = "mdui-icon material-icons";
             icon.innerText = "local_offer";
             var span3 = document.createElement("span");
-            span3.innerText = aresult[i].tags[0];
+            span3.className="jumpto";
+            if(ftag!="") {span3.innerText = ftag;}
+            else if(ftag=="") {span3.innerText = aresult[i].tags[0];}
+            span3.id=$(span3).text();
+            var span4 = document.createElement("span");
+            span4.className="jumpto";
+            if((aresult[i].tags[1]!=ftag)&&(aresult[i].tags[1]!=undefined)) 
+            {span4.innerText = ","+aresult[i].tags[1];}
+            span4.id=($(span4).text().substr(1));
+            var span5 = document.createElement("span");
+            span5.className="jumpto";
+            if((aresult[i].tags[2]!=ftag)&&(aresult[i].tags[2]!=undefined)) 
+            {span5.innerText = ","+aresult[i].tags[2];}
+            span5.id=($(span5).text().substr(1));
             var span1 = document.createElement("span");
             span1.className = "ansCount";
             span1.innerText = aresult[i].count + " 回答";
@@ -45,6 +58,8 @@
             li1.className = "mdui-divider-inset mdui-m-y-0";
             span.appendChild(icon);
             span.appendChild(span3);
+            span.appendChild(span4);
+            span.appendChild(span5);
             div1.appendChild(span);
             div.appendChild(div1);
             li.appendChild(div);
@@ -198,16 +213,22 @@
         if ($(e.target).hasClass("li")) {
             tagItem = $(e.target);
         } else {
+            if($(e.target).hasClass("jumpto")){
+                ftag=$(e.target).id;
+                rendera();
+            }
+            else
             tagItem = $(e.target).parents(".li");
         }
-        //  //获取问题id
+      //获取问题id
         qid = tagItem.attr("id");
         window.location.href = '../QAComm/answer1.html?index=' + qid;
     })
 
     $(".topBar .answerNav").click(function () {
         atable.empty();//清空问题列表
-        renderall();
+        $('.aindex').text('1');
+        inita();
     })
 
 

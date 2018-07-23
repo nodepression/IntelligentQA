@@ -155,7 +155,6 @@
             download();
         })
         //删除
-        //删除
         $(".deleteBtn").click(function (e) {
             deleteFile();
         })
