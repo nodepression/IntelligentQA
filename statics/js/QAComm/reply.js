@@ -95,7 +95,7 @@
 
 
 
-    //初始化
+    //第一次初始化
     function inita() {
         apre.css("visibility", "hidden");
         if (alen <= anum) {
@@ -105,9 +105,33 @@
     }
     inita();
 
+     //初始化
+     function initato() {
+         atable.empty();
+         aindex=1;
+         $('.aindex').text(aindex);
+        apre.css("visibility", "hidden");
+        if (alen <= anum) {
+            anext.css("visibility", "hidden");
+        }
+        rendera();
+    }
+
+    //点标签初始化
+    function initaclick() {
+        atable.empty();
+        aindex=1;
+        $('.aindex').text(aindex);
+       apre.css("visibility", "hidden");
+       if (alen <= anum) {
+           anext.css("visibility", "hidden");
+       }
+       renderclick();
+   }
+
     //下翻页
     function ansnext() {
-        atable.empty()
+        atable.empty();
         if (aindex == 1) {  //当前是第一页
             apre.css("visibility", "visible");
         }
@@ -122,7 +146,7 @@
 
     //上翻页
     function anspre() {
-        atable.empty()
+        atable.empty();
         if (aindex == alastIndex) {  //当前是最后一页
             anext.css("visibility", "visible");
         } if (aindex == 2) //当前是第二页
@@ -149,8 +173,6 @@
                     if (data.status != 200) {
                         alert(data.msg);
                     } else {
-    
-    
                         [...aresult] = data.data;//把json的data取出来
                         aindex = 1; //当前位于第几页
                         alen = aresult.length;
@@ -186,6 +208,8 @@
                     [...aresult] = data.data;//把json的data取出来
                     aindex = 1; //当前位于第几页
                     alen = aresult.length;
+                    if(alen%anum==0) alastIndex=alen/anum;
+                    else
                     alastIndex = Math.floor(alen / anum) + 1; //最多显示到第几页
                     listq();
                 }
@@ -211,6 +235,8 @@
                     [...aresult] = data.data;//把json的data取出来
                     aindex = 1; //当前位于第几页
                     alen = aresult.length;
+                    if(alen%anum==0) alastIndex=(alen/anum);
+                    else 
                     alastIndex = Math.floor(alen / anum) + 1; //最多显示到第几页
                     listq();
                 }
@@ -230,8 +256,7 @@
     })
     //筛选问题
     filter.click(function () {
-        atable.empty();//清空问题列表
-        rendera();
+        initato();
     })
 
     //点击标签跳转
@@ -239,32 +264,26 @@
         var jumptoItem;
         if($(e.target).hasClass("jumpto")){
             jumptoItem = $(e.target);
-        } else{
-            jumptoItem = $(e.target).parents(".jumpto");
-        }
         if(jumptoItem.attr("id")!=undefined)
         ftag=jumptoItem.attr("id");
-        atable.empty();
-        renderclick();
+        initaclick();}
+        else {
+                var tagItem;
+                // if ($(e.target).hasClass("li")) {
+                //     tagItem = $(e.target);
+                // } else {
+                    tagItem = $(e.target).parents(".li");
+                //}
+                //获取问题id
+                qid = tagItem.attr("id");
+                window.location.href = '../QAComm/answer1.html?index=' + qid;
+            }
       })
 
-    // //点击问题跳转
-    // $('#questions').click(function (e) {
-    //     var tagItem;
-    //     if ($(e.target).hasClass("li")) {
-    //         tagItem = $(e.target);
-    //     } else {
-    //         tagItem = $(e.target).parents(".li");
-    //     }
-    //     //  //获取问题id
-    //     qid = tagItem.attr("id");
-    //     window.location.href = '../QAComm/answer1.html?index=' + qid;
-    // })
+
 
     $(".topBar .answerNav").click(function () {
-        atable.empty();//清空问题列表
-        // $('.aindex').text('1');
-        // inita();
+       location.reload();
     })
 
 
