@@ -93,37 +93,7 @@
     }
 
 
-    //一点进伸出援手 出现的问题列表
-    function renderall() {
-        // ftag = $("#ftag").val();//输入的标签
-        $.ajax({
-            type: 'post',
-            url: "http://localhost:8080/QAComm/showques",
-            contentType: "application/json;charset=UTF-8",
-            xhrFields: {
-                withCredentials: true
-            },
-            dataType: "json", //预期服务器返回类
-            success: function (data) {
-                if (data.status != 200) {
-                    alert(data.msg);
-                } else {
 
-
-                    [...aresult] = data.data;//把json的data取出来
-                    aindex = 1; //当前位于第几页
-                    alen = aresult.length;
-                    if(alen % anum==0){
-                        alastIndex = alen / anum;
-                    }else{
-                        alastIndex = Math.floor(alen / anum) + 1; //最多显示到第几页
-                    }
-                    
-                    listq();
-                }
-            }
-        })
-    }
 
     //初始化
     function inita() {
@@ -164,10 +134,67 @@
         listq();
     }
 
+        //一点进伸出援手 出现的问题列表
+        function renderall() {
+            // ftag = $("#ftag").val();//输入的标签
+            $.ajax({
+                type: 'post',
+                url: "http://localhost:8080/QAComm/showques",
+                contentType: "application/json;charset=UTF-8",
+                xhrFields: {
+                    withCredentials: true
+                },
+                dataType: "json", //预期服务器返回类
+                success: function (data) {
+                    if (data.status != 200) {
+                        alert(data.msg);
+                    } else {
+    
+    
+                        [...aresult] = data.data;//把json的data取出来
+                        aindex = 1; //当前位于第几页
+                        alen = aresult.length;
+                        if(alen % anum==0){
+                            alastIndex = alen / anum;
+                        }else{
+                            alastIndex = Math.floor(alen / anum) + 1; //最多显示到第几页
+                        }
+                        
+                        listq();
+                    }
+                }
+            })
+        }
+
 
     //根据输入的标签筛选问题
     function rendera() {
         ftag = $("#ftag").val();//输入的标签
+        $.ajax({
+            type: 'post',
+            url: "http://localhost:8080/QAComm/reply",
+            data: JSON.stringify({ "questionLabel1": ftag }),
+            contentType: "application/json;charset=UTF-8",
+            xhrFields: {
+                withCredentials: true
+            },
+            dataType: "json", //预期服务器返回类
+            success: function (data) {
+                if (data.status != 200) {
+                    alert(data.msg);
+                } else {
+                    [...aresult] = data.data;//把json的data取出来
+                    aindex = 1; //当前位于第几页
+                    alen = aresult.length;
+                    alastIndex = Math.floor(alen / anum) + 1; //最多显示到第几页
+                    listq();
+                }
+            }
+        })
+    }
+
+    //根据点击的标签筛选问题
+    function renderclick() {
         $.ajax({
             type: 'post',
             url: "http://localhost:8080/QAComm/reply",
@@ -207,28 +234,37 @@
         rendera();
     })
 
-    //点击问题跳转
+    //点击标签跳转
     $('#questions').click(function (e) {
-        var tagItem;
-        if ($(e.target).hasClass("li")) {
-            tagItem = $(e.target);
-        } else {
-            if($(e.target).hasClass("jumpto")){
-                ftag=$(e.target).id;
-                rendera();
-            }
-            else
-            tagItem = $(e.target).parents(".li");
+        var jumptoItem;
+        if($(e.target).hasClass("jumpto")){
+            jumptoItem = $(e.target);
+        } else{
+            jumptoItem = $(e.target).parents(".jumpto");
         }
-      //获取问题id
-        qid = tagItem.attr("id");
-        window.location.href = '../QAComm/answer1.html?index=' + qid;
-    })
+        if(jumptoItem.attr("id")!=undefined)
+        ftag=jumptoItem.attr("id");
+        atable.empty();
+        renderclick();
+      })
+
+    // //点击问题跳转
+    // $('#questions').click(function (e) {
+    //     var tagItem;
+    //     if ($(e.target).hasClass("li")) {
+    //         tagItem = $(e.target);
+    //     } else {
+    //         tagItem = $(e.target).parents(".li");
+    //     }
+    //     //  //获取问题id
+    //     qid = tagItem.attr("id");
+    //     window.location.href = '../QAComm/answer1.html?index=' + qid;
+    // })
 
     $(".topBar .answerNav").click(function () {
         atable.empty();//清空问题列表
-        $('.aindex').text('1');
-        inita();
+        // $('.aindex').text('1');
+        // inita();
     })
 
 

@@ -28,7 +28,11 @@
                     [...rresult] = data.data;//把json的data取出来
                     index1 = 1; //当前位于第几页
                     rlen = rresult.length;
+                    if(rlen % num==0){
+                        rlastIndex = rlen / num;
+                    }else{
                     rlastIndex = Math.floor(rlen / num) + 1; //最多显示到第几页
+                    }
                     listresource();
                 }
             }

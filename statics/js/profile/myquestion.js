@@ -35,7 +35,11 @@
                     [...qresult] = data.data;//把json的data取出来
                     index = 1;
                     len = qresult.length;
+                    if(len % num==0){
+                        lastIndex = len / num;
+                    }else{
                     lastIndex = Math.floor(len / num) + 1; //最多显示到第几页
+                    }
                     listquestions();
                 }
             }
