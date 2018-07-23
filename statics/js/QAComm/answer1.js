@@ -5,6 +5,11 @@
     var answers;  //回答json数组
     var myHtml;
 
+    var index = 1; //当前位于第几页
+    var num = 2; //一页最多显示多少个
+    var len;
+    var lastIndex; //最多显示到第几页
+
     var types = ["学生", "教师", "管理员"];
     function generateHtml(item) {
         myHtml =
@@ -33,10 +38,14 @@
 
     //渲染答案
     function renderAns() {
-        for (var i = 0; i < len; i++) {
+        for (var i = (index - 1) * num; i < (index - 1) * num + num; i++) {
+            if (i >= len)
+                break;
             generateHtml(answers[i]);
             $('.anslist').append(myHtml);
         }
+        $('.index').text(index);
+
         if (question.best_answer_id) { //有最佳答案   
             $('.setBest').text("");
         } else {
@@ -48,7 +57,7 @@
 
     //渲染后台返回的结果按时间排序,每次请求必定刷新回答
     function getResult() {
-        $('.anslist').empty()
+        $('.anslist').empty();
         $.ajax({
             type: 'post',
             url: "http://localhost:8080/QAComm/QA/time",
@@ -64,7 +73,21 @@
                 } else {
                     question = data.data.question;
                     answers = data.data.answers;
+
+
+                    index = 1
                     len = answers.length;
+                    if (len % num == 0) {
+                        lastIndex = len / num;
+                    } else {
+                        lastIndex = Math.floor(len / num) + 1;
+                    }
+                    $('.pre').css("visibility", "hidden");
+                    $('.next').css("visibility", "visible");
+                    if (len <= num) {
+                        $('.next').css("visibility", "hidden");
+                    }
+
 
                     // console.log(len);
                     renderQus();
@@ -119,7 +142,7 @@
         });
     }
 
-    function chooseBest(queId,ansId) {
+    function chooseBest(queId, ansId) {
         $.ajax({
             type: 'post',
             url: "http://localhost:8080/QAComm/chooseBest",
@@ -139,6 +162,8 @@
             }
         });
     }
+
+    var inst = new mdui.Dialog('#reply_dialog', { 'overlay': true, 'destroyOnClosed': true });
     (function init() {
         //显示当前用户
         if (document.cookie != "") {
@@ -173,17 +198,31 @@
 
     function addEvent() {
         //弹出回答问题框
-        var inst = new mdui.Dialog('#reply_dialog', { 'overlay': true, 'destroyOnClosed': true });
+
         $(".replyBtn").click(function () {
             inst.open();
         })
 
         //发布回答
 
+        var timer;
         $(".reply").click(function () {
-            var text = $('.ansDialog').val();
-            replyAns(text);
-            inst.close();
+
+            if (timer) {
+                console.log("清楚timer");
+                clearTimeout(timer);
+            }
+            timer = setTimeout(function () {
+                var text = $('.ansDialog').val();
+                if (text.replace(/(^[ ]+$)/g, "").length != 0) {
+                    inst.close();
+                    replyAns(text);
+                } else {
+                    alert("输入不能为空");
+                }
+            }, 500);
+
+
         })
         //取消回答
         $(".cancel").click(function () {
@@ -204,12 +243,42 @@
 
         //选择最佳答案
 
-        $('.setBest').click(function(e){
+        $('.setBest').click(function (e) {
             var ansId = $(e.target).parents(".item").attr("class").split(" ")[1];
-            chooseBest(qId,ansId);
+            chooseBest(qId, ansId);
         })
-
     }
+
+    //页码选择 
+
+    //上一页
+    $('.pre').click(function () {
+        $('.anslist').empty();
+        if (index == lastIndex) {  //当前是最后一页
+            $('.next').css("visibility", "visible");
+        }
+        if (index == 2) //当前是第二页
+        {
+            $('.pre').css("visibility", "hidden");
+        }
+        index--;
+        renderAns()
+    })
+
+    //下一页
+    $('.next').click(function () {
+        $('.anslist').empty();
+        if (index == 1) {  //当前是第一页
+            $('.pre').css("visibility", "visible");
+        }
+        if (index == (lastIndex - 1)) //当前是倒数第二页
+        {
+            $('.next').css("visibility", "hidden");
+        }
+        index++;
+        renderAns()
+    })
+
 
 
 

@@ -116,3 +116,14 @@
     background-color: #016690;
     color: white;
 }
+
+.page{
+    width: 100px;
+    height: 30px;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 32px;
+}
+.page i{
+    cursor: pointer;
+}

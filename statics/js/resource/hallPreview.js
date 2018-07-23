@@ -39,6 +39,7 @@
                     <div class="mdui-btn downloadBtn">下载</div>
                     <button class="mdui-btn previewBtn">预览</button>`;
     }
+
     var inst = new mdui.Dialog('#resource_detail', { 'overlay': true, 'destroyOnClosed': true });
     (function init() {
         $('.result').click(function (e) {
@@ -59,6 +60,7 @@
             //生存预览的html
             generateHtml();
             $('#resource_detail').html(myHtml);
+            getStatus();
 
             //绑定事件(必须在html生成以后);
             addEvent();
@@ -84,7 +86,7 @@
                     alert(data.msg);
                 } else {
                     url = data.data;
-                   
+
                     if (type == "pdf") {
                         window.open("http://" + url);
                     } else if (type == "mp4") {
@@ -120,12 +122,12 @@
         });
     }
 
-    function deleteFile(){
+    function deleteFile() {
         inst.close();
         $.ajax({
             type: 'post',
             url: "http://localhost:8080/resource/deletefile",
-            data: JSON.stringify({ "fileid": resourceId}),
+            data: JSON.stringify({ "fileid": resourceId }),
             contentType: "application/json;charset=UTF-8",
             xhrFields: {
                 withCredentials: true
@@ -140,6 +142,17 @@
             }
         });
     }
+
+    //获取用户身份,决定是否显示删除按钮
+    function getStatus() {
+        if (document.cookie != "") {
+            var status = $.cookie("type").replace(/\"/g, "");
+            if(status!=2){
+                $(".deleteBtn").hide();
+            }
+        }
+    };
+
     function addEvent() {
         //预览
         $(".previewBtn").click(function (e) {
