@@ -39,9 +39,9 @@
                     <a href="#" class="mdui-btn downloadBtn">下载</a>
                     <button class="mdui-btn previewBtn">预览</button>`;
     }
-
+    var inst = new mdui.Dialog('#resource_detail', { 'overlay': true, 'destroyOnClosed': true });
     (function init() {
-        var inst = new mdui.Dialog('#resource_detail', { 'overlay': true, 'destroyOnClosed': true });
+
         $('.list').click(function (e) {
 
 
@@ -53,7 +53,7 @@
                 previewItem = $(e.target).parents(".preview");
             }
 
-            
+
             resourceId = previewItem.attr("class").split(" ")[2];
             name = previewItem.find(".title").text();
             type = previewItem.find(".type").text();
@@ -73,7 +73,7 @@
     })();
 
     function preview() {
-        // inst.close();
+        inst.close();
         $.ajax({
             type: 'post',
             url: "http://localhost:8080/resource/getUrl",
@@ -88,7 +88,7 @@
                     alert(data.msg);
                 } else {
                     url = data.data;
-                   
+
                     if (type == "pdf") {
                         window.open("http://" + url);
                     } else if (type == "mp4") {
@@ -102,6 +102,7 @@
     }
 
     function download() {
+        inst.close();
         $.ajax({
             type: 'post',
             url: "http://localhost:8080/resource/getUrl",
@@ -122,16 +123,42 @@
             }
         });
     }
+
+    function deleteFile() {
+        inst.close();
+        $.ajax({
+            type: 'post',
+            url: "http://localhost:8080/resource/deletefile",
+            data: JSON.stringify({ "fileid": resourceId }),
+            contentType: "application/json;charset=UTF-8",
+            xhrFields: {
+                withCredentials: true
+            },
+            dataType: "json", //预期服务器返回类
+            success: function (data) {
+                if (data.status != 200) {
+                    // alert(data.msg);
+                } else {
+                    alert("成功删除文件");
+                }
+            }
+        });
+    }
+
     function addEvent() {
         //预览
         $(".previewBtn").click(function () {
-           preview();
+            preview();
         })
         //下载
         $(".downloadBtn").click(function () {
             download();
         })
         //删除
+        //删除
+        $(".deleteBtn").click(function (e) {
+            deleteFile();
+        })
     }
 
 

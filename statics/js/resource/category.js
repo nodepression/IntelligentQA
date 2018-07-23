@@ -56,16 +56,16 @@ var tag1,      //一级
         //根据资源大厅以及页面跳转时传来的 index 显示详细分类  并初始化tag1 tag2
         var first = $(".first").find(".tag").eq(index1);
         tag1 = first.text();
-        first.css("backgroundColor", "#6db7d5");
+        first.css({"backgroundColor":"#6db7d5","color":"white"});
         var aspect = first.attr("class").split(" ")[1]; //获取方向名
         changeSecond(aspect);
 
         var second = $(".second").find(".tag").eq(index2);
         tag2 = second.text();
-        second.css("backgroundColor", "#6db7d5");
+        second.css({"backgroundColor":"#6db7d5","color":"white"});
 
 
-        $(".third").find(".tag").eq(index3).css("backgroundColor", "#6db7d5");
+        $(".third").find(".tag").eq(index3).css({"backgroundColor":"#6db7d5","color":"white"});
 
 
         //初始化,获取数据.
@@ -148,8 +148,8 @@ var tag1,      //一级
         if ($(e.target).hasClass("tag")) {
             //改变方向，并初始化新的分类列表
             tag1 = $(e.target).text();
-            $(".first>.tag").css("backgroundColor", "white");
-            $(e.target).css("backgroundColor", "#6db7d5");
+            $(".first>.tag").css({"backgroundColor": "white","color":"black"}); 
+            $(e.target).css({"backgroundColor":"#6db7d5","color":"white"});
 
             $('.second').empty();
             var aspect = $(e.target).attr("class").split(" ")[1];
@@ -159,7 +159,7 @@ var tag1,      //一级
             //改变方向时 默认显示第一个分类
             var second = $(".second").find(".tag").eq(0);
             tag2 = second.text();
-            second.css("backgroundColor", "#6db7d5");
+            second.css({"backgroundColor":"#6db7d5","color":"white"});
 
             //tag1 tag2 改变。获取新的数据
 
@@ -171,9 +171,8 @@ var tag1,      //一级
         if ($(e.target).hasClass("tag")) {
             //改变分类
             tag2 = $(e.target).text();
-            $(".second>.tag").css("backgroundColor", "white");
-            $(e.target).css("backgroundColor", "#6db7d5");
-
+            $(".second>.tag").css({"backgroundColor": "white","color":"black"});
+            $(e.target).css({"backgroundColor":"#6db7d5","color":"white"});
             //tag2 改变。获取新的数据
             getResult();
         }
@@ -183,8 +182,8 @@ var tag1,      //一级
         if ($(e.target).hasClass("tag")) {
             //改变类型
             tag3 = $(e.target).text();
-            $(".third>.tag").css("backgroundColor", "white");
-            $(e.target).css("backgroundColor", "#6db7d5");
+            $(".third>.tag").css({"backgroundColor": "white","color":"black"});
+            $(e.target).css({"backgroundColor":"#6db7d5","color":"white"});
 
             //tag3 改变。获取新的数据
             getResult();
@@ -219,6 +218,23 @@ var tag1,      //一级
         }
         index++;
         render();
+    })
+
+    //选择排序方式
+
+    $('.sort').click(function(e){
+        if($(e.target).hasClass('hot')){
+            $('.hot').css("background-color","#6db7d5");
+            $('.time').css({"backgroundColor":"#6db7d5","color":"white"});
+            sort = 2;
+            getResult();
+           
+        }else{
+            $('.hot').css("background-color","white");
+            $('.time').css({"backgroundColor":"#6db7d5","color":"white"});
+            sort = 1;
+            getResult();
+        }
     })
 
 }.call(this));

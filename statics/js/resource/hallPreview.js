@@ -69,7 +69,7 @@
     })();
 
     function preview() {
-        // inst.close();
+        inst.close();
         $.ajax({
             type: 'post',
             url: "http://localhost:8080/resource/getUrl",
@@ -98,6 +98,7 @@
     }
 
     function download() {
+        inst.close();
         $.ajax({
             type: 'post',
             url: "http://localhost:8080/resource/getUrl",
@@ -118,6 +119,27 @@
             }
         });
     }
+
+    function deleteFile(){
+        inst.close();
+        $.ajax({
+            type: 'post',
+            url: "http://localhost:8080/resource/deletefile",
+            data: JSON.stringify({ "fileid": resourceId}),
+            contentType: "application/json;charset=UTF-8",
+            xhrFields: {
+                withCredentials: true
+            },
+            dataType: "json", //预期服务器返回类
+            success: function (data) {
+                if (data.status != 200) {
+                    // alert(data.msg);
+                } else {
+                    alert("成功删除文件");
+                }
+            }
+        });
+    }
     function addEvent() {
         //预览
         $(".previewBtn").click(function (e) {
@@ -128,6 +150,9 @@
             download();
         })
         //删除
+        $(".deleteBtn").click(function (e) {
+            deleteFile();
+        })
     }
 
 

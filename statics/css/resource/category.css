@@ -20,8 +20,9 @@
     margin-left: 2%;
     cursor: pointer;
 }
-.type span:hover{
+.tag:hover{
     background-color: #6db7d5;
+    color: white;
 }
 
 .list>.choose{
@@ -59,4 +60,8 @@
 }
 .page i{
     cursor: pointer;
+}
+
+.time{
+    background-color: #6db7d5;
 }
