@@ -83,6 +83,7 @@
                     if (len <= num) {
                         $('.next').css("visibility", "hidden");
                     }
+                    
                     render();
                 }
             }
