@@ -44,6 +44,11 @@
             generateHtml(answers[i]);
             $('.anslist').append(myHtml);
         }
+        if(index==1){
+            $('.best').show();
+        }else{
+            $('.best').hide();
+        }
         $('.index').text(index);
 
         if (question.best_answer_id) { //有最佳答案   
@@ -308,6 +313,7 @@
         {
             $('.next').css("visibility", "hidden");
         }
+
         index++;
         renderAns()
     })

@@ -70,6 +70,10 @@
             $('.list').append(myHtml);
         }
         $('.index').text(index);
+        if(index==1){
+            $('.pre').css("visibility", "hidden");
+        }
+        
     }
 
 
@@ -84,6 +88,7 @@
             success: function (data) {
                 [...result] = data.data.response.docs;
                 
+
                 render();
             }
         });
@@ -145,7 +150,7 @@
                 index = 1;
                 getResult(num * (index - 1), num);
             }
-        },200);
+        },500);
     })
 
     //点击搜索
