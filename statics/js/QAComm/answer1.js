@@ -113,7 +113,7 @@
                 if (data.status != 200) {
                     alert(data.msg);
                 } else {
-                    alert("答案提交成功！");
+                    alert("答案提交成功!");
                     getResult();
                 }
             }
@@ -121,7 +121,7 @@
     }
 
     //点赞
-    function like(ansId) {
+    function like(ansId, obj) {
 
         $.ajax({
             type: 'post',
@@ -137,6 +137,10 @@
                     alert(data.msg);
                 } else {
                     alert("点赞成功");
+                    var preCount = obj.text() * 1;
+                    obj.text(preCount + 1);
+                    obj.parents('.like').unbind();
+                    obj.parents('.like').attr("disabled", "disabled");
                 }
             }
         });
@@ -158,6 +162,28 @@
                 } else {
                     alert("最佳答案设置成功！");
                     getResult();
+                }
+            }
+        });
+    }
+
+    function closeQue() {
+        $.ajax({
+            type: 'post',
+            url: "http://localhost:8080/QAComm/closeQuestion",
+            data: JSON.stringify({ "questionId": qId }),
+            contentType: "application/json;charset=UTF-8",
+            xhrFields: {
+                withCredentials: true
+            },
+            dataType: "json", //预期服务器返回类
+            success: function (data) {
+                if (data.status != 200) {
+                    alert(data.msg);
+                } else {
+                    alert("问题已关闭！");
+                    $('.closeQue').attr("disabled", "disabled");
+                    $('.closeQue').text("已关闭");
                 }
             }
         });
@@ -197,48 +223,12 @@
 
 
     function addEvent() {
-        //弹出回答问题框
-
-        $(".replyBtn").click(function () {
-            inst.open();
-        })
-
-        //发布回答
-
-        var timer;
-        $(".reply").click(function () {
-
-            if (timer) {
-                console.log("清楚timer");
-                clearTimeout(timer);
-            }
-            timer = setTimeout(function () {
-                var text = $('.ansDialog').val();
-                if (text.replace(/(^[ ]+$)/g, "").length != 0) {
-                    inst.close();
-                    replyAns(text);
-                } else {
-                    alert("输入不能为空");
-                }
-            }, 500);
-
-
-        })
-        //取消回答
-        $(".cancel").click(function () {
-            inst.close();
-        })
 
         //点赞
         $('.like').click(function (e) {
             var ansId = $(e.target).parents(".item").attr("class").split(" ")[1];
-            like(ansId);
-            // alert(ansId);
             var myTarget = $(e.target).parents('.info').find('.count');
-            var preCount = myTarget.text() * 1;
-            myTarget.text(preCount + 1);
-            myTarget.parents('.like').unbind();
-            myTarget.parents('.like').attr("disabled", "disabled");
+            like(ansId, myTarget);
         })
 
         //选择最佳答案
@@ -248,6 +238,49 @@
             chooseBest(qId, ansId);
         })
     }
+
+
+
+    //关闭问题
+    $('.closeQue').click(function () {
+        closeQue();
+    })
+
+    //弹出回答问题框
+    var timer;
+
+    $(".replyBtn").click(function () {
+        console.log(timer);
+        if (timer) {
+            clearTimeout(timer);
+        }
+        inst.open();
+    })
+
+    //发布回答
+
+    $(".reply").click(function () {
+
+        if (timer) { //清除上一次点击发布回答产生的timer
+            clearTimeout(timer);
+        }
+        timer = setTimeout(function () {
+            var text = $('.ansDialog').val();
+            if (text.replace(/(^[ ]+$)/g, "").length != 0) {
+                inst.close();
+                $('.ansDialog').val(" ");
+                replyAns(text);
+            } else {
+                alert("输入不能为空");
+            }
+        }, 500);
+
+    })
+    //取消回答
+    $(".cancel").click(function () {
+        inst.close();
+    })
+
 
     //页码选择 
 
@@ -278,7 +311,6 @@
         index++;
         renderAns()
     })
-
 
 
 

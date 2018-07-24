@@ -21,6 +21,7 @@
     var switchID = $('#switchID'); //登陆时切换身份button
     var identity = $('#identity'); //登陆时的身份显示
 
+    var prefix = "http://localhost:8080";
 
     //初始化
     (function init() {
@@ -87,7 +88,7 @@
                 // alert(username + " " + password + " " + type);
                 $.ajax({
                     type: 'post',
-                    url: "http://localhost:8080/sign/in",
+                    url: prefix + "/sign/in",
                     data: JSON.stringify({ "username": username, "password": password, "type": type }),
                     contentType: "application/json;charset=UTF-8",
                     xhrFields: {

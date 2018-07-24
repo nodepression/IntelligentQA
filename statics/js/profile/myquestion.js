@@ -4,7 +4,7 @@
     var qnext = $('#qnext');//下翻页
     var qtable = $('#qtable');
     var index = 1; //当前位于第几页
-    var num = 4; //一页最多显示多少个
+    var num = 3; //一页最多显示多少个
     var qresult;
     var len ;
     var lastIndex ; //最多显示到第几页

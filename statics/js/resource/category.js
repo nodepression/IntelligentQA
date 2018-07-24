@@ -223,14 +223,14 @@ var tag1,      //一级
     //选择排序方式
 
     $('.sort').click(function(e){
-        if($(e.target).hasClass('hot')){
-            $('.hot').css("background-color","#6db7d5");
-            $('.time').css({"backgroundColor":"#6db7d5","color":"white"});
+        if($(e.target).hasClass('hot')){ //热门排序
+            $('.hot').css({"backgroundColor":"#6db7d5","color":"white"});
+            $('.time').css({"backgroundColor":"white","color":"black"});
             sort = 2;
             getResult();
            
-        }else{
-            $('.hot').css("background-color","white");
+        }else{  //时间排序
+            $('.hot').css({"background-color":"white","color":"black"});
             $('.time').css({"backgroundColor":"#6db7d5","color":"white"});
             sort = 1;
             getResult();

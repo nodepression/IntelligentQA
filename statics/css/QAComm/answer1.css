@@ -7,25 +7,30 @@
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
-    height: 50px;
-    line-height: 50px;
+    /* height: 50px; */
+    line-height: 24px;
 }
 .title>.text{
     width: 80%;
-    font-size: 24px;
+    font-size: 18px;
 }
 .title>.closeQue{
     border: 1px solid #016690;
     color: #016690;
+    height: 24px;
+    line-height: 24px;
 }
 
 .disc{
-    padding: 24px;
+    padding: 8px;
+    text-indent: 24px;
     line-height: 24px;
 }
 .replyBtn{
     border: 1px solid #016690;
     color: #016690;
+    height: 24px;
+    line-height: 24px;
 }
 
 .best{
