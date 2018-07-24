@@ -88,7 +88,7 @@
             td.appendChild(div);
             tr.appendChild(td);
             qtable.append(tr);
-        }
+        }    $('.index').text(index);
     }
 
 
@@ -120,7 +120,6 @@
             qnext.css("visibility", "hidden");
         }
         index++;
-        $('.index').text(index);
         listquestions();
 
     }
@@ -135,7 +134,6 @@
             qpre.css("visibility", "hidden");
         }
         index--;
-        $('.index').text(index);
         listquestions();
 
     }
