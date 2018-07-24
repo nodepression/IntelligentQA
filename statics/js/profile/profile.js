@@ -10,24 +10,69 @@
     var passEqual = false; //两次密码是否相等
     //dom obj
     var submit = $('#submit');     //提交按钮,点击发送请求。
+
+     //第一次初始化
+     function init() {
+            if (document.cookie != "") {
+                    showa();
+                }
+                else if (document.cookie == "") {
+                    alert("您好，请先登录。");
+            }
+        }
+        init();
+
     submit.click(function () {
-        $('.text').val(undefined);
-        pass = false; //密码格式
-        repass = true //再次输入密码的格式
-        passEqual = false; //两次密码是否相等
         changepassword();
     })
+
+    
+    //获取新密码并验证格式
+    $('#newpassword').change(function (e) {
+        newpassword = $(e.target).val();
+        if (newpassword.length < 8) {
+            pass = false;
+            // alert("密码最少8位");
+        } else {
+            pass = true;
+            if (newpassword != repassword) {
+                passEqual = false;
+                // alert("两次密码不一致");
+            } else {
+                passEqual = true;
+            }
+        }
+    })
+    //获取第二次密码并验证两次密码是否相等
+    $('#repassword').change(function (e) {
+        repassword = $(e.target).val();
+        if (repassword.length < 8) {
+            repass = false;
+            // alert("密码最少8位");
+        } else {
+            repass = true;
+            if (newpassword != repassword) {
+                passEqual = false;
+                // alert("两次密码不一致");
+            } else {
+                passEqual = true;
+            }
+        }
+    })
+
     function changepassword() {
+        password = $("#password").val();   //原密码
+                newpassword = $("#newpassword").val();   //新密码
+                alert(password+","+newpassword+","+repassword);
         if (!pass || !repass) {
             alert("密码格式不正确(最少8位)");
+            // return;
         }
         else {
             if (!passEqual) {
                 alert("两次密码不一致");
             }
             else {
-                password = $("#password").val();   //原密码
-                newpassword = $("#newpassword").val();   //新密码
                 $.ajax({
                     type: 'post',
                     url: "http://localhost:8080/profile/modifyPass",
@@ -50,32 +95,7 @@
         }
     }
 
-    //获取新密码并验证格式
-    $('#newpassword').change(function (e) {
-        newpassword = $(e.target).val();
-        if (newpassword.length < 8) {
-            pass = false;
-            alert("密码最少8位");
-        } else {
-            pass = true;
-        }
-    })
-    //获取第二次密码并验证两次密码是否相等
-    $('#repassword').change(function (e) {
-        repassword = $(e.target).val();
-        if (repassword.length < 8) {
-            repass = false;
-            alert("密码最少8位");
-        } else {
-            repass = true;
-            if (newpassword != repassword) {
-                passEqual = false;
-                alert("两次密码不一致");
-            } else {
-                passEqual = true;
-            }
-        }
-    })
+
 
     function showa() {
         $("#tab1").show();//显示tab1
@@ -85,7 +105,14 @@
   
     //页面切换
     $('#taba').click(function () {
-        showa();
+        if (document.cookie != "") {
+        showa();}
+        else{
+            $("#tab1").hide();//显示tab1
+            $("#tab2").hide();
+            $("#tab3").hide();
+            alert("您好，请先登录。");
+        }
     })
   
 }.call(this));

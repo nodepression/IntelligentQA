@@ -98,7 +98,13 @@
         if (len <= num) {
             qnext.css("visibility", "hidden");
         }
-        renderq();
+        if (document.cookie != "") {
+            var status = $.cookie("type").replace(/\"/g, "");
+            if(status==0||status==1||status==2){
+                renderq();
+            }
+        }
+        
     }
     initq();
 

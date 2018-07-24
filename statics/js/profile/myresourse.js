@@ -82,7 +82,12 @@
         if (rlen <= num) {
             rnext.css("visibility", "hidden");
         }
-        renderr();
+        if (document.cookie != "") {
+            var status = $.cookie("type").replace(/\"/g, "");
+            if(status==0||status==1||status==2){
+                renderr();
+            }
+        }
 
     }
     initr();
