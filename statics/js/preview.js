@@ -168,6 +168,8 @@
                 if(status!=2){
                     $(".deleteBtn").hide();
                 }
+            }else{
+                $(".deleteBtn").hide();
             }
         };
 

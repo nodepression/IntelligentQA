@@ -33,7 +33,7 @@
             open.unbind();
             $("#signout").show();
         }
-        else{
+        else {
             $("#signout").hide();
         }
     })();
@@ -46,10 +46,13 @@
             switchID.html('切换到学生'); //可以切换到学生
             identity.html('教师'); //当前身份
         }
-        else {
+        else{ //切换到学生
             flag = 0;
             switchID.html('切换到教师'); //可以切换到学生
             identity.html('学生'); //当前身份
+            $("#admin").css("visibility","visible");
+            $('.to_in_up').css("visibility","visible");
+            $('.sign_top').css("backgroundColor","#016690");
         }
     }
     // 更换状态(登陆/注册)
@@ -154,7 +157,7 @@
     //事件注册
     var inst = new mdui.Dialog('#signin_dialog', { 'overlay': true, 'destroyOnClosed': true });
     function addEvent() {
-        
+
         //点击进入登陆/注册框界面
         open.click(function () {
             inst.open();
@@ -168,6 +171,18 @@
         //切换状态
         in_up.click(function (e) {
             switch_in_up();
+        })
+
+        //切换到管理员登陆
+        $("#admin").click(function () {
+            flag = 2;
+            $("#admin").css("visibility","hidden");
+            $('.to_in_up').css("visibility","hidden");
+            switchID.html('切换到学生'); //可以切换到学生
+            identity.html('管理员'); //当前身份
+            $('.sign_top').css("backgroundColor","#191970");
+            
+            
         })
 
         //登陆/注册
@@ -220,7 +235,7 @@
         })
 
         //注销
-        $("#signout").click(function(){
+        $("#signout").click(function () {
             $.cookie('username', '', { expires: -1 })
             $.cookie('id', '', { expires: -1 })
             $.cookie('type', '', { expires: -1 })

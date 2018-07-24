@@ -185,9 +185,11 @@
                 if (data.status != 200) {
                     alert(data.msg);
                 } else {
-                    alert("问题已关闭!");
-                    $('.closeQue').attr("disabled","disabled");
-                    $('.closeQue').text("已关闭");
+                    alert("问题已关闭！");
+                    close.disabled = true;
+                    var textdelete = document.createElement("del");
+                    textdelete.innerText = "已关闭";
+                    close.appendChild(textdelete);
                 }
             }
         });

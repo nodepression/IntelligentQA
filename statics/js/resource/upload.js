@@ -11,11 +11,17 @@
     var upload = $("#upload");
     var inst = new mdui.Dialog('#upload_dialog', { 'overlay': true, 'destroyOnClosed': true });
     upload.click(function () {
-        //获取上传资源时所选择的tags
-        $('.tag1').val(tag1);
-        $('.tag2').val(tag2);
-        $('.tag3').val(tag3);
-        inst.open();
+
+        if (document.cookie == "") {
+            alert("请先登陆");
+        } else {
+            //获取上传资源时所选择的tags
+            $('.tag1').val(tag1);
+            $('.tag2').val(tag2);
+            $('.tag3').val(tag3);
+            inst.open();
+        }
+
     })
 
     //文件选择
@@ -33,7 +39,9 @@
     })
 
     //文件上传
-    $('#uploadButton').click(function (e) {
+    $('#uploadButton').click(function () {
+
+
         if (newName != " ") {
             if (oldName != " ") {
                 uploadFile();
