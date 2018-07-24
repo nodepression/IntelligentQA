@@ -11,6 +11,10 @@
     //dom obj
     var submit = $('#submit');     //提交按钮,点击发送请求。
     submit.click(function () {
+        $('.text').val(undefined);
+        pass = false; //密码格式
+        repass = true //再次输入密码的格式
+        passEqual = false; //两次密码是否相等
         changepassword();
     })
     function changepassword() {
