@@ -6,11 +6,31 @@
 .top{
     margin-bottom: 8px;
 }
-.searchCon{
-    width: 60%;
+
+.search{
+    width: 80%;
+    height: 60px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
     margin: 0 auto;
+    /* background-color: #016690; */
 }
-#search
+.searchText{
+    width: 70%;
+    line-height: 60px;
+}
+#a_search,#b_search{
+    width: 12%;
+    height: 40px;
+    line-height: 40px;
+    margin-top: 10Px;
+    text-align: center;
+    border: 1px solid #dbe0e2;
+}
+
+
+#a_search
 {
     right: 0px;
     cursor: pointer;

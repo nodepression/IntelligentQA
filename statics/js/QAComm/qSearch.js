@@ -81,13 +81,31 @@
     function getResult(start, num) {
         $.ajax({
             type: 'post',
-            url:  prefix + "/QAComm/search",
+            url: prefix + "/QAComm/search",
             data: JSON.stringify({ "q": words, "start": start, "rows": num }),
             contentType: "application/json;charset=UTF-8",
             dataType: "json", //预期服务器返回类
             success: function (data) {
                 if (data.data != "null") {
                     [...result] = data.data.response.docs;
+                    render();
+                }
+
+            }
+        });
+    }
+
+    //第二种算法
+    function getResultB(start, num) {
+        $.ajax({
+            type: 'post',
+            url: prefix + "/QAComm/sqjsearch",
+            data: JSON.stringify({ "q": words, "start": start, "rows": num }),
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json", //预期服务器返回类
+            success: function (data) {
+                if (data.data != "null") {
+                    [...result] = data.data.docs;
                     render();
                 }
 
@@ -154,9 +172,9 @@
         }, 500);
     })
 
-    //点击搜索
+    //问题搜索
 
-    $('#search').click(function (e) {
+    $('#a_search').click(function (e) {
         $('.list').empty();
 
         if (words != "") {
@@ -167,6 +185,20 @@
         }
     })
 
+    //问题搜索
+
+    $('#b_search').click(function (e) {
+        $('.list').empty();
+
+        if (words != "") {
+            index = 1;
+            getResultB(num * (index - 1), num);
+        } else {
+            alert("请输入上传者或者关键词");
+        }
+    })
+
+
     //点击问题进入详情页
     $('.list').click(function (e) {
         var qId;
@@ -175,6 +207,8 @@
             window.location.href = '../QAComm/answer1.html?index=' + qId;
         }
     })
+
+
 
 
 }.call(this));
