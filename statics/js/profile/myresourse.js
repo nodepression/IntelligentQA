@@ -72,7 +72,7 @@
             td.appendChild(row);
             tr.appendChild(td);
             rtable.append(tr);
-        }
+        } $('.index1').text(index1);
     }
 
 
@@ -104,7 +104,6 @@
             rnext.css("visibility", "hidden");
         }
         index1++;
-        $('.index1').text(index1);
         listresource();
 
     }
@@ -119,7 +118,6 @@
             rpre.css("visibility", "hidden");
         }
         index1--;
-        $('.index1').text(index1);
         listresource();
     }
 

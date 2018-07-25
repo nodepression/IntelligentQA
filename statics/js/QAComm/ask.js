@@ -57,6 +57,7 @@
         tags[0] = tag0;
         tags[1] = tag1;
         tags[2] = tag2;
+        if(title=="") alert("问题标题不能为空！");else{
         $.ajax({
             type: 'post',
             url: "http://localhost:8080/QAComm/quiz",
@@ -73,7 +74,7 @@
                     alert("提问成功");
                 }
             }
-        });
+        });}
     }
 
 
