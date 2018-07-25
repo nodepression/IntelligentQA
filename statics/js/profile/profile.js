@@ -75,7 +75,7 @@
             else {
                 $.ajax({
                     type: 'post',
-                    url: "http://localhost:8080/profile/modifyPass",
+                    url: prefix + "/profile/modifyPass",
                     data: JSON.stringify({ "password": password, "newpassword": newpassword }),
                     contentType: "application/json;charset=UTF-8",
                     xhrFields: {

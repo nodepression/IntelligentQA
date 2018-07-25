@@ -225,7 +225,7 @@ function canspre() {
         function renderall(start, anum) {
             $.ajax({
                 type: 'post',
-                url: "http://localhost:8080/QAComm/showques",
+                url: prefix + "/QAComm/showques",
                 data:  JSON.stringify({ "start": start, "rows": anum }),
                 contentType: "application/json;charset=UTF-8",
                 xhrFields: {
@@ -249,7 +249,7 @@ function canspre() {
         ftag = $("#ftag").val();//输入的标签
         $.ajax({
             type: 'post',
-            url: "http://localhost:8080/QAComm/reply",
+            url: prefix + "/QAComm/reply",
             data: JSON.stringify({ "questionLabel1": ftag, "start": start, "rows": anum }),
             contentType: "application/json;charset=UTF-8",
             xhrFields: {
@@ -271,7 +271,7 @@ function canspre() {
     function renderclick(start, anum) {
         $.ajax({
             type: 'post',
-            url: "http://localhost:8080/QAComm/reply",
+            url: prefix + "/QAComm/reply",
             data: JSON.stringify({ "questionLabel1": ftag, "start": start, "rows": anum  }),
             contentType: "application/json;charset=UTF-8",
             xhrFields: {

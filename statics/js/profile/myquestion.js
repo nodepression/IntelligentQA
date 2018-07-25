@@ -22,7 +22,7 @@
     function renderq() {
         $.ajax({
             type: 'post',
-            url: "http://localhost:8080/profile/myQuestion",
+            url: prefix + "/profile/myQuestion",
             contentType: "application/json;charset=UTF-8",
             xhrFields: {
                 withCredentials: true

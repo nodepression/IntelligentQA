@@ -15,7 +15,7 @@
     function renderr() {
         $.ajax({
             type: 'post',
-            url: "http://localhost:8080/profile/myResource",
+            url: prefix + "/profile/myResource",
             contentType: "application/json;charset=UTF-8",
             xhrFields: {
                 withCredentials: true

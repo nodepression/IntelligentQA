@@ -22,7 +22,7 @@
     function alltags() {
         $.ajax({
             type: 'post',
-            url: "http://localhost:8080/QAComm/getTags",
+            url: prefix + "/QAComm/getTags",
             xhrFields: {
                 withCredentials: true
             },
@@ -61,7 +61,7 @@
         if(title=="") alert("问题标题不能为空！");else{
         $.ajax({
             type: 'post',
-            url: "http://localhost:8080/QAComm/quiz",
+            url: prefix + "/QAComm/quiz",
             data: JSON.stringify({ "questionTitle": title, "questionDescription": description, "questionLabel1": tags[0],"questionLabel2": tags[1],"questionLabel3": tags[2] }),
             xhrFields: {
                 withCredentials: true
