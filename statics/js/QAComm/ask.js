@@ -133,14 +133,17 @@
         var inputField = undefined;
         inputField = $("#tags").val();
         var arr = new Array;
-        var len = Tags.length;
-        var j = 0;
-        for (var i = 1; i < len; i++) {
-            if ((Tags[i]).indexOf(inputField) >= 0) {
-                arr[j] = Tags[i];
-                j++;
+        if(Tags){
+            var len = Tags.length;
+            var j = 0;
+            for (var i = 1; i < len; i++) {
+                if ((Tags[i]).indexOf(inputField) >= 0) {
+                    arr[j] = Tags[i];
+                    j++;
+                }
             }
         }
+       
         set(arr);
     }
 
