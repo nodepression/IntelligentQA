@@ -57,7 +57,7 @@
         $('.list').empty()
         $.ajax({
             type: 'post',
-            url: "http://localhost:8080/resource/search",
+            url:  prefix + "/resource/search",
             data: JSON.stringify({ "words": words }),
             contentType: "application/json;charset=UTF-8",
             dataType: "json", //预期服务器返回类

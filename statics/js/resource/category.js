@@ -79,7 +79,7 @@ var tag1,      //一级
     function getResult() {
         $.ajax({
             type: 'post',
-            url: "http://localhost:8080/resource/findByTag",
+            url:  prefix + "/resource/findByTag",
             data: JSON.stringify({ "tag1": tag1, "tag2": tag2, "tag3": tag3, "sort": sort }),
             contentType: "application/json;charset=UTF-8",
             xhrFields: {

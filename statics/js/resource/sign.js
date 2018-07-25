@@ -21,7 +21,6 @@
     var switchID = $('#switchID'); //登陆时切换身份button
     var identity = $('#identity'); //登陆时的身份显示
 
-    var prefix = "http://localhost:8080";
 
     //初始化
     (function init() {
