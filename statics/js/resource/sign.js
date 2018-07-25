@@ -131,7 +131,7 @@
 
                     $.ajax({
                         type: 'post',
-                        url: "http://localhost:8080/sign/up",
+                        url: prefix + "/sign/up",
                         data: JSON.stringify({ "username": username, "password": password, "type": type }),
                         contentType: "application/json;charset=UTF-8",
                         dataType: "json", //预期服务器返回类

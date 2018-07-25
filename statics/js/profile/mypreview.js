@@ -6,7 +6,6 @@
     var uploader;
     var downloads;
     var resourceId;
-    var resourceId;
     var url;
     var myHtml;
     function generateHtml() {
@@ -54,13 +53,15 @@
             }
             resourceId = previewItem.attr("id");
             name = previewItem.find(".title").text();
-            type = previewItem.find(".type").text();
+            type = previewItem.find(".type").attr("class").split(" ")[1];
             time = previewItem.find(".time").text();
-            downloads = previewItem.find(".downloads").text();
+            uploader =previewItem.attr("class").split(" ")[2];
+            downloads = previewItem.find(".downloads").children("span").text();
 
             //生存预览的html
             generateHtml();
             $('#resource_detail').html(myHtml);
+            getStatus();
 
             //绑定事件(必须在html生成以后);
             addEvent();
@@ -142,6 +143,20 @@
             }
         });
     }
+
+    
+    //获取用户身份,决定是否显示删除按钮
+    function getStatus() {
+        if (document.cookie != "") {
+            var status = $.cookie("type").replace(/\"/g, "");
+            if(status!=2){
+                $(".deleteBtn").hide();
+            }
+        }else{
+            $(".deleteBtn").hide();
+        }
+    };
+
 
     function addEvent() {
         //预览

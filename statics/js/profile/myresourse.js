@@ -46,13 +46,13 @@
                 break;
             var tr = document.createElement("tr");
             var td = document.createElement("td");
-            td.className = "td mypreview";
+            td.className = "td mypreview "+rresult[i].uploader;
             td.id=rresult[i].fileid;
             var row = document.createElement("div");
             row.className = "item";
             var pic = document.createElement("img");
             pic.src = `../../statics/images/${rresult[i].type}.png`;
-            pic.className = " ype";
+            pic.className = "type " + rresult[i].type;
             var text = document.createElement("div");
             text.className = " font1 title";
             text.innerText = rresult[i].title;
@@ -61,7 +61,7 @@
             text1.innerText = "上传时间：" + rresult[i].time;
             var text2 = document.createElement("div");
             text2.className = " downloads";
-            text2.innerText = "下载次数：" + rresult[i].downloads;
+            text2.innerHTML= "下载次数：" + "<span>"+ rresult[i].downloads+ "</span>" ;
             var row2 = document.createElement("div");
         
             row.appendChild(pic);

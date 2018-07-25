@@ -70,10 +70,10 @@
             $('.list').append(myHtml);
         }
         $('.index').text(index);
-        if(index==1){
+        if (index == 1) {
             $('.pre').css("visibility", "hidden");
         }
-        
+
     }
 
 
@@ -82,14 +82,15 @@
         $.ajax({
             type: 'post',
             url: "http://localhost:8080/QAComm/search",
-            data:  JSON.stringify({ "q": words, "start": start, "rows": num }),
+            data: JSON.stringify({ "q": words, "start": start, "rows": num }),
             contentType: "application/json;charset=UTF-8",
             dataType: "json", //预期服务器返回类
             success: function (data) {
-                [...result] = data.data.response.docs;
-                
+                if (data.data != "null") {
+                    [...result] = data.data.response.docs;
+                    render();
+                }
 
-                render();
             }
         });
     }
@@ -120,7 +121,7 @@
         }
 
         getResult(num * (index - 1), num);
-        
+
     })
 
     //下一页
@@ -139,18 +140,18 @@
     var timer;
     $('.words').keyup(function () {
 
-        if(timer){
+        if (timer) {
             console.log("清除timer");
             clearTimeout(timer);
         }
-        timer = setTimeout(function(){
+        timer = setTimeout(function () {
             $('.list').empty();
             words = $('.words').val();
             if (words != " ") {
                 index = 1;
                 getResult(num * (index - 1), num);
             }
-        },500);
+        }, 500);
     })
 
     //点击搜索
@@ -167,9 +168,9 @@
     })
 
     //点击问题进入详情页
-    $('.list').click(function(e){
+    $('.list').click(function (e) {
         var qId;
-        if($(e.target).hasClass("more")||$(e.target).hasClass("que_text")){
+        if ($(e.target).hasClass("more") || $(e.target).hasClass("que_text")) {
             qId = $(e.target).parents(".item").attr("class").split(" ")[1];
             window.location.href = '../QAComm/answer1.html?index=' + qId;
         }
