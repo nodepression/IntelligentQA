@@ -21,7 +21,6 @@
     var switchID = $('#switchID'); //登陆时切换身份button
     var identity = $('#identity'); //登陆时的身份显示
 
-    var prefix = "http://localhost:8080";
 
     //初始化
     (function init() {
@@ -131,7 +130,7 @@
 
                     $.ajax({
                         type: 'post',
-                        url: "http://localhost:8080/sign/up",
+                        url: prefix + "/sign/up",
                         data: JSON.stringify({ "username": username, "password": password, "type": type }),
                         contentType: "application/json;charset=UTF-8",
                         dataType: "json", //预期服务器返回类

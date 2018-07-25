@@ -65,7 +65,7 @@
         inst.close();
         $.ajax({
             type: 'POST',
-            url: "http://localhost:8080/resource/upload",
+            url:  prefix + "/resource/upload",
             data: formData,
             cache: false,
             processData: false,

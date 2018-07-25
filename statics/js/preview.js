@@ -77,7 +77,7 @@
         inst.close();
         $.ajax({
             type: 'post',
-            url: "http://localhost:8080/resource/getUrl",
+            url:  prefix + "/resource/getUrl",
             data: JSON.stringify({ "fileid": resourceId, "urlType": 1 }),
             contentType: "application/json;charset=UTF-8",
             xhrFields: {
@@ -106,7 +106,7 @@
         inst.close();
         $.ajax({
             type: 'post',
-            url: "http://localhost:8080/resource/getUrl",
+            url:  prefix + "/resource/getUrl",
             data: JSON.stringify({ "fileid": resourceId, "urlType": 2 }),
             contentType: "application/json;charset=UTF-8",
             xhrFields: {
@@ -129,7 +129,7 @@
         inst.close();
         $.ajax({
             type: 'post',
-            url: "http://localhost:8080/resource/deletefile",
+            url:  prefix + "/resource/deletefile",
             data: JSON.stringify({ "fileid": resourceId }),
             contentType: "application/json;charset=UTF-8",
             xhrFields: {

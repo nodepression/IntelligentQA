@@ -65,7 +65,7 @@
         $('.anslist').empty();
         $.ajax({
             type: 'post',
-            url: "http://localhost:8080/QAComm/QA/time",
+            url:  prefix + "/QAComm/QA/time",
             data: JSON.stringify({ "questionId": qId }),
             contentType: "application/json;charset=UTF-8",
             dataType: "json", //预期服务器返回类
@@ -107,7 +107,7 @@
     function replyAns(text) {
         $.ajax({
             type: 'post',
-            url: "http://localhost:8080/QAComm/replyques",
+            url:  prefix + "/QAComm/replyques",
             data: JSON.stringify({ "questionId": qId, "answerDetails": text }),
             contentType: "application/json;charset=UTF-8",
             dataType: "json", //预期服务器返回类
@@ -130,7 +130,7 @@
 
         $.ajax({
             type: 'post',
-            url: "http://localhost:8080/QAComm/like",
+            url:  prefix + "/QAComm/like",
             data: JSON.stringify({ "answerId": ansId }),
             contentType: "application/json;charset=UTF-8",
             xhrFields: {
@@ -154,7 +154,7 @@
     function chooseBest(queId, ansId) {
         $.ajax({
             type: 'post',
-            url: "http://localhost:8080/QAComm/chooseBest",
+            url:  prefix + "/QAComm/chooseBest",
             data: JSON.stringify({ "id": queId, "answerId": ansId }),
             contentType: "application/json;charset=UTF-8",
             xhrFields: {
@@ -175,7 +175,7 @@
     function closeQue() {
         $.ajax({
             type: 'post',
-            url: "http://localhost:8080/QAComm/closeQuestion",
+            url:  prefix + "/QAComm/closeQuestion",
             data: JSON.stringify({ "questionId": qId }),
             contentType: "application/json;charset=UTF-8",
             xhrFields: {
