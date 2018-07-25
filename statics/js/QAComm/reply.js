@@ -6,6 +6,10 @@
     var filter = $('#filter');//点击传标签获得相应问题
     var apre = $('#apre');  // 上翻页
     var anext = $('#anext');//下翻页
+    var bpre = $('#bpre');  // 上翻页
+    var bnext = $('#bnext');//下翻页
+    var cpre = $('#cpre');  // 上翻页
+    var cnext = $('#cnext');//下翻页
     var atable = $('#questions');
     var aindex = 1; //当前位于第几页
     var anum = 6; //一页最多显示多少个
@@ -16,8 +20,7 @@
 
     //显示问题
     function listq() {
-       
-        for (var i = (aindex - 1) * anum; i < (aindex - 1) * anum + anum; i++) {
+        for (var i = 0; i < anum; i++) {
             if (i >= alen)
                 break;
             var li = document.createElement("li");
@@ -56,10 +59,10 @@
             span2.innerText = aresult[i].time;
             var li1 = document.createElement("li");
             li1.className = "mdui-divider-inset mdui-m-y-0";
-            span.appendChild(icon);
+            if(aresult[i].tags!=""){ span.appendChild(icon);
             span.appendChild(span3);
             span.appendChild(span4);
-            span.appendChild(span5);
+            span.appendChild(span5);}
             div1.appendChild(span);
             div.appendChild(div1);
             li.appendChild(div);
@@ -101,7 +104,7 @@
         if (alen <= anum) {
             anext.css("visibility", "hidden");
         }
-        renderall();
+        renderall(anum * (aindex - 1), anum);
     }
     inita();
 
@@ -110,11 +113,14 @@
          atable.empty();
          aindex=1;
          $('.aindex').text(aindex);
-        apre.css("visibility", "hidden");
+         $('.apage').hide();
+         $('.bpage').show();
+         $('.cpage').hide();
+        bpre.css("visibility", "hidden");
         if (alen <= anum) {
-            anext.css("visibility", "hidden");
+            bnext.css("visibility", "hidden");
         }
-        rendera();
+        rendera(anum * (aindex - 1), anum);
     }
 
     //点标签初始化
@@ -122,11 +128,14 @@
         atable.empty();
         aindex=1;
         $('.aindex').text(aindex);
-       apre.css("visibility", "hidden");
+        $('.apage').hide();
+        $('.bpage').hide();
+        $('.cpage').show();
+       cpre.css("visibility", "hidden");
        if (alen <= anum) {
-           anext.css("visibility", "hidden");
+           cnext.css("visibility", "hidden");
        }
-       renderclick();
+       renderclick(anum * (aindex - 1), anum);
    }
 
     //下翻页
@@ -135,13 +144,9 @@
         if (aindex == 1) {  //当前是第一页
             apre.css("visibility", "visible");
         }
-        if (aindex == (alastIndex - 1)) //当前是倒数第二页
-        {
-            anext.css("visibility", "hidden");
-        }
         aindex++;
         $('.aindex').text(aindex);
-        listq();
+        renderall(anum * (aindex - 1), anum);
     }
 
     //上翻页
@@ -155,15 +160,73 @@
         }
         aindex--;
         $('.aindex').text(aindex);
-        listq();
+        renderall(anum * (aindex - 1), anum);
     }
 
+//下翻页
+function bansnext() {
+    atable.empty();
+    if (aindex == 1) {  //当前是第一页
+        bpre.css("visibility", "visible");
+    }
+    if (aindex == (alastIndex - 1)) //当前是倒数第二页
+    {
+        anext.css("visibility", "hidden");
+    }
+    aindex++;
+    $('.aindex').text(aindex);
+    rendera(anum * (aindex - 1), anum);
+}
+
+//上翻页
+function banspre() {
+    atable.empty();
+    if (aindex == alastIndex) {  //当前是最后一页
+        bnext.css("visibility", "visible");
+    } if (aindex == 2) //当前是第二页
+    {
+        bpre.css("visibility", "hidden");
+    }
+    aindex--;
+    $('.aindex').text(aindex);
+    rendera(anum * (aindex - 1), anum);
+}
+
+//下翻页
+function cansnext() {
+    atable.empty();
+    if (aindex == 1) {  //当前是第一页
+        cpre.css("visibility", "visible");
+    }
+    if (aindex == (alastIndex - 1)) //当前是倒数第二页
+    {
+        cnext.css("visibility", "hidden");
+    }
+    aindex++;
+    $('.aindex').text(aindex);
+    renderclick(anum * (aindex - 1), anum);
+}
+
+//上翻页
+function canspre() {
+    atable.empty();
+    if (aindex == alastIndex) {  //当前是最后一页
+        cnext.css("visibility", "visible");
+    } if (aindex == 2) //当前是第二页
+    {
+        cpre.css("visibility", "hidden");
+    }
+    aindex--;
+    $('.aindex').text(aindex);
+    renderclick(anum * (aindex - 1), anum);
+}
+
         //一点进伸出援手 出现的问题列表
-        function renderall() {
-            // ftag = $("#ftag").val();//输入的标签
+        function renderall(start, anum) {
             $.ajax({
                 type: 'post',
                 url: "http://localhost:8080/QAComm/showques",
+                data:  JSON.stringify({ "start": start, "rows": anum }),
                 contentType: "application/json;charset=UTF-8",
                 xhrFields: {
                     withCredentials: true
@@ -174,14 +237,6 @@
                         alert(data.msg);
                     } else {
                         [...aresult] = data.data;//把json的data取出来
-                        aindex = 1; //当前位于第几页
-                        alen = aresult.length;
-                        if(alen % anum==0){
-                            alastIndex = alen / anum;
-                        }else{
-                            alastIndex = Math.floor(alen / anum) + 1; //最多显示到第几页
-                        }
-                        
                         listq();
                     }
                 }
@@ -190,12 +245,12 @@
 
 
     //根据输入的标签筛选问题
-    function rendera() {
+    function rendera(start, anum) {
         ftag = $("#ftag").val();//输入的标签
         $.ajax({
             type: 'post',
             url: "http://localhost:8080/QAComm/reply",
-            data: JSON.stringify({ "questionLabel1": ftag }),
+            data: JSON.stringify({ "questionLabel1": ftag, "start": start, "rows": anum }),
             contentType: "application/json;charset=UTF-8",
             xhrFields: {
                 withCredentials: true
@@ -206,11 +261,6 @@
                     alert(data.msg);
                 } else {
                     [...aresult] = data.data;//把json的data取出来
-                    aindex = 1; //当前位于第几页
-                    alen = aresult.length;
-                    if(alen%anum==0) alastIndex=alen/anum;
-                    else
-                    alastIndex = Math.floor(alen / anum) + 1; //最多显示到第几页
                     listq();
                 }
             }
@@ -218,11 +268,11 @@
     }
 
     //根据点击的标签筛选问题
-    function renderclick() {
+    function renderclick(start, anum) {
         $.ajax({
             type: 'post',
             url: "http://localhost:8080/QAComm/reply",
-            data: JSON.stringify({ "questionLabel1": ftag }),
+            data: JSON.stringify({ "questionLabel1": ftag, "start": start, "rows": anum  }),
             contentType: "application/json;charset=UTF-8",
             xhrFields: {
                 withCredentials: true
@@ -233,11 +283,6 @@
                     alert(data.msg);
                 } else {
                     [...aresult] = data.data;//把json的data取出来
-                    aindex = 1; //当前位于第几页
-                    alen = aresult.length;
-                    if(alen%anum==0) alastIndex=(alen/anum);
-                    else 
-                    alastIndex = Math.floor(alen / anum) + 1; //最多显示到第几页
                     listq();
                 }
             }
@@ -254,6 +299,29 @@
     anext.click(function () {
         ansnext();
     })
+        //上一页
+        bpre.click(function () {
+            banspre();
+        })
+        //下一页
+        bnext.click(function () {
+            bansnext();
+        })
+         //上一页
+         cpre.click(function () {
+            canspre();
+        })
+        //下一页
+        cnext.click(function () {
+            cansnext();
+        })
+
+
+
+
+
+
+
     //筛选问题
     filter.click(function () {
         initato();

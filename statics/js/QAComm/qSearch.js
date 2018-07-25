@@ -87,8 +87,6 @@
             dataType: "json", //预期服务器返回类
             success: function (data) {
                 [...result] = data.data.response.docs;
-                
-
                 render();
             }
         });
