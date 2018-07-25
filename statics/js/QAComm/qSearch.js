@@ -5,6 +5,7 @@
     var index = 1; //当前位于第几页
     var num = 3;    //一页最多显示多少个
     var result = null;
+    var type = 1;
 
 
 
@@ -141,7 +142,12 @@
             $('.pre').css("visibility", "hidden");
         }
 
-        getResult(num * (index - 1), num);
+        if (type == 1) {
+            getResult(num * (index - 1), num);
+        } else {
+            getResultB(num * (index - 1), num);
+        }
+
 
     })
 
@@ -153,7 +159,12 @@
             $('.pre').css("visibility", "visible");
         }
         index++;
-        getResult(num * (index - 1), num);
+
+        if (type == 1) {
+            getResult(num * (index - 1), num);
+        } else {
+            getResultB(num * (index - 1), num);
+        }
     })
 
 
@@ -167,6 +178,10 @@
         }
         timer = setTimeout(function () {
             $('.list').empty();
+            type=1;
+            $('#a_search').css({"backgroundColor":"#6db7d5","color":"white"});
+            $('#b_search').css({"backgroundColor":"white","color":"black"});
+
             words = $('.words').val();
             if (words != " ") {
                 index = 1;
@@ -179,7 +194,9 @@
 
     $('#a_search').click(function (e) {
         $('.list').empty();
-
+        type=1;
+        $('#a_search').css({"backgroundColor":"#6db7d5","color":"white"});
+        $('#b_search').css({"backgroundColor":"white","color":"black"});
         if (words != "") {
             index = 1;
             getResult(num * (index - 1), num);
@@ -188,10 +205,15 @@
         }
     })
 
-    //问题搜索
+    //相关搜索
 
     $('#b_search').click(function (e) {
         $('.list').empty();
+
+        type=2;
+        $('#a_search').css({"backgroundColor":"white","color":"black"});
+        $('#b_search').css({"backgroundColor":"#6db7d5","color":"white"});
+       
 
         if (words != "") {
             index = 1;
