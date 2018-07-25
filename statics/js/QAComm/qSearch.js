@@ -70,10 +70,10 @@
             $('.list').append(myHtml);
         }
         $('.index').text(index);
-        if(index==1){
+        if (index == 1) {
             $('.pre').css("visibility", "hidden");
         }
-        
+
     }
 
 
@@ -81,13 +81,34 @@
     function getResult(start, num) {
         $.ajax({
             type: 'post',
-            url: "http://localhost:8080/QAComm/search",
-            data:  JSON.stringify({ "q": words, "start": start, "rows": num }),
+            url: prefix + "/QAComm/search",
+            data: JSON.stringify({ "q": words, "start": start, "rows": num }),
             contentType: "application/json;charset=UTF-8",
             dataType: "json", //预期服务器返回类
             success: function (data) {
-                [...result] = data.data.response.docs;
-                render();
+                if (data.data != "null") {
+                    [...result] = data.data.response.docs;
+                    render();
+                }
+
+            }
+        });
+    }
+
+    //第二种算法
+    function getResultB(start, num) {
+        $.ajax({
+            type: 'post',
+            url: prefix + "/QAComm/sqjsearch",
+            data: JSON.stringify({ "q": words, "start": start, "rows": num }),
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json", //预期服务器返回类
+            success: function (data) {
+                if (data.data != "null") {
+                    [...result] = data.data.docs;
+                    render();
+                }
+
             }
         });
     }
@@ -118,7 +139,7 @@
         }
 
         getResult(num * (index - 1), num);
-        
+
     })
 
     //下一页
@@ -137,23 +158,23 @@
     var timer;
     $('.words').keyup(function () {
 
-        if(timer){
+        if (timer) {
             console.log("清除timer");
             clearTimeout(timer);
         }
-        timer = setTimeout(function(){
+        timer = setTimeout(function () {
             $('.list').empty();
             words = $('.words').val();
             if (words != " ") {
                 index = 1;
                 getResult(num * (index - 1), num);
             }
-        },500);
+        }, 500);
     })
 
-    //点击搜索
+    //问题搜索
 
-    $('#search').click(function (e) {
+    $('#a_search').click(function (e) {
         $('.list').empty();
 
         if (words != "") {
@@ -164,14 +185,30 @@
         }
     })
 
+    //问题搜索
+
+    $('#b_search').click(function (e) {
+        $('.list').empty();
+
+        if (words != "") {
+            index = 1;
+            getResultB(num * (index - 1), num);
+        } else {
+            alert("请输入上传者或者关键词");
+        }
+    })
+
+
     //点击问题进入详情页
-    $('.list').click(function(e){
+    $('.list').click(function (e) {
         var qId;
-        if($(e.target).hasClass("more")||$(e.target).hasClass("que_text")){
+        if ($(e.target).hasClass("more") || $(e.target).hasClass("que_text")) {
             qId = $(e.target).parents(".item").attr("class").split(" ")[1];
             window.location.href = '../QAComm/answer1.html?index=' + qId;
         }
     })
+
+
 
 
 }.call(this));
