@@ -57,11 +57,12 @@
         tags[0] = tag0;
         tags[1] = tag1;
         tags[2] = tag2;
+        console.log(tags);
         if(title=="") alert("问题标题不能为空！");else{
         $.ajax({
             type: 'post',
             url: "http://localhost:8080/QAComm/quiz",
-            data: JSON.stringify({ "questionTitle": title, "questionDescription": description, "tags": tags }),
+            data: JSON.stringify({ "questionTitle": title, "questionDescription": description, "questionLabel1": tags[0],"questionLabel2": tags[1],"questionLabel3": tags[2] }),
             xhrFields: {
                 withCredentials: true
             },
